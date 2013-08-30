@@ -1,0 +1,156 @@
+************************* welcome / game page ********************************
+
+Welcome Page:
+	title: Sokoban Craze
+	
+	button: PUSH
+	position:  in centre.
+	normal page. 
+	
+	on click of PUSH --> navigate to a test 'game.html' for now.
+	use <a href for this>
+	
+Game Page:
+version 1:
+	Design using tables and javascript.
+	basic maze using table.
+	create some pngs for empty place(white), destination(red cross), bricks(yellow), and brick_mover(black).
+	
+	
+	test following things work
+		>	change the class of an element based on user-defined action.
+			may be click on a button to change the css class.
+				document.getElementById("MyElement").className = 
+				document.getElementById("MyElement").className.replace( /(?:^|\s)MyClass(?!\S)/g , '' )
+
+				document.getElementById('id').classList.add('class');
+				document.getElementById('id').classList.remove('class');
+				
+				
+				SIMPLE WAY:
+				use jquery to remove/add class.
+			
+		>	test that js identifies that an arrow key is pressed.
+			also which arrow key is pressed.
+				initialize the event handler for key press:
+				document.onkeypress=handleKeyEvent();
+				used jquery
+		
+		>	Use JS to find the current position of PUSHER from the table.
+			by reading its class or something.
+			
+		>	Use JS to find what is present at the position given the position.
+				eg. whatisAt(1,2) returns a BRICK.
+					later can be used to make a object out of it, to move it etc.
+				
+	feature1:
+		>	write code so that the BLACK pusher moves freely around the maze.
+				use combination of arrow key handling and css.
+				
+				> ?? how to maintain/track the position of PUSHER.
+					
+					create object Position.
+							has two variables.
+								x_pos, y_pos.
+					
+					create object MazeDimension
+							two vars
+								width, height.
+					
+					create object, Pusher.
+						has a Position object.
+						has a MazeSize.
+						has a move method.
+							move(x_inc, y_inc) 
+								x_inc --> increment in x_position.
+								y_inc --> increment in y_position.
+								
+					created privileged methods to detect the x and y boundary.
+					
+					create a method initializeGame().
+						global variables --> 
+										Pusher position. (not sure if this is needed, since we have the whole object itself.)
+										Pusher Object.
+										Global ObjectMap (see below)
+						First Time:
+						initialize the Pusher object with its position in the GlobalMap.
+						
+						Second time onwards-->
+							Retreive the Pusher object from the ObjectMap.
+							
+						OK. Global Or Static or Both . its a mess.
+						Write a test html page to find what is what.
+						create an object map
+						declare a global object.
+						call it multiple times and see the value of its variable.
+								>> this is done.
+								
+					
+					Tracking the position of Pusher and showing its position on screen.
+						>> it is done.
+						
+						
+			
+				> IDEA, create a global object "ObjectMap".
+					it stores the object_name --> object.
+						eg. "PUSHER" --> Pusher_object.
+						>> this is done.
+						
+				> modify the push method to push a brick object.
+					Move the Pusher to destination.
+						>> change the class of destination.
+					Reset the element in source position & bring a normal tile in it.
+						>> change the class of source.
+				
+				> the co-ordinates bit messed up right now.
+					>> correct them all.
+					>> it should align to normal co-ordinates system.
+						i.e. left-bottom is 0,0
+							and it is (X, Y)
+					>>THIS IS DONE
+					
+			>> This part is all done. The PUSHER is now moving all over the place.	
+				
+		>	write code so that PUSHER  can push a BRICK.
+				>> design so that moveMethod of Pusher in turn calls moveMethod of the entity present in the destination position.
+					>>  create object for the Brick.
+							it gets a method canMove(destinationPosition)
+								canMove(newPosition) -->
+									check if the new Position is empty OR is not DEAD-END.
+									TO MUCH REPETITION, take care of it, (A COMMON CLASS to extend).
+							Brick object is quite complete.
+							
+						one object for each of the Brick on the maze.
+						
+						one object for each empty space on maze . DO WE NEED THIS??
+						Keep this for later.
+						
+		
+		>	code to detect unmovable/boundaries.
+				like wall, end_of_maze.
+				// DONE this is taken care of by individual moving elements.
+		
+		>	Pusher object should be only one. Use singleton property.
+		
+		// put the license gpl3 and other legal things.
+			>> THIS IS DONE
+			
+		> // TODO a map of position vs brick is required.
+		      if we think what we actually need is a map of position vs entity.
+			  where entity = pusher, brick, empty_space or stone(something unmovable).
+			  so that we will be replicating the entire table (of id vs classes) into the map.
+			  this way we will not need to depend on class name to find out the entity.
+			  
+			  This will require that the map is updated for each of the movement. but more on this later when we start doing things.
+			  
+			  find out a map is implemented in JS. (every object can be used as hashmap with key as string)
+			  var map = {};
+				// add a item
+				map[key1] = value1;
+				// or remove it
+				delete map[key1];
+				// or determine whether a key exists
+				key1 in map;
+	
+version 2:
+	Design using HTML5-canvas and some good library like easel.js etc.

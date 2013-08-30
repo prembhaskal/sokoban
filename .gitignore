@@ -1,0 +1,4 @@
+.idea
+# ignore the generated class files.
+*.class
+Thumbs.db

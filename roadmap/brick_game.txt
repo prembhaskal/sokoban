@@ -1,0 +1,78 @@
+***************** Sokoban ****************
+
+GOOD LINKS:
+	http://html5center.sourceforge.net/Build-Awesome-Apps-with-CSS3-Animations
+	https://developer.mozilla.org/en-US/docs/JavaScript
+	
+DOCS:
+	see saved html pages.
+	read jquery.js
+	
+DEBUGGER;
+	use chrome to see the syntax errors in the js code.
+
+Description:
+	sokoban: push  bricks to move them into a particular position on a maze.
+	
+SourceForge project: sokoban-craze
+git clone ssh://pbhaskal@git.code.sf.net/p/sokobancraze/code sokobancraze-code
+git clone git://git.code.sf.net/p/sokobancraze/code
+git config user.name "YOUR NAME"
+git config user.email "USERNAME@users.sourceforge.net"
+
+git Post receive hook:
+https://sourceforge.net/apps/trac/sourceforge/wiki/Git%20hook%20script%20example
+http://git.kernel.org/?p=git/git.git;a=blob_plain;f=contrib/hooks/post-receive-email
+http://larsmichelsen.com/open-source/adding-email-hook-script-to-sourceforge-net-git/
+
+GAME UI ART:
+http://opengameart.org/content/gui-elements
+
+Steps to create clone repository:
+
+
+Release 1:
+	Design a basic game using HTML5 and CSS3.
+	A black brick to push other white bricks.
+	Basic table.
+	limited colors and animation.
+
+	Framework development:
+		JS folder.
+		CSS folder.
+		JS library: ???
+		HTML5, Canvas:
+		
+		UNIT TESTS
+		
+		
+	Iteration 1:
+	Get the welcome page.
+		Big Header: SOKOBAN CRAZE
+		Big Button: Start Pushing.
+		
+	Get the game page.
+		Borderless table.
+		some colors.
+		Static Maze: destination(X) and Walls.
+		
+		
+******** JS **********
+function MyClass () { // constructor function
+  var privateVariable = "foo";
+
+  this.publicVariable = "bar";
+
+  this.privilegedMethod = function () {
+    alert(privateVariable);
+  };
+}
+
+MyClass.prototype.publicMethod = function () {
+  alert(this.publicVariable);
+};
+
+MyClass.staticProperty = "baz";
+
+//...
+var myInstance = new MyClass();
