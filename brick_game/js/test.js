@@ -18,44 +18,24 @@
 
 // script file to test some basic functions.
 
-// uses jquery inside
-function changeClassOfElement(elementId, className) {
-	elementId = '#'+elementId;
-	$(elementId).removeClass();
-	$(elementId).addClass(className);
+var globalObjectMap = null;
+
+function initializeGame() {
+	var initialPusherPosition = new Position(2, 2);
+	var mazeDimension = new MazeDimension(4, 4);
+	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
+	globalObjectMap = new GlobalObjectMap();
+	globalObjectMap.pusher = pusherObject;
+	
+	//binding key handlers
+	addkeyHandlers();
+	
 }
 
 function addkeyHandlers() {
 	moveOnArrowPress();
 }
 
-
-// object to define the maze dimensions.
-function MazeDimension(width, height) {
-	this.width = width;
-	this.height = height;
-}
-
-	// testing the global variable
-	//var testGlobalVariable = 0;
-	
-	// initialize the global object map
-var globalObjectMap = initializeGame();
-	
-function initializeGame() {
-	var initialPusherPosition = new Position(2, 2);
-	var mazeDimension = new MazeDimension(4, 4);
-	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
-	var globalObjectMap = new GlobalObjectMap();
-	globalObjectMap.pusher = pusherObject;
-	return globalObjectMap; 
-}
-	
-//	function incrementGlobalVariable() {
-//		testGlobalVariable++;
-//		alert('value of global variable is ' && testGlobalVariable);
-//	}
-	
 // global object map
 function GlobalObjectMap() {
 	this.pusher = null;
@@ -74,26 +54,6 @@ function GlobalObjectMap() {
 	this.DESTINATION = 'destination';
 }
 
-
-function getArrowKeyPressed(keyCode) {
-	if(keyCode == '37') {
-		return globalObjectMap.LEFT_ARROW;
-	}
-	else if (keyCode == '38') {
-		return globalObjectMap.UP_ARROW;
-	}
-	else if (keyCode == '39') {
-		return globalObjectMap.RIGHT_ARROW;
-	} 
-	else if (keyCode == '40') {
-		return globalObjectMap.DOWN_ARROW;
-	} 
-	else {
-		return null;
-	}
-}
-
-
 // method to move when arrow ley is pressed.
 function moveOnArrowPress() {
 	$(document).keydown(function(event){
@@ -101,7 +61,6 @@ function moveOnArrowPress() {
 		var keyName = getArrowKeyPressed(keyCode);
 		movePusherObject(keyName);
 		displayPusherPosition();
-//		alert(keyName);
 	});
 }
 
