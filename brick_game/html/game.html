@@ -9,42 +9,26 @@
 	<script src="../js/position.js"></script>
 	<script src="../js/brick.js"></script>
 	<script src="../js/pusher.js"></script>
+	<script src="../js/sokoban_canvas.js"></script>
 	<script src="../js/test.js"></script>
 	<script src="../lib/jquery-1.8.2.js"></script>
 	<script type="text/javascript">
-	initializeGame();
+	function init()
+	{
+		var table = document.getElementById("maze_table");
+		//alert(table);
+		initializeGame(table);
+	}
+
 	</script>
 </head>
-<body>
+<body onload="init();">
 	<div class="main_panel" align="center">
 		<h3>SOKOBAN</h3>
 		<br></br>
-		<table class="game_maze" border="1">
+		<table id="maze_table" class="game_maze" border="1">
 			<thead></thead>
-			<tr id="row3">
-				<td id="col_0_3" class="destination"></td>
-				<td id="col_1_3" class="empty_space"></td>
-				<td id="col_2_3" class="empty_space"></td>
-				<td id="col_3_3" class="empty_space"></td>
-			</tr>
-			<tr id="row2">
-				<td id="col_0_2" class="empty_space"></td>
-				<td id="col_1_2" class="brick"></td>
-				<td id="col_2_2" class="brick_mover"></td>
-				<td id="col_3_2" class="empty_space"></td>
-			</tr>
-			<tr id="row1">
-				<td id="col_0_1" class="empty_space"></td>
-				<td id="col_1_1" class="empty_space"></td>
-				<td id="col_2_1" class="brick"></td>
-				<td id="col_3_1" class="empty_space"></td>
-			</tr>
-			<tr id="row0">
-				<td id="col_0_0" class="destination"></td>
-				<td id="col_1_0" class="empty_space"></td>
-				<td id="col_2_0" class="empty_space"></td>
-				<td id="col_3_0" class="empty_space"></td>
-			</tr>
+
 		</table>
 		<br></br>
 		

@@ -15,14 +15,27 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
  
-
-// script file to test some basic functions.
+//TODO -Remove unnecessay comments
 
 var globalObjectMap = null;
-
-function initializeGame() {
+var canvas = null;
+function initializeGame(table) {
+	var maze_x = 4;
+	var maze_y = 4;
+	
+	//For different levels we can choose random positions for the following drawable components
+	//TODO - Change type of drawDefinedCanvas to accept array of Destinations and array of Bricks so that we can have dynamic
+	//number of bricks and destinations
 	var initialPusherPosition = new Position(2, 2);
-	var mazeDimension = new MazeDimension(4, 4);
+	var initialBrickPosition1 = new Position(1,2);
+	var initialBrickPosition2 = new Position(2,1);
+	var destination1 = new Position(0,3);
+	var destination2 = new Position(0,0);
+	var mazeDimension = new MazeDimension(maze_x,maze_y);
+	
+	canvas = new SokobanCanvas(mazeDimension,table);
+	canvas.drawDefinedMaze(initialPusherPosition,initialBrickPosition1,initialBrickPosition2,destination1,destination2);
+	
 	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
 	globalObjectMap = new GlobalObjectMap();
 	globalObjectMap.pusher = pusherObject;
