@@ -1,4 +1,5 @@
 // Util functions 
+//TODO - Wrap dangling util functions to SokobanUtil class
 function changeClassOfElement(elementId, className) {
 	elementId = '#'+elementId;
 	$(elementId).removeClass();
@@ -14,7 +15,6 @@ function changeClassOFElementByPosition(position,className)
 
 }
 
-//TODO - Wrap dangling util functions to SokobanUtil class
 function getArrowKeyPressed(keyCode) {
 	if(keyCode == '37') {
 		return globalObjectMap.LEFT_ARROW;
@@ -50,7 +50,7 @@ function generateTable(x,y,table)
 			var cell = row.insertCell(row.cells.length);
 			cell.id="col_"+xpos+"_"+ypos;
 			cell.className = "empty_space";
-			//cell.innerHTML="col_"+xpos+"_"+ypos;;
+			cell.innerHTML="col_"+xpos+"_"+ypos;;
 		}
 	}
 

@@ -2,18 +2,29 @@ function SokobanCanvas(mazeDimension,table)
 {
 	this.mazeDimesion=mazeDimension;
 	this.table = table;
-	
-	this.drawDefinedMaze = function(pusherPos,brick1Pos,brick2Pos,destination1,destination2)
+	//TODO - Arrays as input for bricks and destinations
+	this.drawDefinedMaze = function(pusherPos,brickArray,destinationArray,immovableArray)
 	{
 		generateTable(mazeDimension.width,mazeDimension.height,table);
 		
-		drawDestination(destination1);
-		drawDestination(destination2);
+		for(var i =0;i < brickArray.length;i++)
+		{
+			drawBrick(brickArray[i]);
+		}
 		
-		drawBrick(brick1Pos);
-		drawBrick(brick2Pos);
+		for(var i =0;i < destinationArray.length;i++)
+		{
+			drawDestination(destinationArray[i]);
+		}
+		
+		for(var i =0;i < immovableArray.length;i++)
+		{
+			drawImmovable(immovableArray[i]);
+		}	
 		
 		drawPusher(pusherPos);
+		
+		
 	}
 	
 	this.drawRandomMaze = function()
@@ -33,8 +44,11 @@ function SokobanCanvas(mazeDimension,table)
 	}
 	function drawPusher(pusherPos)
 	{
-		alert();
 		changeClassOFElementByPosition(pusherPos,"brick_mover");
+	}
+	function drawImmovable(immovablePos)
+	{
+		changeClassOFElementByPosition(immovablePos,"immovable");
 	}
 
 }

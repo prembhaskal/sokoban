@@ -19,7 +19,12 @@
 
 var globalObjectMap = null;
 var canvas = null;
+var log = null;
 function initializeGame(table) {
+	
+	var div = document.getElementById("footer");
+	initializeLogger(div);
+	
 	var maze_x = 4;
 	var maze_y = 4;
 	
@@ -27,14 +32,23 @@ function initializeGame(table) {
 	//TODO - Change type of drawDefinedCanvas to accept array of Destinations and array of Bricks so that we can have dynamic
 	//number of bricks and destinations
 	var initialPusherPosition = new Position(2, 2);
-	var initialBrickPosition1 = new Position(1,2);
-	var initialBrickPosition2 = new Position(2,1);
-	var destination1 = new Position(0,3);
-	var destination2 = new Position(0,0);
+	//
+	var brickArray = new Array();
+	brickArray.push( new Position(1,2));
+	brickArray.push( new Position(2,1));
+
+	var destinationArray = new Array();
+	destinationArray.push(new Position(0,3));
+	destinationArray.push(new Position(0,0));
+	
+	var immovableArray = new Array();
+	immovableArray.push(new Position(2,3));
+	immovableArray.push(new Position(3,3));
+	
 	var mazeDimension = new MazeDimension(maze_x,maze_y);
 	
 	canvas = new SokobanCanvas(mazeDimension,table);
-	canvas.drawDefinedMaze(initialPusherPosition,initialBrickPosition1,initialBrickPosition2,destination1,destination2);
+	canvas.drawDefinedMaze(initialPusherPosition,brickArray,destinationArray,immovableArray);
 	
 	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
 	globalObjectMap = new GlobalObjectMap();
@@ -72,6 +86,10 @@ function moveOnArrowPress() {
 	$(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
 		var keyName = getArrowKeyPressed(keyCode);
+//		if(canMove())
+//		{
+//			
+//		}
 		movePusherObject(keyName);
 		displayPusherPosition();
 	});
