@@ -1,80 +1,174 @@
 // object to define the maze dimensions.
-function MazeDimension(width, height) {
+function MazeDimension (width, height) {
 	this.width = width;
 	this.height = height;
 }
 
-function RawMaze(mazeDimension, mazeStructure)
+var CellType = enumeration ({BrickType : "brick", 
+							 StoneType : "immovable", 
+							 PusherType : "brick_mover", 
+							 DestinationType : "destination",
+							 EmptySpaceType: "empty_space"});
+
+// TODO create a Interface/Abstract object, cell and all other objects inherit from it.
+
+//BRICK Object
+function Brick (position, cellId) {
+	
+	var cellType = CellType.BrickType;
+	
+	this.getCellType = function() {
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+}
+
+//STONE Object
+function Stone (position, cellId) {
+	var cellType = CellType.StoneType;
+	
+	this.getCellType = function() {
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+}
+
+//PUSHER Object
+function Pusher (position, cellId) {
+	var cellType = CellType.PusherType;
+	
+	this.getCellType = function() {
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+}
+
+//DESTINATION Object
+function Destination (position, cellId) {
+	var cellType = CellType.DestinationType;
+	
+	this.getCellType = function() {
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+}
+
+//EMPTYSPACE Object
+function EmptySpace (position, cellId) 
+{
+	var cellType = CellType.EmptySpaceType;
+	
+	this.getCellType = function() 
+	{
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+}
+
+function RawMaze (mazeDimension, mazeStructure)
 {
 	this.mazeDimension = mazeDimension;
 	this.mazeStructure = mazeStructure;
 }
 
-function Maze(mazeDimension, mazeStructure)
+function Maze (mazeDimension, cellArray)
 {
 	this.mazeDimension = mazeDimension;
-	this.mazeStructure = mazeStructure;
-	
-	this.pusherPosition = null;
-	this.emptySpaceArray = null;
-	this.destinationArray = null;
-	this.immovableArray = null;
-	this.brickArray = null;
-	
-	// TODO initialise the maze on during construction.
-	this.init = function ()
-	{
-		// initialise arrays and dimension
-		this.emptySpaceArray = new Array();
-		this.destinationArray = new Array();
-		this.immovableArray = new Array();
-		this.brickArray = new Array();
+	this.cellArray = cellArray;	
+}
+
+
+function MazeCreator() {
+	// parses a raw maze, creates and returns a maze corresponding to the maze.
+	this.createMaze = function(rawMaze) {
+		var mazeDimension = rawMaze.mazeDimension;
+		var mazeStructure = rawMaze.mazeStructure;
 		
-		for (var i = 0; i < this.mazeDimension.height; i++) 
-		{
-			for (var j = 0; j < this.mazeDimension.width; j++) 
-			{
-				var type = this.mazeStructure[i][j];
-				var position = new Position(j, this.mazeDimension.height-1-i);
+		// create the cellArray representing the maze
+		var cellArray = new Array(mazeDimension.height);
+		for (var i = 0; i < cellArray.length; i++) {
+			cellArray[i] = new Array(mazeDimension.width);
+		}
+		
+
+		for (var i = 0; i < mazeDimension.height; i++) {
+			for (var j = 0; j < mazeDimension.width; j++) {
+				var type = mazeStructure[i][j];
+				var position = new Position(j, mazeDimension.height-1-i);
 				
-				if (type == 'E')
-				{
-					this.emptySpaceArray.push(position);
+				if (type == 'E') {
+					cellArray[i][j] = new EmptySpace (position, getCellId(position));
 				} 
-				else if (type == 'B')
-				{
-					this.brickArray.push(position);
+				else if (type == 'B') {
+					cellArray[i][j] = new Brick (position, getCellId(position));
 				}
-				else if (type == 'D')
-				{
-					this.destinationArray.push(position);
+				else if (type == 'D') {
+					cellArray[i][j] = new Destination (position, getCellId(position));
 				}
-				else if (type == 'I')
-				{
-					this.immovableArray.push(position);
+				else if (type == 'I') {
+					cellArray[i][j] = new Stone (position, getCellId(position));
 				} 
-				else if (type == 'P')
-				{
-					this.pusherPosition = position;
+				else if (type == 'P') {
+					cellArray[i][j] = new Pusher (position, getCellId(position));
 				}
-					
 				
 			}
 		}
+		
+		var maze = new Maze (mazeDimension, cellArray);
+		return maze;
 	};
-
+	
+	function getCellId(position) {
+		return 'col_' + position.x_pos + '_' + position.y_pos;
+	}
 }
 
 
+
+
 // Object containing all the levels of the maze.
-function AllMazeLevels() 
-{
+function AllMazeLevels () {
 	var rawMazes = new Array();
 	
 	addAllMazes();
 	
-	function addAllMazes()
-	{
+	function addAllMazes() {
 		/*
 		  Basic terminologies
 			E - empty_space

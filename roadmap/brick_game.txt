@@ -66,6 +66,12 @@ function MyClass () { // constructor function
   this.privilegedMethod = function () {
     alert(privateVariable);
   };
+  
+  function private_method() {
+  }
+  
+  MyClass.class_static_method = function () {
+  }
 }
 
 MyClass.prototype.publicMethod = function () {

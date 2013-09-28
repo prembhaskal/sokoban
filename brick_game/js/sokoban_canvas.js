@@ -25,12 +25,12 @@ function SokobanCanvas(mazeDimension,table)
 		drawPusher(pusherPos);
 		
 		
-	}
+	};
 	
 	this.drawRandomMaze = function()
 	{
 		//TODO
-	}
+	};
 	
 	//private functions
 	function drawDestination(destination)
@@ -51,4 +51,28 @@ function SokobanCanvas(mazeDimension,table)
 		changeClassOFElementByPosition(immovablePos,"immovable");
 	}
 
+}
+
+function CanvasDrawer() {
+	// draws the maze on the given table.
+	this.drawMaze = function (maze, table) {
+		var mazeDimension = maze.mazeDimension;
+		
+		// generate table
+		generateTable(mazeDimension.width,mazeDimension.height,table);
+		
+		var cellArray = maze.cellArray;
+		
+		for (var i = 0; i < mazeDimension.height; i++) {
+			for (var j = 0; j < mazeDimension.width; j++) {
+				var cell = cellArray[i][j];
+				drawCell(cell);
+			}
+		}
+		
+	};
+	
+	function drawCell (cell) {
+		changeClassOFElementByPosition(cell.getPosition(), cell.getCellType().value);
+	}
 }

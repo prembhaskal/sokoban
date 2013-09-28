@@ -81,15 +81,12 @@ function GlobalObjectMap() {
 	this.DESTINATION = 'destination';
 }
 
-// method to move when arrow ley is pressed.
+// method to move when arrow key is pressed.
 function moveOnArrowPress() {
 	$(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
 		var keyName = getArrowKeyPressed(keyCode);
-//		if(canMove())
-//		{
-//			
-//		}
+
 		movePusherObject(keyName);
 		displayPusherPosition();
 	});
