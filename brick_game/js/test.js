@@ -35,8 +35,10 @@ function initializeGame(table) {
 	var initialPusherPosition = new Position(2, 2);
 	//
 	var brickArray = new Array();
-	brickArray.push( new Position(1,2));
-	brickArray.push( new Position(2,1));
+	var brick1Position = new Position(1,2);
+	var brick2Position =  new Position(2,1)
+	brickArray.push(brick1Position );
+	brickArray.push(brick2Position);
 
 	var destinationArray = new Array();
 	destinationArray.push(new Position(0,3));
@@ -52,8 +54,17 @@ function initializeGame(table) {
 	canvas.drawDefinedMaze(initialPusherPosition,brickArray,destinationArray,immovableArray);
 	
 	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
+	var brick1 = new Brick(brick1Position,mazeDimension);
+	var brick2 = new Brick(brick2Position,mazeDimension);
+	
+	pusherObject.addPushListener(brick1);
+	pusherObject.addPushListener(brick2);
+	
 	globalObjectMap = new GlobalObjectMap();
 	globalObjectMap.pusher = pusherObject;
+	
+	globalObjectMap.brickObjects.push(brick1);
+	globalObjectMap.brickObjects.push(brick2);
 	
 	//binding key handlers
 	addkeyHandlers();
@@ -68,6 +79,7 @@ function addkeyHandlers() {
 function GlobalObjectMap() {
 	this.pusher = null;
 	this.current_position = null;
+	this.brickObjects = new Array();
 	
 	// constants for arrows
 }

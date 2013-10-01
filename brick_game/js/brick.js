@@ -6,7 +6,6 @@
 		
 		// privileged methods
 		this.getNewXPosition = function(x_inc) {
-//			alert("get x position called");
 			var old_x_pos = this.position.x_pos;
 			var new_x_pos = old_x_pos + x_inc;
 			// check if it is crossing boundary, both left and right.
@@ -17,67 +16,54 @@
 		};
 		
 		this.getNewYPosition = function(y_inc) {
-//			alert("get y position called");
 			var old_y_pos = this.position.y_pos;
 			var new_y_pos = old_y_pos + y_inc;
 			// check if it is crossing boundary, both upper and lower
 			if ((new_y_pos < 0) || (new_y_pos >= this.mazeDimension.height)) {
 				new_y_pos = old_y_pos;
 			}
+			//check if we are entering empty space.
 			return new_y_pos;
 		};
 		
-		this.elementIdForPosition = function(position) {
-			var x_pos = position.x_pos;
-			var y_pos = position.y_pos;
-			var elementId = 'col_' + x_pos + '_' + y_pos;
-			return elementId;
-		};
-		
-		this.prototype.isPositionEmpty = function (position) {
-			var elementId = this.elementIdForPosition(position);
-			var className = $('#' + elementId).attr('class');
-			if (className == globalObjectMap.EMPTY_SPACE) {
+		// move this BRICK
+		 this.move = function(keyName) {
+			 var x_inc = SokobanUtil.keyXInc(keyName);
+			 var y_inc = SokobanUtil.keyYInc(keyName);
+			 
+			// find the new position
+			var oldPosition = this.position;
+			var new_x_pos = this.getNewXPosition(x_inc);
+			var new_y_pos = this.getNewYPosition(y_inc);
+			var newPosition = new Position(new_x_pos, new_y_pos);
+			
+			var cellType = SokobanUtil.getCellType(newPosition);
+			
+			if((SokobanUtil.CellType.StoneType==cellType))
+				return false;
+			else if ((SokobanUtil.CellType.BrickType==cellType))
+				return false;
+			else
+			{
+				this.position = newPosition;
+				// move to new position if it is different than original position
+				if ( ! oldPosition.equals(newPosition)) {
+					//move the Pusher to destination
+					SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK);
+					
+					// replace the original position with empty space
+					SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK);
+				}
+				
 				return true;
 			}
-			return false;
-		};
-	}
-	
-	Brick.prototype.canMove = function(x_inc, y_inc) {
-		// get the present position
-		var oldPosition = this.position;
-		var new_x_pos = this.getNewXPosition(x_inc);
-		var new_y_pos = this.getNewYPosition(y_inc);
-		var newPosition = new Position(new_x_pos, new_y_pos);
-		
-		// check if newPostion is different from old one.
-		if (oldPosition.equals(newPosition)) {
-			return false; // it means we hit a dead end
-		} else {
-			return this.isPositionEmpty(newPosition);
-		}
-	};
-	
-	Brick.prototype.move = function(x_inc, y_inc) {
-		// get the present position
-		var oldPosition = this.position;
-		var new_x_pos = this.getNewXPosition(x_inc);
-		var new_y_pos = this.getNewYPosition(y_inc);
-		var newPosition = new Position(new_x_pos, new_y_pos);
-		
-		// check if newPostion is different from old one.
-		if (!oldPosition.equals(newPosition)) {
-			//move the Pusher to destination
-			var destinationElemId = this.elementIdForPosition(newPosition);
-			SokobanUtil.changeClassOfElement(destinationElemId, SokobanUtil.cellStyle.BRICK);
+
 			
-			// replace the original position with empty space
-			var sourceElemId = this.elementIdForPosition(oldPosition);
-			SokobanUtil.changeClassOfElement(sourceElemId, SokobanUtil.cellStyle.EMPTY_SPACE);
-		}
-	};
-	
-	
-	// **********************End of object Brick ***************************
-	
+		};
+		
+		
+		
+		
+		
+
+	}	

@@ -2,7 +2,7 @@
 function Pusher(position, mazeDimension) {
 	this.position = position;
 	this.mazeDimension = mazeDimension;
-	this.pushListeners= new Array();
+	var pushListeners= new Array();
 	
 	// privileged methods
 	this.getNewXPosition = function(x_inc) {
@@ -41,19 +41,20 @@ function Pusher(position, mazeDimension) {
 		
 		if((SokobanUtil.CellType.StoneType==cellType))
 			return;
-		//else if (SokobanUtil.CellType.BRICK == cellType)
-			
-		else
+		else if (SokobanUtil.CellType.BrickType == cellType)
 		{
-			this.position = newPosition;
-			// move to new position if it is different than original position
-			if ( ! oldPosition.equals(newPosition)) {
-				//move the Pusher to destination
-				SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-				
-				// replace the original position with empty space
-				SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-			}
+			if(!this.onPush(keyName,newPosition))
+				return;
+		}
+		
+		this.position = newPosition;
+		// move to new position if it is different than original position
+		if ( ! oldPosition.equals(newPosition)) {
+			//move the Pusher to destination
+			SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
+			
+			// replace the original position with empty space
+			SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
 		}
 
 		
@@ -61,11 +62,9 @@ function Pusher(position, mazeDimension) {
 	
 	
 	
-	//TODO - Currently the element is position , if infuture the object is changed then we will be needing to grope in to the object and 
-	//fetch the position element
 	this.addPushListener = function(element)
 	{
-		pushListeners.add(element);
+		pushListeners.push(element);
 	}
 	this.removePushListener = function(element)
 	{
@@ -79,14 +78,14 @@ function Pusher(position, mazeDimension) {
 		}
 	}
 	
-	this.onPush = function(element)
+	this.onPush = function(keyName,element)
 	{
 		for(var i =0;i < pushListeners.length; i++)
 		{
 			var item = pushListeners[i];
-			if(item.equals(element))
+			if(item.position.equals(element))
 			{
-				return item.move()
+				return item.move(keyName);
 			}
 		}
 	}

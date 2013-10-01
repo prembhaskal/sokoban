@@ -53,6 +53,8 @@ SokobanUtil.getCellType = function(position)
 	
 	if($(elementId).hasClass(SokobanUtil.cellStyle.IMMOVABLE))
 		return SokobanUtil.CellType.StoneType;
+	else if($(elementId).hasClass(SokobanUtil.cellStyle.BRICK))
+		return SokobanUtil.CellType.BrickType;
 	else
 		return SokobanUtil.CellType.EMPTY_SPACE;
 	
