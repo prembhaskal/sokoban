@@ -35,20 +35,20 @@ function SokobanCanvas(mazeDimension,table)
 	//private functions
 	function drawDestination(destination)
 	{
-		SokobanUtil.changeClassOFElementByPosition(destination,"destination");
+		SokobanUtil.changeClassOFElementByPosition(destination,SokobanUtil.cellStyle.DESTINATION);
 	}
 	
 	function drawBrick(brickPos)
 	{
-		SokobanUtil.changeClassOFElementByPosition(brickPos,"brick");
+		SokobanUtil.changeClassOFElementByPosition(brickPos,SokobanUtil.cellStyle.BRICK);
 	}
 	function drawPusher(pusherPos)
 	{
-		SokobanUtil.changeClassOFElementByPosition(pusherPos,"brick_mover");
+		SokobanUtil.changeClassOFElementByPosition(pusherPos,SokobanUtil.cellStyle.BRICK_MOVER);
 	}
 	function drawImmovable(immovablePos)
 	{
-		SokobanUtil.changeClassOFElementByPosition(immovablePos,"immovable");
+		SokobanUtil.changeClassOFElementByPosition(immovablePos,SokobanUtil.cellStyle.IMMOVABLE);
 	}
 
 }

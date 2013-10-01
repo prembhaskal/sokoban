@@ -69,16 +69,6 @@ function GlobalObjectMap() {
 	this.current_position = null;
 	
 	// constants for arrows
-	this.LEFT_ARROW = "LEFT-ARROW";
-	this.UP_ARROW = "UP-ARROW";
-	this.RIGHT_ARROW = "RIGHT-DOWN";
-	this.DOWN_ARROW = "DOWN-ARROW";
-	
-	// constants for class names
-	this.BRICK_MOVER = 'brick_mover';
-	this.BRICK = 'brick';
-	this.EMPTY_SPACE = 'empty_space';
-	this.DESTINATION = 'destination';
 }
 
 // method to move when arrow key is pressed.
@@ -88,30 +78,25 @@ function moveOnArrowPress() {
 		var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
 		movePusherObject(keyName);
-		displayPusherPosition();
+		
 	});
 }
 
 function movePusherObject(keyName) {
 	var pusher = globalObjectMap.pusher;
 	if (keyName != null) {
-		if (keyName == globalObjectMap.LEFT_ARROW) {
+		if (keyName == SokobanUtil.keyCode.LEFT_ARROW) {
 			pusher.moveLeft();
 		}
-		else if (keyName == globalObjectMap.UP_ARROW) {
+		else if (keyName == SokobanUtil.keyCode.UP_ARROW) {
 			pusher.moveUp();
 		}
-		else if (keyName == globalObjectMap.RIGHT_ARROW) {
+		else if (keyName == SokobanUtil.keyCode.RIGHT_ARROW) {
 			pusher.moveRight();
 		}
-		else if (keyName == globalObjectMap.DOWN_ARROW) {
+		else if (keyName == SokobanUtil.keyCode.DOWN_ARROW) {
 			pusher.moveDown();
 		}
 	}
 }
 
-function displayPusherPosition() {
-	var position =globalObjectMap.pusher.position;
-	$('#x-position').text('x-position ' + position.x_pos);
-	$('#y-position').text('y-position ' + position.y_pos);
-}

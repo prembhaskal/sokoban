@@ -37,7 +37,6 @@ function Pusher(position, mazeDimension) {
 	
 	// move this PUSHER
 	 Pusher.prototype.move = function(x_inc, y_inc) {
-//		 alert("pusher move method called");
 		 
 		// find the new position
 		var oldPosition = this.position;
@@ -45,17 +44,16 @@ function Pusher(position, mazeDimension) {
 		var new_y_pos = this.getNewYPosition(y_inc);
 		var newPosition = new Position(new_x_pos, new_y_pos);
 		this.position = newPosition;
-//		alert("x-position " + new_x_pos);
 		
 		// move to new position if it is different than original position
 		if ( ! oldPosition.equals(newPosition)) {
 			//move the Pusher to destination
 			var destinationElemId = this.elementIdForPosition(newPosition);
-			SokobanUtil.changeClassOfElement(destinationElemId, globalObjectMap.BRICK_MOVER);
+			SokobanUtil.changeClassOfElement(destinationElemId, SokobanUtil.cellStyle.BRICK_MOVER);
 			
 			// replace the original position with empty space
 			var sourceElemId = this.elementIdForPosition(oldPosition);
-			SokobanUtil.changeClassOfElement(sourceElemId, globalObjectMap.EMPTY_SPACE);
+			SokobanUtil.changeClassOfElement(sourceElemId, SokobanUtil.cellStyle.EMPTY_SPACE);
 		}
 	};
 	

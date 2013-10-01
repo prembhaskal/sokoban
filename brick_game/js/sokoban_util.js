@@ -3,6 +3,10 @@
 
 function SokobanUtil(){}
 
+SokobanUtil.keyCode = {LEFT_ARROW:"LEFT-ARROW",UP_ARROW:"UP-ARROW",RIGHT_ARROW:"RIGHT-DOWN",DOWN_ARROW:"DOWN-ARROW"};
+
+SokobanUtil.cellStyle = {BRICK_MOVER :'brick_mover',BRICK : 'brick',EMPTY_SPACE : 'empty_space',DESTINATION :'destination',IMMOVABLE:"immovable"};
+
 SokobanUtil.changeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
@@ -21,21 +25,22 @@ SokobanUtil.changeClassOFElementByPosition = function (position,className)
 
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
-		return globalObjectMap.LEFT_ARROW;
+		return SokobanUtil.keyCode.LEFT_ARROW;
 	}
 	else if (keyCode == '38') {
-		return globalObjectMap.UP_ARROW;
+		return SokobanUtil.keyCode.UP_ARROW;
 	}
 	else if (keyCode == '39') {
-		return globalObjectMap.RIGHT_ARROW;
+		return SokobanUtil.keyCode.RIGHT_ARROW;
 	} 
 	else if (keyCode == '40') {
-		return globalObjectMap.DOWN_ARROW;
+		return SokobanUtil.keyCode.DOWN_ARROW;
 	} 
 	else {
 		return null;
 	}
 }
+
 
 SokobanUtil.generateTable = function (x,y,table)
 {
