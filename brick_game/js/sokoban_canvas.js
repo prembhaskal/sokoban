@@ -73,6 +73,6 @@ function CanvasDrawer() {
 	};
 	
 	function drawCell (cell) {
-		SokobanUtil.changeClassOFElementByPosition(cell.getPosition(), cell.getCellType().value);
+		SokobanUtil.changeClassOFElementByPosition(cell.getPosition(), cell.getCellType());
 	}
 }

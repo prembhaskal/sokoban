@@ -4,11 +4,11 @@ function MazeDimension (width, height) {
 	this.height = height;
 }
 
-var CellType = enumeration ({BrickType : "brick", 
+var CellType =  {BrickType : "brick", 
 							 StoneType : "immovable", 
 							 PusherType : "brick_mover", 
 							 DestinationType : "destination",
-							 EmptySpaceType: "empty_space"});
+							 EmptySpaceType: "empty_space"};
 
 // TODO create a Interface/Abstract object, cell and all other objects inherit from it.
 
