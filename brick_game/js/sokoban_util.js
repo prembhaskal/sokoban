@@ -16,7 +16,6 @@ SokobanUtil.CellType =  {BrickType : "brick",
 SokobanUtil.changeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
-	//$(elementId).removeClass();
 	$(elementId).addClass(className);
 }
 
@@ -41,6 +40,21 @@ SokobanUtil.removeClassOFElementByPosition = function (position,className)
 	var elementId = 'col_' + x_pos + '_' + y_pos;
 	SokobanUtil.removeClassOfElement(elementId,className);
 }
+
+SokobanUtil.getCellType = function(position)
+{
+	var x_pos = position.x_pos;
+	var y_pos = position.y_pos;
+	var elementId = '#col_' + x_pos + '_' + y_pos;
+	
+	if($(elementId).hasClass(SokobanUtil.cellStyle.IMMOVABLE))
+		return SokobanUtil.CellType.StoneType;
+	else
+		return SokobanUtil.CellType.EMPTY_SPACE;
+	
+	
+}
+
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
 		return SokobanUtil.keyCode.LEFT_ARROW;

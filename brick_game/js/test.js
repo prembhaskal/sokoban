@@ -22,6 +22,7 @@ var canvas = null;
 var log = null;
 function initializeGame(table) {
 	
+	//TODO - Find the use point of debug else remove the logger functionality
 	var div = document.getElementById("footer");
 	initializeLogger(div);
 	

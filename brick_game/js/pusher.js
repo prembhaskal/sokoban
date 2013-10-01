@@ -16,13 +16,13 @@ function Pusher(position, mazeDimension) {
 	};
 	
 	this.getNewYPosition = function(y_inc) {
-//		alert("get y position called");
 		var old_y_pos = this.position.y_pos;
 		var new_y_pos = old_y_pos + y_inc;
 		// check if it is crossing boundary, both upper and lower
 		if ((new_y_pos < 0) || (new_y_pos >= this.mazeDimension.height)) {
 			new_y_pos = old_y_pos;
 		}
+		//check if we are entering empty space.
 		return new_y_pos;
 	};
 	
@@ -37,16 +37,25 @@ function Pusher(position, mazeDimension) {
 		var new_x_pos = this.getNewXPosition(x_inc);
 		var new_y_pos = this.getNewYPosition(y_inc);
 		var newPosition = new Position(new_x_pos, new_y_pos);
-		this.position = newPosition;
 		
-		// move to new position if it is different than original position
-		if ( ! oldPosition.equals(newPosition)) {
-			//move the Pusher to destination
-			SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-			
-			// replace the original position with empty space
-			SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
+		var cellType = SokobanUtil.getCellType(newPosition);
+		
+		if((SokobanUtil.CellType.StoneType==cellType))
+			return;
+		else
+		{
+			this.position = newPosition;
+			// move to new position if it is different than original position
+			if ( ! oldPosition.equals(newPosition)) {
+				//move the Pusher to destination
+				SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
+				
+				// replace the original position with empty space
+				SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
+			}
 		}
+
+		
 	};
 	
 	Pusher.prototype.moveLeft = function() {
