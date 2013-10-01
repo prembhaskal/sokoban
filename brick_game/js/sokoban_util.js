@@ -1,5 +1,5 @@
 // Util functions 
-//TODO - Wrap dangling util functions to SokobanUtil class
+
 
 function SokobanUtil(){}
 
