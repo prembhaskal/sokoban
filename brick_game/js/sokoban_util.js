@@ -12,7 +12,7 @@ SokobanUtil.changeClassOfElement= function (elementId, className)
 	elementId = '#'+elementId;
 	//$(elementId).removeClass();
 	$(elementId).addClass(className);
-}
+};
 
 SokobanUtil.changeClassOFElementByPosition = function (position,className)
 {
@@ -21,20 +21,20 @@ SokobanUtil.changeClassOFElementByPosition = function (position,className)
 	var elementId = 'col_' + x_pos + '_' + y_pos;
 	SokobanUtil.changeClassOfElement(elementId,className);
 
-}
+};
 
 SokobanUtil.removeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
 	$(elementId).removeClass(className);
-}
+};
 SokobanUtil.removeClassOFElementByPosition = function (position,className)
 {
 	var x_pos = position.x_pos;
 	var y_pos = position.y_pos;
 	var elementId = 'col_' + x_pos + '_' + y_pos;
 	SokobanUtil.removeClassOfElement(elementId,className);
-}
+};
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
 		return SokobanUtil.keyCode.LEFT_ARROW;
@@ -51,7 +51,7 @@ SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	else {
 		return null;
 	}
-}
+};
 
 
 SokobanUtil.generateTable = function (x,y,table)
@@ -75,5 +75,5 @@ SokobanUtil.generateTable = function (x,y,table)
 		}
 	}
 
-}
+};
 
