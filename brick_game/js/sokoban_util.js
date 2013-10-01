@@ -1,21 +1,25 @@
 // Util functions 
 //TODO - Wrap dangling util functions to SokobanUtil class
-function changeClassOfElement(elementId, className) {
+
+function SokobanUtil(){}
+
+SokobanUtil.changeClassOfElement= function (elementId, className)
+{
 	elementId = '#'+elementId;
 	$(elementId).removeClass();
 	$(elementId).addClass(className);
 }
 
-function changeClassOFElementByPosition(position,className)
+SokobanUtil.changeClassOFElementByPosition = function (position,className)
 {
 	var x_pos = position.x_pos;
 	var y_pos = position.y_pos;
 	var elementId = 'col_' + x_pos + '_' + y_pos;
-	changeClassOfElement(elementId,className);
+	SokobanUtil.changeClassOfElement(elementId,className);
 
 }
 
-function getArrowKeyPressed(keyCode) {
+SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
 		return globalObjectMap.LEFT_ARROW;
 	}
@@ -33,7 +37,7 @@ function getArrowKeyPressed(keyCode) {
 	}
 }
 
-function generateTable(x,y,table)
+SokobanUtil.generateTable = function (x,y,table)
 {
 	table.rows.length = 0;
 	var ypos = y-1;

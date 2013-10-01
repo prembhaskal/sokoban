@@ -85,7 +85,7 @@ function GlobalObjectMap() {
 function moveOnArrowPress() {
 	$(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
-		var keyName = getArrowKeyPressed(keyCode);
+		var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
 		movePusherObject(keyName);
 		displayPusherPosition();

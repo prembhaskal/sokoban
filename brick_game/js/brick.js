@@ -70,11 +70,11 @@
 		if (!oldPosition.equals(newPosition)) {
 			//move the Pusher to destination
 			var destinationElemId = this.elementIdForPosition(newPosition);
-			changeClassOfElement(destinationElemId, globalObjectMap.BRICK);
+			SokobanUtil.changeClassOfElement(destinationElemId, globalObjectMap.BRICK);
 			
 			// replace the original position with empty space
 			var sourceElemId = this.elementIdForPosition(oldPosition);
-			changeClassOfElement(sourceElemId, globalObjectMap.EMPTY_SPACE);
+			SokobanUtil.changeClassOfElement(sourceElemId, globalObjectMap.EMPTY_SPACE);
 		}
 	};
 	

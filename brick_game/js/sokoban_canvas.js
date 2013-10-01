@@ -5,7 +5,7 @@ function SokobanCanvas(mazeDimension,table)
 	//TODO - Arrays as input for bricks and destinations
 	this.drawDefinedMaze = function(pusherPos,brickArray,destinationArray,immovableArray)
 	{
-		generateTable(mazeDimension.width,mazeDimension.height,table);
+		SokobanUtil.generateTable(mazeDimension.width,mazeDimension.height,table);
 		
 		for(var i =0;i < brickArray.length;i++)
 		{
@@ -35,20 +35,20 @@ function SokobanCanvas(mazeDimension,table)
 	//private functions
 	function drawDestination(destination)
 	{
-		changeClassOFElementByPosition(destination,"destination");
+		SokobanUtil.changeClassOFElementByPosition(destination,"destination");
 	}
 	
 	function drawBrick(brickPos)
 	{
-		changeClassOFElementByPosition(brickPos,"brick");
+		SokobanUtil.changeClassOFElementByPosition(brickPos,"brick");
 	}
 	function drawPusher(pusherPos)
 	{
-		changeClassOFElementByPosition(pusherPos,"brick_mover");
+		SokobanUtil.changeClassOFElementByPosition(pusherPos,"brick_mover");
 	}
 	function drawImmovable(immovablePos)
 	{
-		changeClassOFElementByPosition(immovablePos,"immovable");
+		SokobanUtil.changeClassOFElementByPosition(immovablePos,"immovable");
 	}
 
 }
@@ -59,7 +59,7 @@ function CanvasDrawer() {
 		var mazeDimension = maze.mazeDimension;
 		
 		// generate table
-		generateTable(mazeDimension.width,mazeDimension.height,table);
+		SokobanUtil.generateTable(mazeDimension.width,mazeDimension.height,table);
 		
 		var cellArray = maze.cellArray;
 		
@@ -73,6 +73,6 @@ function CanvasDrawer() {
 	};
 	
 	function drawCell (cell) {
-		changeClassOFElementByPosition(cell.getPosition(), cell.getCellType().value);
+		SokobanUtil.changeClassOFElementByPosition(cell.getPosition(), cell.getCellType().value);
 	}
 }
