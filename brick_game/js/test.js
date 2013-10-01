@@ -86,18 +86,7 @@ function moveOnArrowPress() {
 function movePusherObject(keyName) {
 	var pusher = globalObjectMap.pusher;
 	if (keyName != null) {
-		if (keyName == SokobanUtil.keyCode.LEFT_ARROW) {
-			pusher.moveLeft();
-		}
-		else if (keyName == SokobanUtil.keyCode.UP_ARROW) {
-			pusher.moveUp();
-		}
-		else if (keyName == SokobanUtil.keyCode.RIGHT_ARROW) {
-			pusher.moveRight();
-		}
-		else if (keyName == SokobanUtil.keyCode.DOWN_ARROW) {
-			pusher.moveDown();
-		}
+		pusher.move(keyName);
 	}
 }
 
