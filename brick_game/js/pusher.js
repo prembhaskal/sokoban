@@ -26,12 +26,6 @@ function Pusher(position, mazeDimension) {
 		return new_y_pos;
 	};
 	
-	this.elementIdForPosition = function(position) {
-		var x_pos = position.x_pos;
-		var y_pos = position.y_pos;
-		var elementId = 'col_' + x_pos + '_' + y_pos;
-		return elementId;
-	};
 
 }
 	
@@ -48,12 +42,10 @@ function Pusher(position, mazeDimension) {
 		// move to new position if it is different than original position
 		if ( ! oldPosition.equals(newPosition)) {
 			//move the Pusher to destination
-			var destinationElemId = this.elementIdForPosition(newPosition);
-			SokobanUtil.changeClassOfElement(destinationElemId, SokobanUtil.cellStyle.BRICK_MOVER);
+			SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
 			
 			// replace the original position with empty space
-			var sourceElemId = this.elementIdForPosition(oldPosition);
-			SokobanUtil.changeClassOfElement(sourceElemId, SokobanUtil.cellStyle.EMPTY_SPACE);
+			SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
 		}
 	};
 	

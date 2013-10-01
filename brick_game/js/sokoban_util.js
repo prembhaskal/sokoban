@@ -10,7 +10,7 @@ SokobanUtil.cellStyle = {BRICK_MOVER :'brick_mover',BRICK : 'brick',EMPTY_SPACE 
 SokobanUtil.changeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
-	$(elementId).removeClass();
+	//$(elementId).removeClass();
 	$(elementId).addClass(className);
 }
 
@@ -23,6 +23,18 @@ SokobanUtil.changeClassOFElementByPosition = function (position,className)
 
 }
 
+SokobanUtil.removeClassOfElement= function (elementId, className)
+{
+	elementId = '#'+elementId;
+	$(elementId).removeClass(className);
+}
+SokobanUtil.removeClassOFElementByPosition = function (position,className)
+{
+	var x_pos = position.x_pos;
+	var y_pos = position.y_pos;
+	var elementId = 'col_' + x_pos + '_' + y_pos;
+	SokobanUtil.removeClassOfElement(elementId,className);
+}
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
 		return SokobanUtil.keyCode.LEFT_ARROW;
