@@ -7,6 +7,12 @@ SokobanUtil.keyCode = {LEFT_ARROW:"LEFT-ARROW",UP_ARROW:"UP-ARROW",RIGHT_ARROW:"
 
 SokobanUtil.cellStyle = {BRICK_MOVER :'brick_mover',BRICK : 'brick',EMPTY_SPACE : 'empty_space',DESTINATION :'destination',IMMOVABLE:"immovable"};
 
+SokobanUtil.CellType =  {BrickType : "brick", 
+		 StoneType : "immovable", 
+		 PusherType : "brick_mover", 
+		 DestinationType : "destination",
+		 EmptySpaceType: "empty_space"};
+
 SokobanUtil.changeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;

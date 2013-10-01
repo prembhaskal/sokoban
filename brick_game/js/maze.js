@@ -4,18 +4,14 @@ function MazeDimension (width, height) {
 	this.height = height;
 }
 
-var CellType =  {BrickType : "brick", 
-							 StoneType : "immovable", 
-							 PusherType : "brick_mover", 
-							 DestinationType : "destination",
-							 EmptySpaceType: "empty_space"};
+
 
 // TODO create a Interface/Abstract object, cell and all other objects inherit from it.
 
 //BRICK Object
 function Brick (position, cellId) {
 	
-	var cellType = CellType.BrickType;
+	var cellType = SokobanUtil.CellType.BrickType;
 	
 	this.getCellType = function() {
 		return cellType;
@@ -32,7 +28,7 @@ function Brick (position, cellId) {
 
 //STONE Object
 function Stone (position, cellId) {
-	var cellType = CellType.StoneType;
+	var cellType = SokobanUtil.CellType.StoneType;
 	
 	this.getCellType = function() {
 		return cellType;
@@ -49,7 +45,7 @@ function Stone (position, cellId) {
 
 //PUSHER Object
 function Pusher (position, cellId) {
-	var cellType = CellType.PusherType;
+	var cellType = SokobanUtil.CellType.PusherType;
 	
 	this.getCellType = function() {
 		return cellType;
@@ -66,7 +62,7 @@ function Pusher (position, cellId) {
 
 //DESTINATION Object
 function Destination (position, cellId) {
-	var cellType = CellType.DestinationType;
+	var cellType = SokobanUtil.CellType.DestinationType;
 	
 	this.getCellType = function() {
 		return cellType;
@@ -84,7 +80,7 @@ function Destination (position, cellId) {
 //EMPTYSPACE Object
 function EmptySpace (position, cellId) 
 {
-	var cellType = CellType.EmptySpaceType;
+	var cellType = SokobanUtil.CellType.EmptySpaceType;
 	
 	this.getCellType = function() 
 	{
