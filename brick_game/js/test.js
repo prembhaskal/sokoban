@@ -22,50 +22,27 @@ var canvas = null;
 var log = null;
 function initializeGame(table) {
 	
-	//TODO - Find the use point of debug else remove the logger functionality
+	//TODO - Find the use case of debug else remove the logger functionality
 	var div = document.getElementById("footer");
 	initializeLogger(div);
 	
-	var maze_x = 4;
-	var maze_y = 4;
-	
-	//For different levels we can choose random positions for the following drawable components
-	//TODO - Change type of drawDefinedCanvas to accept array of Destinations and array of Bricks so that we can have dynamic
-	//number of bricks and destinations
-	var initialPusherPosition = new Position(2, 2);
-	//
-	var brickArray = new Array();
-	var brick1Position = new Position(1,2);
-	var brick2Position =  new Position(2,1)
-	brickArray.push(brick1Position );
-	brickArray.push(brick2Position);
 
-	var destinationArray = new Array();
-	destinationArray.push(new Position(0,3));
-	destinationArray.push(new Position(0,0));
+	var allMazeLevels = new AllMazeLevels();
+	var rawMaze = allMazeLevels.getRawMaze(2);
 	
-	var immovableArray = new Array();
-	immovableArray.push(new Position(2,3));
-	immovableArray.push(new Position(3,3));
+	var mazeCreator = new MazeCreator();
+	var maze = mazeCreator.createMaze(rawMaze);
+	var canvasDrawer = new CanvasDrawer();
+	canvasDrawer.drawMaze(maze, table);
 	
-	var mazeDimension = new MazeDimension(maze_x,maze_y);
-	
-	canvas = new SokobanCanvas(mazeDimension,table);
-	canvas.drawDefinedMaze(initialPusherPosition,brickArray,destinationArray,immovableArray);
-	
-	var pusherObject = new Pusher(initialPusherPosition, mazeDimension);
-	var brick1 = new Brick(brick1Position,mazeDimension);
-	var brick2 = new Brick(brick2Position,mazeDimension);
-	
-	pusherObject.addPushListener(brick1);
-	pusherObject.addPushListener(brick2);
+	var pusher = maze.pusher;
+	for(var i=0; i < maze.brickArray.length ; i++)
+	{
+		pusher.addPushListener(maze.brickArray[i]);
+	}
 	
 	globalObjectMap = new GlobalObjectMap();
-	globalObjectMap.pusher = pusherObject;
-	
-	globalObjectMap.brickObjects.push(brick1);
-	globalObjectMap.brickObjects.push(brick2);
-	
+	globalObjectMap.maze = maze;
 	//binding key handlers
 	addkeyHandlers();
 	
@@ -77,9 +54,9 @@ function addkeyHandlers() {
 
 // global object map
 function GlobalObjectMap() {
-	this.pusher = null;
-	this.current_position = null;
-	this.brickObjects = new Array();
+	this.maze = null;
+	//this.current_position = null;
+	//**this.brickObjects = new Array();
 	
 	// constants for arrows
 }
@@ -96,7 +73,7 @@ function moveOnArrowPress() {
 }
 
 function movePusherObject(keyName) {
-	var pusher = globalObjectMap.pusher;
+	var pusher = globalObjectMap.maze.pusher;
 	if (keyName != null) {
 		pusher.move(keyName);
 	}

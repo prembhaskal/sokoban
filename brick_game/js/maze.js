@@ -4,98 +4,6 @@ function MazeDimension (width, height) {
 	this.height = height;
 }
 
-
-
-// TODO create a Interface/Abstract object, cell and all other objects inherit from it.
-
-//BRICK Object
-function Brick (position, cellId) {
-	
-	var cellType = SokobanUtil.CellType.BrickType;
-	
-	this.getCellType = function() {
-		return cellType;
-	};
-	
-	this.getPosition = function() {
-		return position;
-	};
-	
-	this.cellId = function() {
-		return cellId;
-	};
-}
-
-//STONE Object
-function Stone (position, cellId) {
-	var cellType = SokobanUtil.CellType.StoneType;
-	
-	this.getCellType = function() {
-		return cellType;
-	};
-	
-	this.getPosition = function() {
-		return position;
-	};
-	
-	this.cellId = function() {
-		return cellId;
-	};
-}
-
-//PUSHER Object
-function Pusher (position, cellId) {
-	var cellType = SokobanUtil.CellType.PusherType;
-	
-	this.getCellType = function() {
-		return cellType;
-	};
-	
-	this.getPosition = function() {
-		return position;
-	};
-	
-	this.cellId = function() {
-		return cellId;
-	};
-}
-
-//DESTINATION Object
-function Destination (position, cellId) {
-	var cellType = SokobanUtil.CellType.DestinationType;
-	
-	this.getCellType = function() {
-		return cellType;
-	};
-	
-	this.getPosition = function() {
-		return position;
-	};
-	
-	this.cellId = function() {
-		return cellId;
-	};
-}
-
-//EMPTYSPACE Object
-function EmptySpace (position, cellId) 
-{
-	var cellType = SokobanUtil.CellType.EmptySpaceType;
-	
-	this.getCellType = function() 
-	{
-		return cellType;
-	};
-	
-	this.getPosition = function() {
-		return position;
-	};
-	
-	this.cellId = function() {
-		return cellId;
-	};
-}
-
 function RawMaze (mazeDimension, mazeStatics, mazeMovables)
 {
 	this.mazeDimension = mazeDimension;
@@ -155,10 +63,10 @@ function MazeCreator() {
 				var position = new Position(j, mazeDimension.height-1-i);
 				
 				if (type == 'B') {
-					brickArray.push(new Brick(position, getCellId(position)));
+					brickArray.push(new Brick(position, getCellId(position),mazeDimension));
 				}
 				else if (type == 'P') {
-					pusher = new Pusher(position, getCellId(position));
+					pusher = new Pusher(position, getCellId(position),mazeDimension);
 				}
 			}
 		}
@@ -237,12 +145,12 @@ function AllMazeLevels () {
 		var level2Static = [
 				              ['E','E','D','D'],
 				              ['E','E','E','E'],
-				              ['E','I','I','E'],
+				              ['E','E','E','E'],
 			              ];
 		
 		var level2Movable= [
-				              ['X','X','P','X'],
-				              ['X','B','B','X'],
+				              ['X','B','P','X'],
+				              ['X','X','B','X'],
 				              ['X','X','X','X'],
 			              ];
 		

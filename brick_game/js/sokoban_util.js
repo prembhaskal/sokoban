@@ -138,7 +138,7 @@ SokobanUtil.generateTable = function (x,y,table)
 			var cell = row.insertCell(row.cells.length);
 			cell.id="col_"+xpos+"_"+ypos;
 			cell.className = "empty_space";
-			cell.innerHTML="col_"+xpos+"_"+ypos;;
+			//cell.innerHTML="col_"+xpos+"_"+ypos;;
 		}
 	}
 

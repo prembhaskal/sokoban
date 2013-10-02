@@ -1,8 +1,26 @@
 //  *********************** Object PUSHER ***************************** 
-function Pusher(position, mazeDimension) {
+
+//PUSHER Object
+function Pusher (position, cellId,mazeDimension) {
+	var cellType = SokobanUtil.CellType.PusherType;
 	this.position = position;
 	this.mazeDimension = mazeDimension;
 	var pushListeners= new Array();
+	
+	this.getCellType = function() {
+		return cellType;
+	};
+	
+	this.getPosition = function() {
+		return position;
+	};
+	
+	this.cellId = function() {
+		return cellId;
+	};
+	
+	
+
 	
 	// privileged methods
 	this.getNewXPosition = function(x_inc) {
@@ -89,10 +107,9 @@ function Pusher(position, mazeDimension) {
 			}
 		}
 	}
-	
-
 
 }
+
 	
 
 	

@@ -1,8 +1,23 @@
 	
-	// *********************** Brick Object ********************************
-	function Brick (position, mazeDimension) {
+	//BRICK Object
+	function Brick (position, cellId,mazeDimension) {
+		
+		var cellType = SokobanUtil.CellType.BrickType;
 		this.position = position;
 		this.mazeDimension = mazeDimension;
+		
+		this.getCellType = function() {
+			return cellType;
+		};
+		
+		this.getPosition = function() {
+			return position;
+		};
+		
+		this.cellId = function() {
+			return cellId;
+		};
+		
 		
 		// privileged methods
 		this.getNewXPosition = function(x_inc) {
@@ -60,10 +75,5 @@
 
 			
 		};
-		
-		
-		
-		
-		
 
-	}	
+	}
