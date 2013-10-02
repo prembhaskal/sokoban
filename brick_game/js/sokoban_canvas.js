@@ -4,7 +4,7 @@ function CanvasDrawer() {
 		var mazeDimension = maze.mazeDimension;
 		
 		// generate table
-		SokobanUtil.generateTable(mazeDimension.width,mazeDimension.height,table);
+		SokobanUtil.generateTable(mazeDimension.width, mazeDimension.height, table);
 		
 		// draw the static maze first.
 		drawStaticItems(maze.cellArray, mazeDimension);
@@ -29,7 +29,7 @@ function CanvasDrawer() {
 		
 		var brickArray = maze.brickArray;
 		// draw bricks.
-		for (var i=0; i < brickArray.length; i++) {
+		for (var i = 0; i < brickArray.length; i++) {
 			drawCell(brickArray[i]);
 		}
 	}

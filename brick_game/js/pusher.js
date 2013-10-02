@@ -83,18 +83,18 @@ function Pusher (position, cellId,mazeDimension) {
 	this.addPushListener = function(element)
 	{
 		pushListeners.push(element);
-	}
+	};
 	this.removePushListener = function(element)
 	{
 		for(var i =0;i < pushListeners.length; i++)
 		{
 			var item = pushListeners[i];
-			if(item.equals(element))
+			if(item.position.equals(element))
 			{
 				pushListeners.splice(i,1);
 			}
 		}
-	}
+	};
 	
 	this.onPush = function(keyName,element)
 	{
@@ -106,7 +106,7 @@ function Pusher (position, cellId,mazeDimension) {
 				return item.move(keyName);
 			}
 		}
-	}
+	};
 
 }
 

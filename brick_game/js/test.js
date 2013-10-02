@@ -28,7 +28,7 @@ function initializeGame(table) {
 	
 
 	var allMazeLevels = new AllMazeLevels();
-	var rawMaze = allMazeLevels.getRawMaze(2);
+	var rawMaze = allMazeLevels.getRawMaze(1);
 	
 	var mazeCreator = new MazeCreator();
 	var maze = mazeCreator.createMaze(rawMaze);

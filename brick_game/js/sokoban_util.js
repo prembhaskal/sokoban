@@ -21,7 +21,7 @@ SokobanUtil.changeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
 	$(elementId).addClass(className);
-}
+};
 
 SokobanUtil.changeClassOFElementByPosition = function (position,className)
 {
@@ -30,20 +30,20 @@ SokobanUtil.changeClassOFElementByPosition = function (position,className)
 	var elementId = 'col_' + x_pos + '_' + y_pos;
 	SokobanUtil.changeClassOfElement(elementId,className);
 
-}
+};
 
 SokobanUtil.removeClassOfElement= function (elementId, className)
 {
 	elementId = '#'+elementId;
 	$(elementId).removeClass(className);
-}
+};
 SokobanUtil.removeClassOFElementByPosition = function (position,className)
 {
 	var x_pos = position.x_pos;
 	var y_pos = position.y_pos;
 	var elementId = 'col_' + x_pos + '_' + y_pos;
 	SokobanUtil.removeClassOfElement(elementId,className);
-}
+};
 
 SokobanUtil.getCellType = function(position)
 {
@@ -59,7 +59,7 @@ SokobanUtil.getCellType = function(position)
 		return SokobanUtil.CellType.EMPTY_SPACE;
 	
 	
-}
+};
 
 //Input related
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
@@ -78,7 +78,7 @@ SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	else {
 		return null;
 	}
-}
+};
 
 SokobanUtil.keyXInc = function(keyName)
 {
@@ -99,7 +99,7 @@ SokobanUtil.keyXInc = function(keyName)
 		return 0;
 	}
 	
-}
+};
 
 SokobanUtil.keyYInc = function(keyName)
 {
@@ -120,7 +120,7 @@ SokobanUtil.keyYInc = function(keyName)
 		return -1;
 	}
 	
-}
+};
 SokobanUtil.generateTable = function (x,y,table)
 {
 	table.rows.length = 0;
@@ -142,5 +142,5 @@ SokobanUtil.generateTable = function (x,y,table)
 		}
 	}
 
-}
+};
 
