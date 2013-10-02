@@ -144,3 +144,14 @@ SokobanUtil.generateTable = function (x,y,table)
 
 };
 
+SokobanUtil.recreateTable = function (x, y, table) {
+	
+	// remove existing rows if any.
+	var rowLength = table.rows.length;
+	for (var i = 0; i < rowLength; i++) {
+		table.deleteRow(0);
+	}
+	
+	SokobanUtil.generateTable(x, y, table);
+};
+

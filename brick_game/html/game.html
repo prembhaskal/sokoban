@@ -23,6 +23,16 @@
 		//alert(table);
 		initializeGame(table);
 	}
+	
+	function startNextLevel() {
+		var table = document.getElementById("maze_table");
+		playNextLevel(table);
+	}
+	
+	function startPreviousLevel() {
+		var table = document.getElementById("maze_table");
+		playPreviousLevel(table);
+	}
 
 	</script>
 </head>
@@ -35,8 +45,8 @@
 
 		</table>
 		<br></br>
-		
-		<button onclick="incrementGlobalVariable()">Next_Level</button>
+		<button onclick = "startPreviousLevel()"> Previous_Level </button>
+		<button onclick ="startNextLevel()">Next_Level</button>
 	</div>
 	<div id="footer"></div>
 	

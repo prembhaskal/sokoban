@@ -1,34 +1,29 @@
-/*
- * Copyright (C) 2012 Premkumar Bhaskal
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Library General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/>.
- */
- 
-//TODO -Remove unnecessay comments
+//TODO -Remove unnecessary comments
 
 var globalObjectMap = null;
 var canvas = null;
 var log = null;
+var maxLevels = 2;
+var presentLevel = null;
+
 function initializeGame(table) {
 	
 	//TODO - Find the use case of debug else remove the logger functionality
 	var div = document.getElementById("footer");
 	initializeLogger(div);
 	
+	presentLevel = 1;
+	startLevel(presentLevel, table);
+	
+	//binding key handlers
+	addkeyHandlers();
+	
+}
+
+function startLevel(levelNo, table) {
 
 	var allMazeLevels = new AllMazeLevels();
-	var rawMaze = allMazeLevels.getRawMaze(1);
+	var rawMaze = allMazeLevels.getRawMaze(levelNo);
 	
 	var mazeCreator = new MazeCreator();
 	var maze = mazeCreator.createMaze(rawMaze);
@@ -43,9 +38,20 @@ function initializeGame(table) {
 	
 	globalObjectMap = new GlobalObjectMap();
 	globalObjectMap.maze = maze;
-	//binding key handlers
-	addkeyHandlers();
-	
+}
+
+function playNextLevel(table) {
+	if (presentLevel < maxLevels) {
+		presentLevel++;
+		startLevel(presentLevel, table);
+	}
+}
+
+function playPreviousLevel(table) {
+	if (presentLevel > 1) {
+		presentLevel--;
+		startLevel(presentLevel, table);
+	}
 }
 
 function addkeyHandlers() {
@@ -78,4 +84,5 @@ function movePusherObject(keyName) {
 		pusher.move(keyName);
 	}
 }
+
 
