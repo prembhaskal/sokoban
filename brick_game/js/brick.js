@@ -42,7 +42,7 @@
 		};
 		
 		// move this BRICK
-		 this.move = function(keyName) {
+		 this.move = function(keyName, registerMove) {
 			 var x_inc = SokobanUtil.keyXInc(keyName);
 			 var y_inc = SokobanUtil.keyYInc(keyName);
 			 
@@ -53,27 +53,51 @@
 			var newPosition = new Position(new_x_pos, new_y_pos);
 			
 			var cellType = SokobanUtil.getCellType(newPosition);
-			
-			if((SokobanUtil.CellType.StoneType==cellType))
+			// return if new position is same as the original position
+			if (oldPosition.equals(newPosition))
+				return;
+			else if((SokobanUtil.CellType.StoneType==cellType))
 				return false;
 			else if ((SokobanUtil.CellType.BrickType==cellType))
 				return false;
 			else
 			{
 				this.position = newPosition;
-				// move to new position if it is different than original position
-				if ( ! oldPosition.equals(newPosition)) {
-					//move the Pusher to destination
-					SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK);
-					
-					// replace the original position with empty space
-					SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK);
+				//move the Brick to destination
+				SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK);
+				
+				// replace the original position with whatever was present below.
+				SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK);
+				
+				// register this move
+				if (registerMove != null) {
+					var gameMove = new GameMove(this, x_inc, y_inc);
+					registerMove(gameMove);
 				}
 				
 				return true;
 			}
 
 			
+		};
+		
+		// usually this method should not require any validation for movement.
+		this.undoMove = function(x_inc, y_inc) {
+			x_inc = x_inc * (-1);
+			y_inc = y_inc * (-1);
+			
+			var new_x_pos = this.getNewXPosition(x_inc);
+			var new_y_pos = this.getNewYPosition(y_inc);
+			var oldPosition = this.position;
+			var newPosition = new Position(new_x_pos, new_y_pos);
+			
+			//move the Brick to destination
+			SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK);
+			
+			// replace the original position with whatever was present below.
+			SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK);
+			
+			this.position = newPosition;
 		};
 
 	}

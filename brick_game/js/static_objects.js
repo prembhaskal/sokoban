@@ -56,3 +56,11 @@ function EmptySpace (position, cellId)
 		return cellId;
 	};
 }
+
+
+// Moves object. this object represents one move of a pusher/brick.
+function GameMove(cell, xinc, yinc) {
+	this.cell = cell;
+	this.xinc = xinc;
+	this.yinc = yinc;
+}

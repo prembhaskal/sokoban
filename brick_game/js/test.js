@@ -61,10 +61,9 @@ function addkeyHandlers() {
 // global object map
 function GlobalObjectMap() {
 	this.maze = null;
-	//this.current_position = null;
-	//**this.brickObjects = new Array();
 	
-	// constants for arrows
+	// put a new undo stack for moves.
+	this.undoStack = new Array();
 }
 
 // method to move when arrow key is pressed.
@@ -81,8 +80,45 @@ function moveOnArrowPress() {
 function movePusherObject(keyName) {
 	var pusher = globalObjectMap.maze.pusher;
 	if (keyName != null) {
-		pusher.move(keyName);
+		pusher.move(keyName, function registerMove(gameMove) {
+								globalObjectMap.undoStack.push(gameMove);
+								console.log('xinc - ' + gameMove.xinc + ' yinc - ' + gameMove.yinc);
+							}
+		);
 	}
 }
 
+function undoMove() {
+	if (globalObjectMap != null) {
+		var gameMove = globalObjectMap.undoStack.pop();
+		
+		// return if nothing is present to undo.
+		if (gameMove == null) {
+			return; 
+		}
+		
+		var cellType = gameMove.cell.getCellType();
+		if (cellType == SokobanUtil.CellType.PusherType) {
+			undoThisMove(gameMove);
+		}
+		
+		// check to see if there was a brick also moved with pusher.
+		gameMove = globalObjectMap.undoStack.pop();
+		if (gameMove == null) {
+			return;
+		}
+		
+		cellType = gameMove.cell.getCellType();
+		if (cellType == SokobanUtil.CellType.BrickType) {
+			undoThisMove(gameMove);
+		} else {
+			// push it back as it is for the next move.
+			globalObjectMap.undoStack.push(gameMove); 
+		}
+	}
+}
 
+function undoThisMove(gameMove) {
+	var cell = gameMove.cell;
+	cell.undoMove(gameMove.xinc, gameMove.yinc);
+}
