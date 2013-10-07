@@ -1,0 +1,7 @@
+1)History Management for moves and undo operation
+2)Game finishing handler.
+3)Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
+4)User state storage methodology so that when user comes back ,
+he should be able to play the level where he left instead of playing from the beginning.
+5)Add upto 100 levels
+6)CSS enhancement for the entire game.
