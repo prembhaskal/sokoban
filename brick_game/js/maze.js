@@ -145,13 +145,13 @@ function AllMazeLevels () {
 		var level2Static = [
 				              ['E','E','D','D'],
 				              ['E','E','E','E'],
-				              ['E','E','E','E'],
+				              ['E','E','E','E']
 			              ];
 		
 		var level2Movable= [
 				              ['X','B','P','X'],
 				              ['X','X','B','X'],
-				              ['X','X','X','X'],
+				              ['X','X','X','X']
 			              ];
 		
 		var rawMaze2 = new RawMaze(dimension2, level2Static, level2Movable);

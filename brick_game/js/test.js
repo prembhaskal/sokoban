@@ -82,7 +82,6 @@ function movePusherObject(keyName) {
 	if (keyName != null) {
 		pusher.move(keyName, function registerMove(gameMove) {
 								globalObjectMap.undoStack.push(gameMove);
-								console.log('xinc - ' + gameMove.xinc + ' yinc - ' + gameMove.yinc);
 							}
 		);
 	}
