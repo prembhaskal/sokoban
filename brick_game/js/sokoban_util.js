@@ -155,3 +155,25 @@ SokobanUtil.recreateTable = function (x, y, table) {
 	SokobanUtil.generateTable(x, y, table);
 };
 
+SokobanUtil.undoMove = function(cell, xinc, yinc, cellStyle) {
+    xinc = xinc * (-1);
+    yinc = yinc * (-1);
+
+    var newXPos = cell.getNewXPosition(xinc);
+    var newYPos = cell.getNewYPosition(yinc);
+
+    var oldPosition = cell.position;
+    var newPosition = new Position(newXPos, newYPos);
+
+    // move the cell back
+
+    //move the Pusher to destination
+    SokobanUtil.changeClassOFElementByPosition(newPosition, cellStyle);
+
+    // replace the original position with whatever was present below.
+    SokobanUtil.removeClassOFElementByPosition(oldPosition, cellStyle);
+
+    cell.position = newPosition;
+
+}
+

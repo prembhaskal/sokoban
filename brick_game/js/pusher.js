@@ -115,21 +115,7 @@ function Pusher (position, cellId,mazeDimension) {
 	
 	// usually this method should not require any validation for movement.
 	this.undoMove = function(x_inc, y_inc) {
-		x_inc = x_inc * (-1);
-		y_inc = y_inc * (-1);
-		
-		var new_x_pos = this.getNewXPosition(x_inc);
-		var new_y_pos = this.getNewYPosition(y_inc);
-		var oldPosition = this.position;
-		var newPosition = new Position(new_x_pos, new_y_pos);
-		
-		//move the Pusher to destination
-		SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-		
-		// replace the original position with whatever was present below.
-		SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-		
-		this.position = newPosition;
+		SokobanUtil.undoMove(this, x_inc, y_inc, SokobanUtil.cellStyle.BRICK_MOVER);
 	};
 
 
