@@ -38,6 +38,8 @@ function startLevel(levelNo, table) {
 	
 	globalObjectMap = new GlobalObjectMap();
 	globalObjectMap.maze = maze;
+
+    SokobanUtil.showLevel(levelNo);
 }
 
 function playNextLevel(table) {

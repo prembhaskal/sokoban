@@ -20,7 +20,6 @@
 	function init()
 	{
 		var table = document.getElementById("maze_table");
-		//alert(table);
 		initializeGame(table);
 	}
 	
@@ -43,16 +42,15 @@
 <body onload="init();">
 	<div class="main_panel" align="center">
 		<h3>SOKOBAN</h3>
-		<br></br>
+        <h4 id="level_no"></h4>
 		<table id="maze_table" class="game_maze" border="1">
 			<thead></thead>
-
 		</table>
-		<br></br>
+		<br><br>
 		<button onclick = "startPreviousLevel()"> Previous_Level </button>
 		<button onclick ="startNextLevel()">Next_Level</button>
 		
-		<br></br>
+		</br>
 		<button onclick ="undo()">Undo</button>
 	</div>
 	<div id="footer"></div>
