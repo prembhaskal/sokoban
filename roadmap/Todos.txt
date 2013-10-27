@@ -5,3 +5,4 @@
 he should be able to play the level where he left instead of playing from the beginning.
 5)Add upto 100 levels
 6)CSS enhancement for the entire game.
+7) Add a reset level button.

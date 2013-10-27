@@ -14,28 +14,35 @@
 	<script src="../js/maze.js"></script>
 	<script src="../js/position.js"></script>
 	<script src="../js/sokoban_canvas.js"></script>
+    <script src="../js/game_controller.js"></script>
 	<script src="../js/test.js"></script>
 	<script src="../lib/jquery-1.8.2.js"></script>
 	<script type="text/javascript">
 	function init()
 	{
-		var table = document.getElementById("maze_table");
-		initializeGame(table);
+		initializeGame(getTable());
 	}
 	
 	function startNextLevel() {
-		var table = document.getElementById("maze_table");
-		playNextLevel(table);
+		playNextLevel(getTable());
 	}
 	
 	function startPreviousLevel() {
-		var table = document.getElementById("maze_table");
-		playPreviousLevel(table);
+		playPreviousLevel(getTable());
 	}
+
+    function replayPresentLevel() {
+        resetPresentLevel(getTable());
+    }
 	
 	function undo() {
 		undoMove();
 	}
+
+    function getTable() {
+        var table = document.getElementById("maze_table");
+        return table;
+    }
 
 	</script>
 </head>
@@ -47,11 +54,12 @@
 			<thead></thead>
 		</table>
 		<br><br>
-		<button onclick = "startPreviousLevel()"> Previous_Level </button>
-		<button onclick ="startNextLevel()">Next_Level</button>
+		<button onclick = "startPreviousLevel()">Previous_Level</button>
+		<button onclick = "startNextLevel()">Next_Level</button>
 		
 		</br>
-		<button onclick ="undo()">Undo</button>
+        <button onclick = "replayPresentLevel()">Reset_Level</button>
+		<button onclick = "undo()">Undo</button>
 	</div>
 	<div id="footer"></div>
 	
