@@ -1,6 +1,6 @@
 	
 	//BRICK Object
-	function Brick (position, cellId,mazeDimension) {
+	function Brick (position, cellId, mazeDimension) {
 		
 		var cellType = SokobanUtil.CellType.BrickType;
 		this.position = position;
@@ -11,7 +11,7 @@
 		};
 		
 		this.getPosition = function() {
-			return position;
+			return this.position;
 		};
 		
 		this.cellId = function() {

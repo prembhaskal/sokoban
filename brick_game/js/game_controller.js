@@ -7,6 +7,9 @@ function GameController() {
 	var undoStack = null;
 	var maze = null;
 
+	var isGameComplete = null;
+	var keysEnabled = null;
+
 	// local methods
 
 	// method to move when arrow key is pressed.
@@ -16,10 +19,14 @@ function GameController() {
 			var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
 			movePusherObject(keyName);
+			checkIfGameIsComplete();
 		});
 	}
 
 	function movePusherObject(keyName) {
+		if (!keysEnabled)
+			return;
+
 		var pusher = maze.pusher;
 		if (keyName != null) {
 			pusher.move(keyName, function registerMove(gameMove) {
@@ -29,15 +36,49 @@ function GameController() {
 		}
 	}
 
+	function checkIfGameIsComplete() {
+		if (areAllBricksOnDestination()) {
+			isGameComplete = true;
+			keysEnabled = false;
+			SokobanUtil.showLevelCompleteMsg();
+		}
+
+		return;
+	}
+
+	function areAllBricksOnDestination() {
+		var brickArray = maze.brickArray;
+		var areAllBricksOnDest = true;
+		for (var i = 0; i < brickArray.length; i++) {
+			var brick = brickArray[i];
+			var isBrickOnDest = SokobanUtil.isDestination(brick.getPosition());
+			if (!isBrickOnDest) {
+				areAllBricksOnDest = false;
+				break;
+			}
+		}
+
+		return areAllBricksOnDest;
+	}
+
 	function undoThisMove(gameMove) {
 		var cell = gameMove.cell;
 		cell.undoMove(gameMove.xinc, gameMove.yinc);
 	}
 
-	function startLevel(levelNo, table) {
+	function initializeStuffForLevel() {
 		// reset the undo stack.
 		undoStack = new Array();
+		// set completed false
+		isGameComplete = false;
+		// enable keys
+		keysEnabled = true;
+		// level completion message
+		SokobanUtil.resetLevelCompleteMsg();
+	}
 
+	function startLevel(levelNo, table) {
+		initializeStuffForLevel();
 		var allMazeLevels = new AllMazeLevels();
 		var rawMaze = allMazeLevels.getRawMaze(levelNo);
 

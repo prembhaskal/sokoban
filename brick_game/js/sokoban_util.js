@@ -19,47 +19,51 @@ SokobanUtil.CellType =  {BrickType : "brick",
 //CSS related
 SokobanUtil.changeClassOfElement= function (elementId, className)
 {
-	elementId = '#'+elementId;
 	$(elementId).addClass(className);
 };
 
 SokobanUtil.changeClassOFElementByPosition = function (position,className)
 {
-	var x_pos = position.x_pos;
-	var y_pos = position.y_pos;
-	var elementId = 'col_' + x_pos + '_' + y_pos;
+	var elementId = this.getElementId(position);
 	SokobanUtil.changeClassOfElement(elementId,className);
 
 };
 
 SokobanUtil.removeClassOfElement= function (elementId, className)
 {
-	elementId = '#'+elementId;
 	$(elementId).removeClass(className);
 };
 SokobanUtil.removeClassOFElementByPosition = function (position,className)
 {
-	var x_pos = position.x_pos;
-	var y_pos = position.y_pos;
-	var elementId = 'col_' + x_pos + '_' + y_pos;
+	var elementId = this.getElementId(position);
 	SokobanUtil.removeClassOfElement(elementId,className);
 };
 
 SokobanUtil.getCellType = function(position)
 {
-	var x_pos = position.x_pos;
-	var y_pos = position.y_pos;
-	var elementId = '#col_' + x_pos + '_' + y_pos;
-	
+	var elementId = this.getElementId(position);
 	if($(elementId).hasClass(SokobanUtil.cellStyle.IMMOVABLE))
 		return SokobanUtil.CellType.StoneType;
 	else if($(elementId).hasClass(SokobanUtil.cellStyle.BRICK))
 		return SokobanUtil.CellType.BrickType;
 	else
 		return SokobanUtil.CellType.EMPTY_SPACE;
-	
-	
 };
+
+SokobanUtil.isDestination = function (position) {
+	var elementId = this.getElementId(position);
+	if ($(elementId).hasClass(SokobanUtil.cellStyle.DESTINATION))
+		return true;
+	return false;
+};
+
+SokobanUtil.getElementId = function (position) {
+	var x_pos = position.x_pos;
+	var y_pos = position.y_pos;
+	var elementId = '#col_' + x_pos + '_' + y_pos;
+
+	return elementId;
+}
 
 //Input related
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
@@ -182,4 +186,14 @@ SokobanUtil.showLevel = function (levelNo) {
     var levelInfo = "LEVEL : " + levelNo;
     $("#level_no").text(levelInfo);
 };
+
+SokobanUtil.showLevelCompleteMsg = function () {
+	var levelComplete = "!!!!!!!!!! LEVEL COMPLETE !!!!!!!!!!";
+	$("#level_completion").text(levelComplete);
+};
+
+SokobanUtil.resetLevelCompleteMsg = function () {
+	var resetLevelComplete = "";
+	$("#level_completion").text(resetLevelComplete);
+}
 
