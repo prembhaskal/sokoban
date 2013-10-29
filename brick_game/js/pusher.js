@@ -6,6 +6,7 @@ function Pusher (position, cellId, mazeDimension) {
 	this.position = position;
 	this.mazeDimension = mazeDimension;
 	var pushListeners= new Array();
+	var moveListeners = new Array();
 	
 	this.getCellType = function() {
 		return cellType;
@@ -60,7 +61,7 @@ function Pusher (position, cellId, mazeDimension) {
 		// return if new position is same as the original position
 		if (oldPosition.equals(newPosition))
 			return;
-		else if((SokobanUtil.CellType.StoneType==cellType))
+		else if (SokobanUtil.CellType.StoneType == cellType)
 			return;
 		else if (SokobanUtil.CellType.BrickType == cellType)
 		{
@@ -77,10 +78,12 @@ function Pusher (position, cellId, mazeDimension) {
 		SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
 		
 		// register this move
+		var gameMove = new GameMove(this, x_inc, y_inc);
 		if (registerMove != null) {
-			var gameMove = new GameMove(this, x_inc, y_inc);
 			registerMove(gameMove);
 		}
+
+		onMove(gameMove);
 	};
 	
 	
@@ -117,6 +120,17 @@ function Pusher (position, cellId, mazeDimension) {
 	this.undoMove = function(x_inc, y_inc) {
 		SokobanUtil.undoMove(this, x_inc, y_inc, SokobanUtil.cellStyle.BRICK_MOVER);
 	};
+
+	// move listeners and its methods.
+	this.addMoveListeners = function (listener) {
+		moveListeners.push(listener);
+	};
+
+	function onMove(gameMove) {
+		for (var i = 0; i < moveListeners.length; i++) {
+			moveListeners[i].onEvent(gameMove);
+		}
+	}
 
 
 }

@@ -1,6 +1,7 @@
 // Game Controller.
 function GameController() {
 
+	// variables containing the game/level information
 	var maxLevels = 2;
 	var presentLevel = null;
 	// put a new undo stack for moves.
@@ -10,6 +11,12 @@ function GameController() {
 	var isGameComplete = null;
 	var keysEnabled = null;
 
+	var total_moves = null;
+
+	// see http://www.crockford.com/javascript/private.html
+	// needed to preserve the object reference in private methods.... stupid ECMA :(
+	var that = this;
+
 	// local methods
 
 	// method to move when arrow key is pressed.
@@ -17,6 +24,10 @@ function GameController() {
 		$(document).keydown(function (event) {
 			var keyCode = (event.keyCode ? event.keyCode : event.which);
 			var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
+
+			// don't do anything if some other key is pressed.
+			if (keyName == null)
+				return;
 
 			movePusherObject(keyName);
 			checkIfGameIsComplete();
@@ -34,6 +45,8 @@ function GameController() {
 							}
 			);
 		}
+
+		SokobanUtil.updateTotalMoves(total_moves);
 	}
 
 	function checkIfGameIsComplete() {
@@ -42,8 +55,6 @@ function GameController() {
 			keysEnabled = false;
 			SokobanUtil.showLevelCompleteMsg();
 		}
-
-		return;
 	}
 
 	function areAllBricksOnDestination() {
@@ -73,6 +84,8 @@ function GameController() {
 		isGameComplete = false;
 		// enable keys
 		keysEnabled = true;
+		// reset total moves
+		total_moves = 0;
 		// level completion message
 		SokobanUtil.resetLevelCompleteMsg();
 	}
@@ -87,13 +100,17 @@ function GameController() {
 		var canvasDrawer = new CanvasDrawer();
 		canvasDrawer.drawMaze(maze, table);
 
+		// add appropriate listeners
 		var pusher = maze.pusher;
 		for (var i = 0; i < maze.brickArray.length; i++) {
 			pusher.addPushListener(maze.brickArray[i]);
 		}
 
+		var movesListener = new MovesListener(that);
+		pusher.addMoveListeners(movesListener);
+		
 		SokobanUtil.showLevel(levelNo);
-	};
+	}
 
 	// privileged methods.
 
@@ -141,6 +158,9 @@ function GameController() {
 
 		// move the pusher...it has to be a pusher... no check required.
 		undoThisMove(gameMove);
+		// TODO may be move it to separate listener....check what is better.
+		this.decreaseTotalMoves();
+		SokobanUtil.updateTotalMoves(total_moves);
 
 		// check to see if a brick was also moved along with the pusher.
 		gameMove = undoStack.pop();
@@ -157,4 +177,21 @@ function GameController() {
 		}
 	};
 
+	this.increaseTotalMoves = function () {
+		total_moves++;
+	};
+
+	this.decreaseTotalMoves = function () {
+		total_moves--;
+	};
+
 }
+
+// moves listener.
+function MovesListener(gameController) {
+	// TODO add undo stack functionality to it....rather than doing it separately in controller.
+	this.onEvent = function (gameMove) {
+		gameController.increaseTotalMoves();
+	}
+}
+
