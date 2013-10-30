@@ -29,23 +29,23 @@ div.main_panel table.game_maze td
 /* styles for statics should come before movables */
 div.main_panel td.empty_space
 {
-	background-image: url("../images/empty_space.png");
+	background-image: url("../images/empty_space.jpg");
 }
 
 div.main_panel td.destination
 {
-	background-image: url("../images/destination.png");
+	background-image: url("../images/destination.pn");
 }
 
 div.main_panel td.immovable
 {
-	background-image: url("../images/immovable.png");
+	background-image: url("../images/immovable.jpg") ;
 }
 
 
 div.main_panel td.brick
 {
-	background-image: url("../images/brick.png");
+	background-image: url("../images/brick.jpg");
 }
 
 div.main_panel td.brick_mover
