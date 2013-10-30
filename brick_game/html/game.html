@@ -46,7 +46,13 @@
 
 	</script>
 </head>
+
+
 <body onload="init();">
+
+	<div id="moveCount" style="color: white;font-weight: bolder;font-size: xx-large;position: absolute;z-index: 100;top: 0px;left: 0px">&nbsp;&nbsp;&nbsp;</div>
+	
+	
 	<div class="main_panel" align="center">
 		<h3>SOKOBAN</h3>
         <h4 id="level_no"></h4>
@@ -54,13 +60,14 @@
 		<table id="maze_table" class="game_maze" border="1">
 			<thead></thead>
 		</table>
-        <div>TOTAL_MOVES: <pre id="total_moves"></pre> </div>
+        
 		<button onclick = "startPreviousLevel()">Previous_Level</button>
 		<button onclick = "startNextLevel()">Next_Level</button>
 		
 		</br>
         <button onclick = "replayPresentLevel()">Reset_Level</button>
 		<button onclick = "undo()">Undo</button>
+		
 	</div>
 	
 	

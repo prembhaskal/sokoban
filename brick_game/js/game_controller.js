@@ -46,7 +46,7 @@ function GameController() {
 			);
 		}
 
-		SokobanUtil.updateTotalMoves(total_moves);
+		
 	}
 
 	function checkIfGameIsComplete() {
@@ -88,6 +88,7 @@ function GameController() {
 		total_moves = 0;
 		// level completion message
 		SokobanUtil.resetLevelCompleteMsg();
+		SokobanUtil.resetTotalMoves();
 	}
 
 	function startLevel(levelNo, table) {
@@ -156,8 +157,9 @@ function GameController() {
 		// move the pusher...it has to be a pusher... no check required.
 		undoThisMove(gameMove);
 		// TODO may be move it to separate listener....check what is better.
-		this.decreaseTotalMoves();
-		SokobanUtil.updateTotalMoves(total_moves);
+		//TODO - Deferring removing the decreasing and updation of TotalMoves as the handle to position object is not present.
+		//this.decreaseTotalMoves();
+		//SokobanUtil.updateTotalMoves(total_moves);
 
 		// check to see if a brick was also moved along with the pusher.
 		gameMove = undoStack.pop();
@@ -181,15 +183,22 @@ function GameController() {
 	this.decreaseTotalMoves = function () {
 		total_moves--;
 	};
+	this.getTotalMoves = function(){
+		return total_moves;
+	}
 
 }
-//TODO - Instead of having move listener we can get the move count from the pusher object itself where it can keep track of valid moves made.
+
 
 // moves listener.
 function MovesListener(gameController) {
 	// TODO add undo stack functionality to it....rather than doing it separately in controller.
-	this.onEvent = function (gameMove) {
+	this.onEvent = function (gameMove,position) {
 		gameController.increaseTotalMoves();
+		
+		SokobanUtil.updateTotalMoves(gameController.getTotalMoves(),position);
+
+
 	}
 }
 
