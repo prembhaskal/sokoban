@@ -115,9 +115,6 @@ function GameController() {
 	// privileged methods.
 
 	this.initializeGame = function (table) {
-		//TODO - Find the use case of debug else remove the logger functionality
-		var div = document.getElementById("footer");
-		initializeLogger(div);
 
 		presentLevel = 1;
 		startLevel(presentLevel, table);
