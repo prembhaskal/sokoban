@@ -1,13 +1,17 @@
-1)History Management for moves and undo operation
-2)Game finishing handler.
+1)Done -History Management for moves and undo operation
+2)Done - Game finishing handler.
+8)Done- Add a moves counter and display it on screen.
+11)Done - Remove Logger as Chromes suffices the purpose.
+12)Done -Remove Enumeration (Oh really!! code)
+
+
 3)Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
 4)User state storage methodology so that when user comes back ,
 he should be able to play the level where he left instead of playing from the beginning.
 5)Add upto 100 levels
 6)CSS enhancement for the entire game.
 7) Add a reset level button.
-8) Add a moves counter and display it on screen.
 9) Add a timer to clock the time spent on present level. It stops on completion of level.
 10) TODO -- code needs some clean up..move undo part to a listener. and complete other refactoring/TODOs.
-11)Remove Logger as Chromes suffices the purpose.
-12)Remove Enumeration (Oh really!! code)
+13)Fix for MoveCount when the level completes
+14)Fix for MoveCount when undo button is hit.
