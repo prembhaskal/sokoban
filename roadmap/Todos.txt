@@ -9,3 +9,5 @@ he should be able to play the level where he left instead of playing from the be
 8) Add a moves counter and display it on screen.
 9) Add a timer to clock the time spent on present level. It stops on completion of level.
 10) TODO -- code needs some clean up..move undo part to a listener. and complete other refactoring/TODOs.
+11)Remove Logger as Chromes suffices the purpose.
+12)Remove Enumeration (Oh really!! code)
