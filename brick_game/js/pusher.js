@@ -73,9 +73,12 @@ function Pusher (position, cellId, mazeDimension) {
 		
 		//move the Pusher to destination
 		SokobanUtil.changeClassOFElementByPosition(newPosition, SokobanUtil.cellStyle.BRICK_MOVER);
-		
+
+		var rect = document.getElementById(SokobanUtil.getDOMId(newPosition)).getBoundingClientRect();
+		alert(rect.top);
 		// replace the original position with empty space
 		SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
+		SokobanUtil.getElementId(oldPosition).innerHTML="";
 		
 		// register this move
 		var gameMove = new GameMove(this, x_inc, y_inc);

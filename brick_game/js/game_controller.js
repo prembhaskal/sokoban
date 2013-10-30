@@ -183,6 +183,7 @@ function GameController() {
 	};
 
 }
+//TODO - Instead of having move listener we can get the move count from the pusher object itself where it can keep track of valid moves made.
 
 // moves listener.
 function MovesListener(gameController) {

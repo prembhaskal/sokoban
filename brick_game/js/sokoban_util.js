@@ -65,6 +65,13 @@ SokobanUtil.getElementId = function (position) {
 	return elementId;
 }
 
+SokobanUtil.getDOMId = function (position) {
+	var x_pos = position.x_pos;
+	var y_pos = position.y_pos;
+	var elementId = 'col_' + x_pos + '_' + y_pos;
+
+	return elementId;
+}
 //Input related
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
 	if(keyCode == '37') {
@@ -142,7 +149,8 @@ SokobanUtil.generateTable = function (x,y,table)
 			var cell = row.insertCell(row.cells.length);
 			cell.id="col_"+xpos+"_"+ypos;
 			cell.className = "empty_space";
-			//cell.innerHTML="col_"+xpos+"_"+ypos;;
+			cell.innerHTML="";
+			//cell.style="color:red";
 		}
 	}
 
