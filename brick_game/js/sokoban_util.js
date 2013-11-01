@@ -205,16 +205,7 @@ SokobanUtil.resetLevelCompleteMsg = function () {
 	$("#level_completion").text(resetLevelComplete);
 };
 
-SokobanUtil.updateTotalMoves = function(totalMoves,position) {
-	var rect = document.getElementById(SokobanUtil.getDOMId(position)).getBoundingClientRect();
-	document.getElementById("moveCount").style.top = (rect.top + rect.bottom)/2-18 +"px";
-	document.getElementById("moveCount").style.left = (rect.left + rect.right)/2-18 +"px";
-	document.getElementById("moveCount").innerHTML = totalMoves;
-};
-
-SokobanUtil.resetTotalMoves = function() {
-	document.getElementById("moveCount").style.top ="0px";
-	document.getElementById("moveCount").style.left = "0px";
-	document.getElementById("moveCount").innerHTML = "&nbsp;";
+SokobanUtil.updateTotalMoves = function(totalMoves) {
+	$("#total_moves").text(totalMoves);
 };
 
