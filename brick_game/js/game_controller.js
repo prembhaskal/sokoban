@@ -2,7 +2,7 @@
 function GameController() {
 
 	// variables containing the game/level information
-	var maxLevels = 2;
+	var maxLevels = 5;
 	var presentLevel = null;
 	// put a new undo stack for moves.
 	var undoStack = null;

@@ -156,6 +156,68 @@ function AllMazeLevels () {
 		
 		var rawMaze2 = new RawMaze(dimension2, level2Static, level2Movable);
 		rawMazes.push(rawMaze2);
+
+		//	--------------- Maze 3 --------------------
+		var dimension3 = new MazeDimension(4,5);
+		var level3Static = [
+								['E','D','I','I'],
+								['E','E','I','I'],
+								['D','E','E','E'],
+								['E','E','E','E'],
+								['E','E','I','I']
+							];
+		var level3Movable = [
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['B','X','X','X'],
+								['X','P','B','X'],
+								['X','X','X','X']
+							];
+		var rawMaze3 = new RawMaze(dimension3, level3Static, level3Movable);
+		rawMazes.push(rawMaze3);
+
+		// --------------- Maze 4 ----------------------
+		var dimension4 = new MazeDimension(4, 5);
+		var level4Static = [
+								['E','E','E','E'],
+								['E','I','E','E'],
+								['E','E','D','E'],
+								['E','D','D','E'],
+								['E','E','E','E']
+							];
+		var level4Movable = [
+								['X','X','X','X'],
+								['X','X','P','X'],
+								['X','B','B','X'],
+								['X','X','B','X'],
+								['X','X','X','X']
+							];
+		var rawMaze4 = new RawMaze(dimension4, level4Static, level4Movable);
+		rawMazes.push(rawMaze4);
+
+		// ----------------- Maze 5 ----------------------
+		var dimension5 = new MazeDimension(4, 7);
+		var level5Static = [
+								['I','E','E','E'],
+								['I','E','I','D'],
+								['E','E','E','E'],
+								['E','E','E','D'],
+								['I','E','I','I'],
+								['I','E','E','E'],
+								['I','E','E','E']
+							];
+		var level5Movable = [
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['X','B','B','P'],
+								['X','X','X','X']
+							];
+		var rawMaze5 = new RawMaze(dimension5, level5Static, level5Movable);
+		rawMazes.push(rawMaze5);
+
 	};
 	
 	// levelNo is 1 based, hence -1
