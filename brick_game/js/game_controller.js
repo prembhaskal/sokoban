@@ -11,8 +11,6 @@ function GameController() {
 	var isGameComplete = null;
 	var keysEnabled = null;
 
-	var total_moves = null;
-
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
 	var that = this;
@@ -46,7 +44,7 @@ function GameController() {
 			);
 		}
 
-		SokobanUtil.updateTotalMoves(total_moves);
+		SokobanUtil.updateTotalMoves(maze.pusher.getTotalMoves());
 	}
 
 	function checkIfGameIsComplete() {
@@ -84,8 +82,6 @@ function GameController() {
 		isGameComplete = false;
 		// enable keys
 		keysEnabled = true;
-		// reset total moves
-		total_moves = 0;
 		// level completion message
 		SokobanUtil.resetLevelCompleteMsg();
 	}
@@ -105,9 +101,6 @@ function GameController() {
 		for (var i = 0; i < maze.brickArray.length; i++) {
 			pusher.addPushListener(maze.brickArray[i]);
 		}
-
-		var movesListener = new MovesListener(that);
-		pusher.addMoveListeners(movesListener);
 		
 		SokobanUtil.showLevel(levelNo);
 	}
@@ -155,9 +148,7 @@ function GameController() {
 
 		// move the pusher...it has to be a pusher... no check required.
 		undoThisMove(gameMove);
-		// TODO may be move it to separate listener....check what is better.
-		this.decreaseTotalMoves();
-		SokobanUtil.updateTotalMoves(total_moves);
+		SokobanUtil.updateTotalMoves(maze.pusher.getTotalMoves());
 
 		// check to see if a brick was also moved along with the pusher.
 		gameMove = undoStack.pop();
@@ -174,22 +165,5 @@ function GameController() {
 		}
 	};
 
-	this.increaseTotalMoves = function () {
-		total_moves++;
-	};
-
-	this.decreaseTotalMoves = function () {
-		total_moves--;
-	};
-
-}
-//TODO - Instead of having move listener we can get the move count from the pusher object itself where it can keep track of valid moves made.
-
-// moves listener.
-function MovesListener(gameController) {
-	// TODO add undo stack functionality to it....rather than doing it separately in controller.
-	this.onEvent = function (gameMove) {
-		gameController.increaseTotalMoves();
-	}
 }
 

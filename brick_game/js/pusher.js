@@ -7,11 +7,13 @@ function Pusher (position, cellId, mazeDimension) {
 	this.mazeDimension = mazeDimension;
 	var pushListeners= new Array();
 	var moveListeners = new Array();
+
+	var totalMoves = 0;
 	
 	this.getCellType = function() {
 		return cellType;
 	};
-	555
+
 	this.getPosition = function() {
 		return this.position;
 	};
@@ -19,10 +21,19 @@ function Pusher (position, cellId, mazeDimension) {
 	this.cellId = function() {
 		return this.cellId;
 	};
-	
-	
 
-	
+	this.getTotalMoves = function() {
+		return totalMoves;
+	};
+
+	function increaseTotalMoves() {
+		totalMoves++;
+	}
+
+	function decreaseTotalMoves() {
+		totalMoves--;
+	}
+
 	// privileged methods
 	this.getNewXPosition = function(x_inc) {
 		var old_x_pos = this.position.x_pos;
@@ -30,7 +41,7 @@ function Pusher (position, cellId, mazeDimension) {
 		// check if it is crossing boundary, both left and right.
 		if ((new_x_pos < 0) || (new_x_pos >= this.mazeDimension.width)) {
 			new_x_pos = old_x_pos;
-		};
+		}
 		return new_x_pos;
 	};
 	
@@ -84,6 +95,8 @@ function Pusher (position, cellId, mazeDimension) {
 		}
 
 		onMove(gameMove);
+
+		increaseTotalMoves();
 	};
 	
 	
@@ -92,6 +105,7 @@ function Pusher (position, cellId, mazeDimension) {
 	{
 		pushListeners.push(element);
 	};
+
 	this.removePushListener = function(element)
 	{
 		for(var i =0;i < pushListeners.length; i++)
@@ -114,11 +128,14 @@ function Pusher (position, cellId, mazeDimension) {
 				return item.move(keyName, registerMove);
 			}
 		}
+
+		return false;
 	};
 	
 	// usually this method should not require any validation for movement.
 	this.undoMove = function(x_inc, y_inc) {
 		SokobanUtil.undoMove(this, x_inc, y_inc, SokobanUtil.cellStyle.BRICK_MOVER);
+		decreaseTotalMoves();
 	};
 
 	// move listeners and its methods.
