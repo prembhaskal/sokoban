@@ -5,6 +5,7 @@
 		var cellType = SokobanUtil.CellType.BrickType;
 		this.position = position;
 		this.mazeDimension = mazeDimension;
+		var moveListeners = new Array();
 		
 		this.getCellType = function() {
 			return cellType;
@@ -26,7 +27,7 @@
 			// check if it is crossing boundary, both left and right.
 			if ((new_x_pos < 0) || (new_x_pos >= this.mazeDimension.width)) {
 				new_x_pos = old_x_pos;
-			};
+			}
 			return new_x_pos;
 		};
 		
@@ -42,7 +43,7 @@
 		};
 		
 		// move this BRICK
-		 this.move = function(keyName, registerMove) {
+		 this.move = function(keyName) {
 			 var x_inc = SokobanUtil.keyXInc(keyName);
 			 var y_inc = SokobanUtil.keyYInc(keyName);
 			 
@@ -70,16 +71,25 @@
 				SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK);
 				
 				// register this move
-				if (registerMove != null) {
-					var gameMove = new GameMove(this, x_inc, y_inc);
-					registerMove(gameMove);
-				}
+				var gameMove = new GameMove(this, x_inc, y_inc);
+				onMove(gameMove);
 				
 				return true;
 			}
 
 			
 		};
+
+		// move listeners and its methods.
+		this.addMoveListeners = function (listener) {
+			moveListeners.push(listener);
+		};
+
+		function onMove(gameMove) {
+			for (var i = 0; i < moveListeners.length; i++) {
+				moveListeners[i].onEvent(gameMove);
+			}
+		}
 		
 		// usually this method should not require any validation for movement.
 		this.undoMove = function(x_inc, y_inc) {

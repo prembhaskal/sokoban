@@ -57,7 +57,7 @@ function Pusher (position, cellId, mazeDimension) {
 	};
 	
 	// move this PUSHER
-	 this.move = function(keyName, registerMove) {
+	 this.move = function(keyName) {
 		 var x_inc = SokobanUtil.keyXInc(keyName);
 		 var y_inc = SokobanUtil.keyYInc(keyName);
 		 
@@ -76,7 +76,7 @@ function Pusher (position, cellId, mazeDimension) {
 			return;
 		else if (SokobanUtil.CellType.BrickType == cellType)
 		{
-			if(!this.onPush(keyName,newPosition, registerMove))
+			if(!this.onPush(keyName,newPosition))
 				return;
 		}
 		
@@ -90,9 +90,6 @@ function Pusher (position, cellId, mazeDimension) {
 				
 		// register this move
 		var gameMove = new GameMove(this, x_inc, y_inc);
-		if (registerMove != null) {
-			registerMove(gameMove);
-		}
 
 		onMove(gameMove);
 

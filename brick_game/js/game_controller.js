@@ -13,7 +13,7 @@ function GameController() {
 
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
-	var that = this;
+	var thisObject = this;
 
 	// local methods
 
@@ -38,10 +38,7 @@ function GameController() {
 
 		var pusher = maze.pusher;
 		if (keyName != null) {
-			pusher.move(keyName, function registerMove(gameMove) {
-								undoStack.push(gameMove);
-							}
-			);
+			pusher.move(keyName);
 		}
 
 		SokobanUtil.updateTotalMoves(maze.pusher.getTotalMoves());
@@ -98,8 +95,13 @@ function GameController() {
 
 		// add appropriate listeners
 		var pusher = maze.pusher;
+
+		var movesListener = new MovesListener(thisObject);
+		pusher.addMoveListeners(movesListener);
+
 		for (var i = 0; i < maze.brickArray.length; i++) {
 			pusher.addPushListener(maze.brickArray[i]);
+			maze.brickArray[i].addMoveListeners(movesListener);
 		}
 		
 		SokobanUtil.showLevel(levelNo);
@@ -165,5 +167,21 @@ function GameController() {
 		}
 	};
 
+	this.addToUndo = function (gameMove) {
+		if (gameMove != null) {
+			undoStack.push(gameMove);
+		}
+	};
+
+}
+
+/**
+ * moves listener to keep track of the moves to facilitate the undo operation.
+ */
+function MovesListener(gameController) {
+
+	this.onEvent = function (gameMove) {
+		gameController.addToUndo(gameMove);
+	};
 }
 
