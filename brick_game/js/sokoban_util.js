@@ -197,12 +197,12 @@ SokobanUtil.showLevel = function (levelNo) {
 
 SokobanUtil.showLevelCompleteMsg = function () {
 	var levelComplete = "!!!!!!!!!! LEVEL COMPLETE !!!!!!!!!!";
-	$("#level_completion").text(levelComplete);
+	$("#level_completion").html(levelComplete);
 };
 
 SokobanUtil.resetLevelCompleteMsg = function () {
 	var resetLevelComplete = "";
-	$("#level_completion").text(resetLevelComplete);
+	$("#level_completion").html("&nbsp;");
 };
 
 SokobanUtil.updateTotalMoves = function(totalMoves) {
