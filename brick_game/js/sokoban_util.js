@@ -201,8 +201,8 @@ SokobanUtil.showLevelCompleteMsg = function () {
 };
 
 SokobanUtil.resetLevelCompleteMsg = function () {
-	var resetLevelComplete = "";
-	$("#level_completion").html("&nbsp;");
+	var emptySpaceHolder = "&nbsp;";
+	$("#level_completion").html(emptySpaceHolder);
 };
 
 SokobanUtil.updateTotalMoves = function(totalMoves) {
