@@ -111,20 +111,24 @@ function AllMazeLevels () {
 			XPXX
 			XXXX
 		*/
-		var dimension1 = new MazeDimension(4, 4);
+		var dimension1 = new MazeDimension(4, 6);
 		var level1Static = [
-				              ['E','D','D','E'],
-				              ['E','E','E','I'],
-				              ['E','E','I','E'],
-				              ['E','E','E','E']
-				            ];
+								['E','E','E','I'],
+								['E','D','E','I'],
+								['E','D','E','I'],
+								['E','D','E','I'],
+								['E','E','E','E'],
+								['E','E','E','E']
+							];
 		
 		var level1Movable = [
-		                      ['X','X','X','X'],
-				              ['X','B','B','X'],
-				              ['X','P','X','X'],
-				              ['X','X','X','X']
-				            ];
+								['X','X','X','X'],
+								['X','X','X','X'],
+								['X','B','X','X'],
+								['X','B','X','X'],
+								['X','B','X','X'],
+								['X','P','X','X']
+							];
 		
 		var rawMaze1 = new RawMaze(dimension1, level1Static, level1Movable);
 		rawMazes.push(rawMaze1);
@@ -217,6 +221,68 @@ function AllMazeLevels () {
 							];
 		var rawMaze5 = new RawMaze(dimension5, level5Static, level5Movable);
 		rawMazes.push(rawMaze5);
+
+		// -------------------- Maze 6 ------------------------
+		var dimension6 = new MazeDimension(5, 6);
+		var level6Static = [
+			['I','I','I','E','E'],
+			['E','E','E','E','E'],
+			['E','D','E','D','E'],
+			['E','E','E','E','E'],
+			['E','D','E','D','E'],
+			['E','E','E','E','E']
+		];
+		var level6Movable = [
+			['X','X','X','X','X'],
+			['X','X','X','X','X'],
+			['X','X','B','X','X'],
+			['X','B','P','B','X'],
+			['X','X','B','X','X'],
+			['X','X','X','X','X']
+		];
+		var rawMaze6 = new RawMaze(dimension6, level6Static, level6Movable);
+		rawMazes.push(rawMaze6);
+
+		// -------------------- Maze 7 ------------------------
+		var dimension7 = new MazeDimension(5, 6);
+		var level7Static = [
+			['E','E','E','E','E'],
+			['E','D','E','D','E'],
+			['E','E','D','E','E'],
+			['E','D','E','D','E'],
+			['E','E','D','E','E'],
+			['E','E','E','E','E']
+		];
+		var level7Movable = [
+			['X','X','X','X','X'],
+			['X','X','B','X','X'],
+			['X','B','X','B','X'],
+			['X','X','B','X','X'],
+			['X','B','X','B','X'],
+			['X','X','P','X','X']
+		];
+		var rawMaze7 = new RawMaze(dimension7, level7Static, level7Movable);
+		rawMazes.push(rawMaze7);
+
+		// -------- Maze 8 ---------------------
+		var dimension8 = new MazeDimension(4, 5);
+		var level8Static = [
+			['D','E','E','I'],
+			['E','E','E','E'],
+			['I','E','E','E'],
+			['I','I','E','E'],
+			['I','I','I','D']
+		];
+
+		var level8Movable = [
+			['X','X','X','X'],
+			['P','B','B','X'],
+			['X','X','X','X'],
+			['X','X','X','X'],
+			['X','X','X','X']
+		];
+		var rawMaze8 = new RawMaze(dimension8, level8Static, level8Movable);
+		rawMazes.push(rawMaze8);
 
 	};
 	
