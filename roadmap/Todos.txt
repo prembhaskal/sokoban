@@ -11,3 +11,4 @@
 -> Add upto 100 levels
 -> CSS enhancement for the entire game.
 -> Add a timer to clock the time spent on present level. It stops on completion of level.
+-> Ctrl+z shortcut for the undo button.
