@@ -10,6 +10,7 @@ function GameController() {
 
 	var isGameComplete = null;
 	var keysEnabled = null;
+	var keyCodeZ = 90;
 
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
@@ -21,6 +22,12 @@ function GameController() {
 	function moveOnArrowPress() {
 		$(document).keydown(function (event) {
 			var keyCode = (event.keyCode ? event.keyCode : event.which);
+			
+			// check if control + z is pressed, then undo
+			if (event.ctrlKey && keyCode == keyCodeZ) {
+				undoMove();
+			}
+			
 			var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
 			// don't do anything if some other key is pressed.
