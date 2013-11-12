@@ -23,11 +23,6 @@ function GameController() {
 		$(document).keydown(function (event) {
 			var keyCode = (event.keyCode ? event.keyCode : event.which);
 			
-			// check if control + z is pressed, then undo
-			if (event.ctrlKey && keyCode == keyCodeZ) {
-				undoMove();
-			}
-			
 			var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
 			// don't do anything if some other key is pressed.
@@ -36,6 +31,17 @@ function GameController() {
 
 			movePusherObject(keyName);
 			checkIfGameIsComplete();
+		});
+	}
+	
+	// check if control + z is pressed, then undo
+	function undoOnCtrlZ() {
+		$(document).keydown(function (event) {
+			var keyCode = (event.keyCode ? event.keyCode : event.which);
+			
+			if (event.ctrlKey && keyCode == keyCodeZ) {
+				undoMove();
+			}
 		});
 	}
 
@@ -113,6 +119,11 @@ function GameController() {
 		
 		SokobanUtil.showLevel(levelNo);
 	}
+	
+	function addKeyHandlers() {
+		moveOnArrowPress();
+		undoOnCtrlZ();
+	};
 
 	// privileged methods.
 
@@ -122,11 +133,7 @@ function GameController() {
 		startLevel(presentLevel, table);
 
 		//binding key handlers
-		this.addKeyHandlers();
-	};
-
-	this.addKeyHandlers = function () {
-		moveOnArrowPress();
+		addKeyHandlers();
 	};
 
 	this.playNextLevel = function (table) {
