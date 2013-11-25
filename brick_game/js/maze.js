@@ -49,6 +49,9 @@ function MazeCreator() {
 				else if (type == 'I') {
 					cellArray[i][j] = new Stone (position, getCellId(position));
 				}
+				else if (type == 'G') {
+					cellArray[i][j] = new Greenery(position, getCellId(position));
+				}
 				
 			}
 		}
@@ -86,10 +89,15 @@ function MazeCreator() {
 // Object containing all the levels of the maze.
 function AllMazeLevels () {
 	var rawMazes = new Array();
-	
+	var UNIVERSAL_HEIGHT = 10;
+	var UNIVERSAL_WIDTH = 10;
+
 	addAllMazes();
 	
 	function addAllMazes() {
+
+		var universalDimension = new MazeDimension(UNIVERSAL_WIDTH, UNIVERSAL_HEIGHT);
+
 		/*
 		  Basic terminologies
 			E - empty_space
@@ -129,8 +137,11 @@ function AllMazeLevels () {
 								['X','B','X','X'],
 								['X','P','X','X']
 							];
-		
-		var rawMaze1 = new RawMaze(dimension1, level1Static, level1Movable);
+
+		level1Static = convertToUniversal(dimension1, level1Static);
+		level1Movable = convertToUniversal(dimension1, level1Movable);
+
+		var rawMaze1 = new RawMaze(universalDimension, level1Static, level1Movable);
 		rawMazes.push(rawMaze1);
 		
 		/*
@@ -157,8 +168,11 @@ function AllMazeLevels () {
 				              ['X','X','B','X'],
 				              ['X','X','X','X']
 			              ];
-		
-		var rawMaze2 = new RawMaze(dimension2, level2Static, level2Movable);
+
+		level2Static = convertToUniversal(dimension2, level2Static);
+		level2Movable = convertToUniversal(dimension2, level2Movable);
+
+		var rawMaze2 = new RawMaze(universalDimension, level2Static, level2Movable);
 		rawMazes.push(rawMaze2);
 
 		//	--------------- Maze 3 --------------------
@@ -177,7 +191,10 @@ function AllMazeLevels () {
 								['X','P','B','X'],
 								['X','X','X','X']
 							];
-		var rawMaze3 = new RawMaze(dimension3, level3Static, level3Movable);
+		level3Static = convertToUniversal(dimension3, level3Static);
+		level3Movable = convertToUniversal(dimension3, level3Movable);
+
+		var rawMaze3 = new RawMaze(universalDimension, level3Static, level3Movable);
 		rawMazes.push(rawMaze3);
 
 		// --------------- Maze 4 ----------------------
@@ -196,7 +213,10 @@ function AllMazeLevels () {
 								['X','X','B','X'],
 								['X','X','X','X']
 							];
-		var rawMaze4 = new RawMaze(dimension4, level4Static, level4Movable);
+		level4Static = convertToUniversal(dimension4, level4Static);
+		level4Movable = convertToUniversal(dimension4, level4Movable);
+
+		var rawMaze4 = new RawMaze(universalDimension, level4Static, level4Movable);
 		rawMazes.push(rawMaze4);
 
 		// ----------------- Maze 5 ----------------------
@@ -219,7 +239,10 @@ function AllMazeLevels () {
 								['X','B','B','P'],
 								['X','X','X','X']
 							];
-		var rawMaze5 = new RawMaze(dimension5, level5Static, level5Movable);
+		level5Static = convertToUniversal(dimension5, level5Static);
+		level5Movable = convertToUniversal(dimension5, level5Movable);
+
+		var rawMaze5 = new RawMaze(universalDimension, level5Static, level5Movable);
 		rawMazes.push(rawMaze5);
 
 		// -------------------- Maze 6 ------------------------
@@ -240,7 +263,10 @@ function AllMazeLevels () {
 			['X','X','B','X','X'],
 			['X','X','X','X','X']
 		];
-		var rawMaze6 = new RawMaze(dimension6, level6Static, level6Movable);
+		level6Static = convertToUniversal(dimension6, level6Static);
+		level6Movable = convertToUniversal(dimension6, level6Movable);
+
+		var rawMaze6 = new RawMaze(universalDimension, level6Static, level6Movable);
 		rawMazes.push(rawMaze6);
 
 		// -------------------- Maze 7 ------------------------
@@ -261,7 +287,10 @@ function AllMazeLevels () {
 			['X','B','X','B','X'],
 			['X','X','P','X','X']
 		];
-		var rawMaze7 = new RawMaze(dimension7, level7Static, level7Movable);
+		level7Static = convertToUniversal(dimension7, level7Static);
+		level7Movable = convertToUniversal(dimension7, level7Movable);
+
+		var rawMaze7 = new RawMaze(universalDimension, level7Static, level7Movable);
 		rawMazes.push(rawMaze7);
 
 		// -------- Maze 8 ---------------------
@@ -281,7 +310,10 @@ function AllMazeLevels () {
 			['X','X','X','X'],
 			['X','X','X','X']
 		];
-		var rawMaze8 = new RawMaze(dimension8, level8Static, level8Movable);
+		level8Static = convertToUniversal(dimension8, level8Static);
+		level8Movable = convertToUniversal(dimension8, level8Movable);
+
+		var rawMaze8 = new RawMaze(universalDimension, level8Static, level8Movable);
 		rawMazes.push(rawMaze8);
 
 	};
@@ -290,4 +322,35 @@ function AllMazeLevels () {
 	this.getRawMaze = function(levelNo) {
 		return rawMazes[levelNo-1];
 	};
+
+
+	// convert the maze to a universal maze
+	function convertToUniversal(dimension, normalArray) {
+		var greenery = 'G';// represents the greenery surrounding the actual maze.
+
+		// create the array
+		var universalArray = new Array(UNIVERSAL_HEIGHT);
+		for (var i = 0; i < UNIVERSAL_HEIGHT; i++) {
+			universalArray[i] = new Array(UNIVERSAL_WIDTH);
+		}
+
+		// fill the area with greenery intially.
+		for (var i = 0; i < UNIVERSAL_HEIGHT; i++) {
+			for (var j = 0; j < UNIVERSAL_WIDTH; j++) {
+				universalArray[i][j] = greenery;
+			}
+		}
+
+		// merge the normal array on the universal array.
+		var startHeight = parseInt((UNIVERSAL_HEIGHT - dimension.height)/2);
+		var startWidth = parseInt((UNIVERSAL_WIDTH - dimension.width)/2);
+
+		for (var i = 0; i < dimension.height; i++) {
+			for (var j = 0; j < dimension.width; j++) {
+				universalArray[i + startHeight][j + startWidth] = normalArray[i][j];
+			}
+		}
+
+		return universalArray;
+	}
 }

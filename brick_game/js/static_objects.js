@@ -57,6 +57,26 @@ function EmptySpace (position, cellId)
 	};
 }
 
+// GREENERY Object
+function Greenery (position, cellId)
+{
+	var cellType = SokobanUtil.CellType.Greenery;
+
+	this.getCellType = function()
+	{
+		return cellType;
+	};
+
+	this.getPosition = function() {
+		return position;
+	};
+
+	this.cellId = function() {
+		return cellId;
+	};
+
+}
+
 
 // Moves object. this object represents one move of a pusher/brick.
 function GameMove(cell, xinc, yinc) {

@@ -6,14 +6,16 @@ function SokobanUtil(){}
 //Global Variables
 SokobanUtil.keyCode = {LEFT_ARROW:"LEFT-ARROW",UP_ARROW:"UP-ARROW",RIGHT_ARROW:"RIGHT-DOWN",DOWN_ARROW:"DOWN-ARROW"};
 
-SokobanUtil.cellStyle = {BRICK_MOVER :'brick_mover',BRICK : 'brick',EMPTY_SPACE : 'empty_space',DESTINATION :'destination',IMMOVABLE:"immovable"};
+SokobanUtil.cellStyle = {BRICK_MOVER :'brick_mover',BRICK : 'brick',EMPTY_SPACE : 'empty_space',
+						 DESTINATION :'destination',IMMOVABLE:'immovable', GREENERY : 'immovable'};
 
 
 SokobanUtil.CellType =  {BrickType : "brick", 
 		 StoneType : "immovable", 
 		 PusherType : "brick_mover", 
 		 DestinationType : "destination",
-		 EmptySpaceType: "empty_space"};
+		 EmptySpaceType: "empty_space",
+		 Greenery  : "immovable"};
 
 
 //CSS related
