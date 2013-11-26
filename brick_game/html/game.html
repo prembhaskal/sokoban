@@ -1,388 +1,388 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
-	<title>Game</title>
-	<link rel="stylesheet" type="text/css" href="../css/maze.css">
-	
-	<script src="../js/logger.js"></script>
-	<script src="../js/sokoban_util.js"></script>
-	<script src="../js/brick.js"></script>
-	<script src="../js/pusher.js"></script>	
-	<script src="../js/static_objects.js"></script>	
-	<script src="../js/maze.js"></script>
-	<script src="../js/position.js"></script>
-	<script src="../js/sokoban_canvas.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="../css/maze.css">
+
+    <script src="../js/logger.js"></script>
+    <script src="../js/sokoban_util.js"></script>
+    <script src="../js/brick.js"></script>
+    <script src="../js/pusher.js"></script>
+    <script src="../js/static_objects.js"></script>
+    <script src="../js/maze.js"></script>
+    <script src="../js/position.js"></script>
+    <script src="../js/sokoban_canvas.js"></script>
     <script src="../js/game_controller.js"></script>
-	<script src="../js/test.js"></script>
-	<script src="../lib/jquery-1.8.2.js"></script>
-	<script type="text/javascript">
+    <script src="../js/test.js"></script>
+    <script src="../lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript">
 
-    var menuOpen = false;
-    function menuAction()
-    {
-        if(!menuOpen)
+        var menuOpen = false;
+        function menuAction()
         {
-            $("#levelChooser").animate({left:'0%'});
-            menuOpen = true;
+            if(!menuOpen)
+            {
+                $("#levelChooser").animate({left:'0%'});
+                menuOpen = true;
+            }
+            else
+            {
+                menuOpen= false;
+                $("#levelChooser").animate({left:'-95%'});
+            }
         }
-        else
+        function init()
         {
-            menuOpen= false;
-            $("#levelChooser").animate({left:'-95%'});
+            initializeGame(getTable());
         }
-    }
-	function init()
-	{
-		initializeGame(getTable());
-	}
-	
-	function startNextLevel() {
-		playNextLevel(getTable());
-	}
-	
-	function startPreviousLevel() {
-		playPreviousLevel(getTable());
-	}
 
-    function replayPresentLevel() {
-        resetPresentLevel(getTable());
-    }
-	
-	function undo() {
-		undoMove();
-	}
+        function startNextLevel() {
+            playNextLevel(getTable());
+        }
 
-    function getTable() {
-        var table = document.getElementById("maze_table");
-        return table;
-    }
+        function startPreviousLevel() {
+            playPreviousLevel(getTable());
+        }
 
-	</script>
+        function replayPresentLevel() {
+            resetPresentLevel(getTable());
+        }
+
+        function undo() {
+            undoMove();
+        }
+
+        function getTable() {
+            var table = document.getElementById("maze_table");
+            return table;
+        }
+
+    </script>
 </head>
 <body onload="init();">
-	<div class="main_panel" align="center">
-		<h3>SOKOBAN</h3>
-        <h4 id="level_no"></h4>
-        <h4 id="level_completion"></h4>
-		<table id="maze_table" class="game_maze" border="1">
-			<thead></thead>
-		</table>
-        <div>TOTAL_MOVES: <pre id="total_moves"></pre> </div>
-		<button onclick = "startPreviousLevel()">Previous_Level</button>
-		<button onclick = "startNextLevel()">Next_Level</button>
+<div class="main_panel" align="center">
+    <h3>SOKOBAN</h3>
+    <h4 id="level_no"></h4>
+    <h4 id="level_completion"></h4>
+    <table id="maze_table" class="game_maze" border="1">
+        <thead></thead>
+    </table>
+    <div>TOTAL_MOVES: <pre id="total_moves"></pre> </div>
+    <button onclick = "startPreviousLevel()">Previous_Level</button>
+    <button onclick = "startNextLevel()">Next_Level</button>
 
-		</br>
-        <button onclick = "replayPresentLevel()">Reset_Level</button>
-		<button onclick = "undo()">Undo</button>
-	</div>
-    <div class="levelChooser" id="levelChooser">
-        <table style="height: 100%;width: 100%;background-color: gray" border="0">
-            <tr style="height: 15%">
-                <td></td>
-                <td style="text-align: center">
-                    Levels
-                </td>
-                <td></td>
-            </tr>
-            <tr style="height: 75%">
-                <td style="width: 15%">&nbsp;</td>
-                <td>
-                    <table style="height: 100%;width: 100%;background-color: antiquewhite" border="1">
-                        <tr style="height: 16%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-
-
-                        </tr>
-                        <tr style="height: 5%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+    </br>
+    <button onclick = "replayPresentLevel()">Reset_Level</button>
+    <button onclick = "undo()">Undo</button>
+</div>
+<div class="levelChooser" id="levelChooser">
+<table style="height: 100%;width: 100%;background-color: gray" border="0">
+<tr style="height: 15%">
+    <td></td>
+    <td style="text-align: center">
+        Levels
+    </td>
+    <td></td>
+</tr>
+<tr style="height: 75%">
+<td style="width: 15%">&nbsp;</td>
+<td>
+<table style="height: 100%;width: 100%;background-color: antiquewhite" border="1">
+<tr style="height: 16%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 16%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 5%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 5%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 16%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 16%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 5%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 5%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 16%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 16%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 5%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 5%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 16%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                        <tr style="height: 16%">
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 5%">
-                                &nbsp;
-                            </td>
-                            <td style="width: 16%">
-                                &nbsp;
-                            </td>
+</tr>
+<tr style="height: 5%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
 
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 15%">
-                    &nbsp;
-                </td>
-            </tr>
+</tr>
+<tr style="height: 16%">
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
+    <td style="width: 5%">
+        &nbsp;
+    </td>
+    <td style="width: 16%">
+        &nbsp;
+    </td>
 
-            <tr style="height: 10%">
-                <td></td>
-                <td></td>
-                <td style="text-align: right"><button id="menubtn"onclick="menuAction()">Menu</button></td>
-            </tr>
-        </table>
-    </div>
-	
-	
+
+</tr>
+</table>
+</td>
+<td style="width: 15%">
+    &nbsp;
+</td>
+</tr>
+
+<tr style="height: 10%">
+    <td></td>
+    <td></td>
+    <td style="text-align: right"><button id="menubtn"onclick="menuAction()">Menu</button></td>
+</tr>
+</table>
+</div>
+
+
 </body>
 </html>
