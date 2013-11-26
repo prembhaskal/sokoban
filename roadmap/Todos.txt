@@ -14,3 +14,4 @@
 -> Add upto 100 levels
 -> CSS enhancement for the entire game.
 -> Add a timer to clock the time spent on present level. It stops on completion of level.
+-->Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
