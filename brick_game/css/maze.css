@@ -52,12 +52,3 @@ div.main_panel td.brick_mover
 {
 	background-image: url("../images/brick_mover.png");
 }
-div.levelChooser
-{
-    position: absolute;
-    top: 10%;
-    left: -95%;
-    height: 80%;
-    width: 100%;
-    opacity: 0.9;
-}
