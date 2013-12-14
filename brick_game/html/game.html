@@ -4,18 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
     <title>Game</title>
     <link rel="stylesheet" type="text/css" href="../css/maze.css">
+    <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.css">
 
-    <script src="../js/logger.js"></script>
+    <script src="../lib/jquery-1.8.2.js"></script>
     <script src="../js/sokoban_util.js"></script>
-    <script src="../js/brick.js"></script>
-    <script src="../js/pusher.js"></script>
     <script src="../js/static_objects.js"></script>
+    <script src="../js/brick.js"></script>
+    <script src="../js/logger.js"></script>
+    <script src="../js/pusher.js"></script>
     <script src="../js/maze.js"></script>
     <script src="../js/position.js"></script>
     <script src="../js/sokoban_canvas.js"></script>
     <script src="../js/game_controller.js"></script>
     <script src="../js/test.js"></script>
-    <script src="../lib/jquery-1.8.2.js"></script>
     <script type="text/javascript">
 
         var menuOpen = false;
@@ -61,20 +62,38 @@
     </script>
 </head>
 <body onload="init();">
-<div class="main_panel" align="center">
-    <h3>SOKOBAN</h3>
-    <h4 id="level_no"></h4>
-    <h4 id="level_completion"></h4>
-    <table id="maze_table" class="game_maze" border="1">
-        <thead></thead>
-    </table>
-    <div>TOTAL_MOVES: <pre id="total_moves"></pre> </div>
-    <button onclick = "startPreviousLevel()">Previous_Level</button>
-    <button onclick = "startNextLevel()">Next_Level</button>
+<div class="full_panel">
+    <div class="header_panel" style="text-align: center; font-size: 30px;">
+        <h1>Sokoban</h1>
+    </div>
+    <div class="game_panel">
+        <div class="main_panel" align="center" style="width: 60%; float: left; margin-left: 8%">
+            <div class="maze_header">
+                <h4 id="level_no"></h4>
+                <h4 id="level_completion"></h4>
+            </div>
+            <div class="maze">
+                <table id="maze_table" class="game_maze" border="1">
+                    <thead></thead>
+                </table>
+            </div>
+            <div class="maze_footer">
+                TOTAL_MOVES: <pre id="total_moves"></pre>
+            </div>
+        </div>
 
-    </br>
-    <button onclick = "replayPresentLevel()">Reset_Level</button>
-    <button onclick = "undo()">Undo</button>
+        <div class="button_panel" style="width: 28%; float: left; margin: 50px 25px">
+            <div class="level_buttons" style="margin: 5px 5px">
+                <button class="soko_button topcoat-button--large--cta" onclick = "startPreviousLevel()">Previous_Level</button>
+                <button class="soko_button topcoat-button--large--cta" onclick = "startNextLevel()">Next_Level</button>
+            </div>
+
+            <div class="moves_buttons" style="margin: 5px 5px">
+                <button class="soko_button topcoat-button--large--cta" onclick = "replayPresentLevel()">Reset_Level</button>
+                <button class="soko_button topcoat-button--large--cta" onclick = "undo()">Undo</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="levelChooser" id="levelChooser">
 <table style="height: 100%;width: 100%;background-color: gray" border="0">

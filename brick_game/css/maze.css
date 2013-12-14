@@ -11,7 +11,7 @@ div.main_panel table.game_maze
 	border-spacing: 0;
 	padding: 0;
 	
-	width: 400px;
+	width: 700px;
 	height: 400px;
 }
 
@@ -61,3 +61,16 @@ div.levelChooser
     width: 100%;
     opacity: 0.9;
 }
+
+h1, h2, h3, h4, h5, h6
+{
+    margin: 10px 0;
+}
+
+button.soko_button
+{
+    width: 150px;
+    height: 35px;
+    margin: 10px 10px;
+}
+
