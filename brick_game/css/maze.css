@@ -67,10 +67,21 @@ h1, h2, h3, h4, h5, h6
     margin: 10px 0;
 }
 
+
+body
+{
+    background-color: #ffffff;
+}
 button.soko_button
 {
     width: 150px;
     height: 35px;
     margin: 10px 10px;
+}
+
+button.menu_button
+{
+    width: 60px;
+    height: 30px;
 }
 

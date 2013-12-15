@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
     <title>Game</title>
-    <link rel="stylesheet" type="text/css" href="../css/maze.css">
     <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/maze.css">
 
     <script src="../lib/jquery-1.8.2.js"></script>
     <script src="../js/sokoban_util.js"></script>
@@ -84,25 +84,33 @@
 
         <div class="button_panel" style="width: 28%; float: left; margin: 50px 25px">
             <div class="level_buttons" style="margin: 5px 5px">
-                <button class="soko_button topcoat-button--large--cta" onclick = "startPreviousLevel()">Previous_Level</button>
-                <button class="soko_button topcoat-button--large--cta" onclick = "startNextLevel()">Next_Level</button>
+                <div>
+                    <button class="soko_button topcoat-button--large--cta" onclick = "startPreviousLevel()">Previous_Level</button>
+                </div>
+                <div>
+                    <button class="soko_button topcoat-button--large--cta" onclick = "startNextLevel()">Next_Level</button>
+                </div>
             </div>
 
             <div class="moves_buttons" style="margin: 5px 5px">
-                <button class="soko_button topcoat-button--large--cta" onclick = "replayPresentLevel()">Reset_Level</button>
-                <button class="soko_button topcoat-button--large--cta" onclick = "undo()">Undo</button>
+                <div>
+                    <button class="soko_button topcoat-button--large--cta" onclick = "replayPresentLevel()">Reset_Level</button>
+                </div>
+                <div>
+                    <button class="soko_button topcoat-button--large--cta" onclick = "undo()">Undo</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="levelChooser" id="levelChooser">
-<table style="height: 100%;width: 100%;background-color: gray" border="0">
+<table style="height: 100%;width: 100%;background-color: #ec514e" border="0">
 <tr style="height: 15%">
     <td></td>
     <td style="text-align: center">
         Levels
     </td>
-    <td></td>
+    <td style="text-align: right"><button class="menu_button topcoat-button--cta" id="menubtn" onclick="menuAction()">Menu</button></td>
 </tr>
 <tr style="height: 75%">
 <td style="width: 15%">&nbsp;</td>
@@ -397,7 +405,7 @@
 <tr style="height: 10%">
     <td></td>
     <td></td>
-    <td style="text-align: right"><button id="menubtn"onclick="menuAction()">Menu</button></td>
+    <td></td>
 </tr>
 </table>
 </div>
