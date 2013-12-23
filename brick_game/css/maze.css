@@ -11,7 +11,7 @@ div.main_panel table.game_maze
 	border-spacing: 0;
 	padding: 0;
 	
-	width: 700px;
+	width: 95%;
 	height: 400px;
 }
 
@@ -74,9 +74,10 @@ body
 }
 button.soko_button
 {
-    width: 150px;
+    min-width: 150px;
     height: 35px;
     margin: 10px 10px;
+    font-size: 1.3rem;
 }
 
 button.menu_button
