@@ -92,8 +92,15 @@ function GameController() {
 		isGameComplete = false;
 		// enable keys
 		keysEnabled = true;
+
+		initializeLevelViews();
+	}
+
+	function initializeLevelViews() {
 		// level completion message
 		SokobanUtil.resetLevelCompleteMsg();
+		// initialize total moves.
+		SokobanUtil.updateTotalMoves(0);
 	}
 
 	function startLevel(levelNo, table) {
