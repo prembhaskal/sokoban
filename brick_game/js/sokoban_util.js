@@ -211,3 +211,20 @@ SokobanUtil.updateTotalMoves = function(totalMoves) {
 	$("#total_moves").text(totalMoves);
 };
 
+SokobanUtil.disableUndoButton = function() {
+	$("#button_undo_move").attr('disabled', true);
+}
+
+SokobanUtil.enableUndoButton = function() {
+	$("#button_undo_move").removeAttr('disabled');
+}
+
+
+SokobanUtil.disableResetButton = function() {
+	$("#button_reset_level").attr('disabled', true);
+}
+
+SokobanUtil.enableResetButton = function() {
+	$("#button_reset_level").removeAttr('disabled');
+}
+

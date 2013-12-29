@@ -101,6 +101,7 @@ function GameController() {
 		SokobanUtil.resetLevelCompleteMsg();
 		// initialize total moves.
 		SokobanUtil.updateTotalMoves(0);
+		thisObject.updateUndoResetButton();
 	}
 
 	function startLevel(levelNo, table) {
@@ -133,6 +134,18 @@ function GameController() {
 	};
 
 	// privileged methods.
+
+	this.updateUndoResetButton = function() {
+		if (undoStack.length == 1) {
+			SokobanUtil.enableUndoButton();
+			SokobanUtil.enableResetButton();
+		}
+		else if (undoStack.length == 0) {
+			SokobanUtil.disableUndoButton();
+			SokobanUtil.disableResetButton();
+		}
+
+	}
 
 	this.initializeGame = function (table) {
 
@@ -172,6 +185,7 @@ function GameController() {
 		// move the pusher...it has to be a pusher... no check required.
 		undoThisMove(gameMove);
 		SokobanUtil.updateTotalMoves(maze.pusher.getTotalMoves());
+		this.updateUndoResetButton();
 
 		// check to see if a brick was also moved along with the pusher.
 		gameMove = undoStack.pop();
@@ -203,6 +217,7 @@ function MovesListener(gameController) {
 
 	this.onEvent = function (gameMove) {
 		gameController.addToUndo(gameMove);
+		gameController.updateUndoResetButton();
 	};
 }
 
