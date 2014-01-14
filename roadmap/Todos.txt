@@ -17,3 +17,4 @@
 -->Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
 --> disable buttons (like next level, previous level, undo, reset) at appropriate times.
 --> show a pop-up LEVEL-COMPLETE at the centre of the screen with options like play-again, next-level, previous-level etc.
+--> CSS enhancement -- make the bricks, pusher as present in wikipedia page.
