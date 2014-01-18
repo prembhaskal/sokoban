@@ -27,6 +27,7 @@ div.main_panel table.game_maze td
 
 
 /* styles for statics should come before movables */
+
 div.main_panel td.empty_space
 {
 	background-image: url("../images/empty_space.jpg");
@@ -42,7 +43,6 @@ div.main_panel td.immovable
 	background-image: url("../images/immovable.jpg") ;
 }
 
-
 div.main_panel td.brick
 {
     background-size: 100% 100%;
@@ -53,6 +53,13 @@ div.main_panel td.brick_mover
 {
 	background-image: url("../images/brick_mover.png");
 }
+
+div.main_panel td.destination.brick
+{
+    background-size: 100% 100%;
+    background-image: url("../images/brick_on_dest.png");
+}
+
 div.levelChooser
 {
     position: absolute;
