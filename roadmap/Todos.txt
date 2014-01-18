@@ -1,7 +1,7 @@
 -> Done -History Management for moves and undo operation
 -> Done - Game finishing handler.
 -> Done- Add a moves counter and display it on screen.
--> Done - Remove Logger as Chromes suffices the purpose.
+-> Done - Remove Logger as Chrome suffices the purpose.
 -> Done -Remove Enumeration (Oh really!! code)
 -> Done Add a reset level button.
 -> Done -- code needs some clean up..move undo part to a listener. and complete other refactoring/TODOs.

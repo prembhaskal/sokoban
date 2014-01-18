@@ -34,7 +34,7 @@ div.main_panel td.empty_space
 
 div.main_panel td.destination
 {
-	background-image: url("../images/destination.pn");
+	background-image: url("../images/destination.png");
 }
 
 div.main_panel td.immovable
@@ -45,7 +45,8 @@ div.main_panel td.immovable
 
 div.main_panel td.brick
 {
-	background-image: url("../images/brick.jpg");
+    background-size: 100% 100%;
+	background-image: url("../images/brick.png");
 }
 
 div.main_panel td.brick_mover
@@ -70,7 +71,7 @@ h1, h2, h3, h4, h5, h6
 
 body
 {
-    background-color: #ffffff;
+    background-color: #fff9e6;
 }
 button.soko_button
 {
