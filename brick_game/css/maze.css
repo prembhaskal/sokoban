@@ -70,6 +70,33 @@ div.levelChooser
     opacity: 0.9;
 }
 
+div.modalWindow
+{
+    display: none;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity:20;
+    -webkit-transition: opacity 500ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+}
+
+div.modalDialog
+{
+    position: fixed;
+    top: 25%;
+    left: 20%;
+    width: 50%;
+    height: 50%;
+    opacity: 2;
+    background-color: limegreen;
+
+}
+
 h1, h2, h3, h4, h5, h6
 {
     margin: 10px 0;
