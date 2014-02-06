@@ -49,9 +49,16 @@ div.main_panel td.brick
 	background-image: url("../images/brick.png");
 }
 
+div.main_panel td.greenery
+{
+    background-size: 100% 100%;
+	background-image: url("../images/green.png");
+}
+
 div.main_panel td.brick_mover
 {
-	background-image: url("../images/brick_mover.png");
+	background-size: 100% 130%;
+	background-image: url("../images/mario.gif");
 }
 
 div.main_panel td.destination.brick
@@ -119,5 +126,8 @@ button.menu_button
 {
     width: 60px;
     height: 30px;
+	position: absolute;
+	top: 11%;
+	z-index: 5;
 }
 
