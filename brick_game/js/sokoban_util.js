@@ -15,7 +15,7 @@ SokobanUtil.CellType =  {BrickType : "brick",
 		 PusherType : "brick_mover", 
 		 DestinationType : "destination",
 		 EmptySpaceType: "empty_space",
-		 Greenery  : "immovable"};
+		 Greenery  : "greenery"};
 
 
 //CSS related
