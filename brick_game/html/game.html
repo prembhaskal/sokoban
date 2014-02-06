@@ -61,9 +61,12 @@
             return table;
         }
 
-        function showModalWindow(){
-            var modalWindow = document.getElementById("modalWindow");
-            modalWindow.style.display = 'block';
+        function showModalWindow() {
+            showPopUp();
+        }
+
+        function hideModalWindow() {
+            hidePopUp();
         }
 
     </script>
@@ -78,12 +81,13 @@
             <div class="main_panel col-lg-8" style="margin-left: 50px;">
                 <div class="maze_header">
                     <h4 id="level_no"></h4>
+                    <!-- this button is kept basically for testing purpose. -->
                     <button id="showWindow" onclick="showModalWindow()">SHOW_MODAL</button>
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
-
-                                content of the modal dialog.
-
+                            <h1 style="text-align: center">LEVEL COMPLETE</h1>
+                            <br/>
+                            <button id="hideWindow" onclick="hideModalWindow()">HIDE_MODAL</button>
                         </div>
                     </div>
                     <h4 id="level_completion"></h4>

@@ -228,3 +228,13 @@ SokobanUtil.enableResetButton = function() {
 	$("#button_reset_level").removeAttr('disabled');
 }
 
+SokobanUtil.displayPopUp = function() {
+	var modalWindow = document.getElementById("modalWindow");
+	modalWindow.style.display = 'block';
+}
+
+
+SokobanUtil.hidePopUp = function() {
+	var modalWindow = document.getElementById("modalWindow");
+	modalWindow.style.display = 'none';
+}

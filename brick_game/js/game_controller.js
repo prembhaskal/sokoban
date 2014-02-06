@@ -25,6 +25,9 @@ function GameController() {
 			
 			var keyName = SokobanUtil.getArrowKeyPressed(keyCode);
 
+			if (!isKeyPressEnabled())
+				return;
+
 			// don't do anything if some other key is pressed.
 			if (keyName == null)
 				return;
@@ -38,11 +41,18 @@ function GameController() {
 	function undoOnCtrlZ() {
 		$(document).keydown(function (event) {
 			var keyCode = (event.keyCode ? event.keyCode : event.which);
-			
+
+			if (!isKeyPressEnabled())
+				return;
+
 			if (event.ctrlKey && keyCode == keyCodeZ) {
 				undoMove();
 			}
 		});
+	}
+
+	function isKeyPressEnabled() {
+		return keysEnabled;
 	}
 
 	function movePusherObject(keyName) {
@@ -62,6 +72,9 @@ function GameController() {
 			isGameComplete = true;
 			keysEnabled = false;
 			SokobanUtil.showLevelCompleteMsg();
+			//TODO add may be a delay before showing the pop up.
+			SokobanUtil.displayPopUp();
+			thisObject.updateUndoResetButton();
 		}
 	}
 
@@ -136,7 +149,10 @@ function GameController() {
 	// privileged methods.
 
 	this.updateUndoResetButton = function() {
-		if (undoStack.length == 1) {
+		if (isGameComplete) {
+			SokobanUtil.disableUndoButton();
+		}
+		else if (undoStack.length == 1) {
 			SokobanUtil.enableUndoButton();
 			SokobanUtil.enableResetButton();
 		}

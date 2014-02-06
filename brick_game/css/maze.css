@@ -81,12 +81,12 @@ div.modalWindow
 {
     display: none;
     position: fixed;
-    z-index: 101;
+    z-index: 10;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity:20;
+    opacity:2; /* transparency */
     -webkit-transition: opacity 500ms ease-in;
     -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
@@ -99,8 +99,8 @@ div.modalDialog
     left: 20%;
     width: 50%;
     height: 50%;
-    opacity: 2;
-    background-color: limegreen;
+    opacity: 0.9;
+    background-color: #feffb4;
 
 }
 
