@@ -359,60 +359,51 @@ function AllMazeLevels () {
 	// cover with boundary
 	function coverWithBoundary(mazeArray) {
 
-	// cover the internal maze
-		// horizontal pass
+	// cover the maze with immovable on the inner boundary.
 		for (var i = 1; i < UNIVERSAL_HEIGHT - 1; i++) {
             for (var j = 1; j < UNIVERSAL_WIDTH - 1; j++) {
                var cell = mazeArray[i][j];
-               if (isMazeGuy(cell)) {
-
-               // replace neighbours.
-                   for (var x = -1; x < 2; x++) {
-                    for (var y = -1; y < 2; y++) {
-                       if (x == 0 && y ==0)
-                          continue;
-
-                          if (!isMazeGuy(mazeArray[i + x][j + y]))
-                               mazeArray[i + x][j + y] = 'I';
-                    }
-                   }
+               if (doesCellBelongToMaze(cell)) {
+				   replaceNeighboursAtBoundary(i, j, mazeArray);
                }
             }
 		}
 
 
-		// cover the external maze
+		// cover the maze with immovable on the outer boundary.
 		for (var i = 0; i < UNIVERSAL_HEIGHT; i++) {
 		    for (var j = 0; j < UNIVERSAL_WIDTH; j++) {
 		        var cell = mazeArray[i][j];
-		        if (!isMazeGuy(cell) && (i == 0 || j == 0 || i == UNIVERSAL_HEIGHT - 1 || j == UNIVERSAL_WIDTH - 1))
+		        if (!doesCellBelongToMaze(cell) && isCellOnBoundary(i, j))
 		            mazeArray[i][j] = 'I';
 
 		    }
 		}
 	}
 
-    // no boundary cells should be passed
-	function replaceNeighbours(i ,j, mazeArray) {
-	    var xAxes = new Array();
-	    var yAxes = new Array();
+	function replaceNeighboursAtBoundary(i, j, mazeArray) {
+		// check all the 8 neighbours of a cell.
+		for (var x = -1; x < 2; x++) {
+			for (var y = -1; y < 2; y++) {
+				if (x == 0 && y == 0)
+					continue;
 
-	    neighbours.push(mazeArray[i][j-1]);
-	    neighbours.push(mazeArray[i][j+1]);
-	    neighbours.push(mazeArray[i-1][j]);
-	    neighbours.push(mazeArray[i+1][j]);
-
-	    neighbours.push(mazeArray[i + 1][j + 1]);
-	    neighbours.push(mazeArray[i + 1][j - 1]);
-	    neighbours.push(mazeArray[i - 1][j + 1]);
-	    neighbours.push(mazeArray[i - 1][j - 1]);
-	    return neighbours;
+				if (!doesCellBelongToMaze(mazeArray[i + x][j + y]))
+					mazeArray[i + x][j + y] = 'I';
+			}
+		}
 	}
 
-	
-	function isMazeGuy(cell) {
+	function isCellOnBoundary(i, j) {
+		if (i == 0 || j == 0 || i == UNIVERSAL_HEIGHT - 1 || j == UNIVERSAL_WIDTH - 1)
+			return true;
+		return false;
+	}
+
+
+	function doesCellBelongToMaze(cell) {
 		if (cell ===  'E' || cell === 'D' || cell === 'B' || cell === 'P')
-		    return true;
+			return true;
 
 		return false;
 	}

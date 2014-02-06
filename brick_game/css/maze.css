@@ -21,7 +21,7 @@ div.main_panel table.game_maze td
 	border-left-width: 2px;
 	
 	border-bottom-color: #000000;
-	border-bottom-width: 2px;	
+	border-bottom-width: 2px;
 }
 
 
@@ -114,6 +114,7 @@ body
 {
     background-color: #fff9e6;
 }
+
 button.soko_button
 {
     min-width: 150px;
@@ -126,8 +127,8 @@ button.menu_button
 {
     width: 60px;
     height: 30px;
-	position: absolute;
-	top: 11%;
-	z-index: 5;
+    position: absolute;
+    top: 11%;
+    z-index: 5;
 }
 
