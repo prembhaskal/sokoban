@@ -92,5 +92,8 @@ button.menu_button
 {
     width: 60px;
     height: 30px;
+	position: absolute;
+	top: 11%;
+	z-index: 5;
 }
 
