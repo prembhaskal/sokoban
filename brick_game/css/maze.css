@@ -11,7 +11,7 @@ div.main_panel table.game_maze
 	border-spacing: 0;
 	padding: 0;
 	
-	width: 95%;
+	width: 100%;
 	height: 400px;
 }
 
@@ -30,16 +30,21 @@ div.main_panel table.game_maze td
 
 div.main_panel td.empty_space
 {
+/*
 	background-image: url("../images/empty_space.jpg");
+*/
+	background-color: grey;
 }
 
 div.main_panel td.destination
 {
 	background-image: url("../images/destination.png");
+    background-color: yellow;
 }
 
 div.main_panel td.immovable
 {
+	background-size : 10% 10%;
 	background-image: url("../images/immovable.jpg") ;
 }
 
@@ -58,7 +63,7 @@ div.main_panel td.greenery
 div.main_panel td.brick_mover
 {
 	background-size: 100% 130%;
-	background-image: url("../images/mario.gif");
+	background-image: url("../images/mario.png");
 }
 
 div.main_panel td.destination.brick
