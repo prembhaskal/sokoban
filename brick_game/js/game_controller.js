@@ -139,11 +139,23 @@ function GameController() {
 		}
 		
 		SokobanUtil.showLevel(levelNo);
+		updatePreviousNextButtons();
 	}
 	
 	function addKeyHandlers() {
 		moveOnArrowPress();
 		undoOnCtrlZ();
+	};
+
+	function updatePreviousNextButtons() {
+		SokobanUtil.enablePreviousLevelButton();
+		SokobanUtil.enableNextLevelButton();
+		if (presentLevel == maxLevels) {
+			SokobanUtil.disableNextLevelButton();
+		}
+		if (presentLevel == 1) {
+			SokobanUtil.disablePreviousLevelButton();
+		}
 	};
 
 	// privileged methods.

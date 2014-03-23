@@ -211,30 +211,46 @@ SokobanUtil.updateTotalMoves = function(totalMoves) {
 	$("#total_moves").text(totalMoves);
 };
 
+SokobanUtil.disablePreviousLevelButton = function() {
+	$("#button_pre_level").attr('disabled', true);
+};
+
+SokobanUtil.enablePreviousLevelButton = function() {
+	$("#button_pre_level").attr('disabled', false);
+};
+
+SokobanUtil.disableNextLevelButton = function() {
+	$("#button_next_level").attr('disabled', true);
+};
+
+SokobanUtil.enableNextLevelButton = function() {
+	$("#button_next_level").attr('disabled', false);
+};
+
 SokobanUtil.disableUndoButton = function() {
 	$("#button_undo_move").attr('disabled', true);
-}
+};
 
 SokobanUtil.enableUndoButton = function() {
 	$("#button_undo_move").removeAttr('disabled');
-}
+};
 
 
 SokobanUtil.disableResetButton = function() {
 	$("#button_reset_level").attr('disabled', true);
-}
+};
 
 SokobanUtil.enableResetButton = function() {
 	$("#button_reset_level").removeAttr('disabled');
-}
+};
 
 SokobanUtil.displayPopUp = function() {
 	var modalWindow = document.getElementById("modalWindow");
 	modalWindow.style.display = 'block';
-}
+};
 
 
 SokobanUtil.hidePopUp = function() {
 	var modalWindow = document.getElementById("modalWindow");
 	modalWindow.style.display = 'none';
-}
+};
