@@ -18,7 +18,7 @@
     <script src="../js/position.js"></script>
     <script src="../js/sokoban_canvas.js"></script>
     <script src="../js/game_controller.js"></script>
-    <script src="../js/test.js"></script>
+    <script src="../js/game.js"></script>
     <script type="text/javascript">
 
         var menuOpen = false;
@@ -80,9 +80,10 @@
         <div class="row">
             <div class="main_panel col-lg-8" style="margin-left: 50px;">
                 <div class="maze_header">
-                    <h4 id="level_no"></h4>
-                    <!-- this button is kept basically for testing purpose. -->
+                    <h4 style="text-align: center" id="level_no"></h4>
+                    <!-- this button is kept basically for testing purpose.
                     <button id="showWindow" onclick="showModalWindow()">SHOW_MODAL</button>
+                    -->
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
                             <h1 style="text-align: center">LEVEL COMPLETE</h1>
@@ -90,7 +91,9 @@
                             <button id="hideWindow" onclick="hideModalWindow()">HIDE_MODAL</button>
                         </div>
                     </div>
+                    <!--
                     <h4 id="level_completion"></h4>
+                    -->
                 </div>
                 <div class="maze">
                     <table id="maze_table" class="game_maze" border="1">
