@@ -104,7 +104,7 @@ div.modalDialog
     left: 20%;
     width: 50%;
     height: 50%;
-    opacity: 0.9;
+    opacity: 1.0;
     background-color: #feffb4;
 
 }
@@ -135,5 +135,14 @@ button.menu_button
     position: absolute;
     top: 11%;
     z-index: 5;
+}
+
+button.button_popup
+{
+    width: 120px;
+    height: 80px;
+    margin: 20px 20px;
+    font-size: 1.5rem;
+    text-align: center;
 }
 

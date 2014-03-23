@@ -78,17 +78,36 @@
     </div>
     <div class="game_panel container" style="width: 90%">
         <div class="row">
+            <!-- the whole row is divided into 12 parts...col-lg-8 will cover 100*8/12% part of it. -->
             <div class="main_panel col-lg-8" style="margin-left: 50px;">
                 <div class="maze_header">
                     <h4 style="text-align: center" id="level_no"></h4>
-                    <!-- this button is kept basically for testing purpose.
-                    <button id="showWindow" onclick="showModalWindow()">SHOW_MODAL</button>
+                    <!--
+                    this button is kept basically for testing purpose.
                     -->
+                    <button id="showWindow" onclick="showModalWindow()">SHOW_MODAL</button>
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
                             <h1 style="text-align: center">LEVEL COMPLETE</h1>
                             <br/>
+                            <!--
+                            this button is kept basically for testing purpose.
                             <button id="hideWindow" onclick="hideModalWindow()">HIDE_MODAL</button>
+                            -->
+                            <div class="row">
+                                <div class="filler_left col-lg-2"></div>
+                                <div class="level_buttons_popup col-lg-10">
+                                    <button id="button_popup_pre_level"
+                                            class="button_popup topcoat-button--large--cta"
+                                            onclick="startPreviousLevel()">Previous_Level</button>
+                                    <button id="button_popup_next_level"
+                                            class="button_popup topcoat-button--large--cta"
+                                            onclick="startNextLevel()">Next_Level</button>
+                                    <button id="button_popup_reset_level"
+                                            class="button_popup topcoat-button--large--cta"
+                                            onclick="replayPresentLevel()">Play_Again</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!--

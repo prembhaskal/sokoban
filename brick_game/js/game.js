@@ -9,14 +9,17 @@ function initializeGame(table) {
 
 function playNextLevel(table) {
 	gameController.playNextLevel(table);
+	hidePopUp();
 }
 
 function playPreviousLevel(table) {
 	gameController.playPreviousLevel(table);
+	hidePopUp();
 }
 
 function resetPresentLevel(table) {
 	gameController.resetPresentLevel(table);
+	hidePopUp();
 }
 
 function undoMove() {
