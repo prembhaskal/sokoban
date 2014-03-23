@@ -9,7 +9,8 @@
 -> Done - Change grid...grid for each level is big say 50x50, main cells are in centre, the outside cells just form a boundary, this is required so that 
    the grid looks same for for each of the level.
 
--> Partly Done - disable buttons (like next level, previous level, undo, reset) at appropriate times.
+-> Done - disable buttons (like next level, previous level, undo, reset) at appropriate times.
+-> Done - show a pop-up LEVEL-COMPLETE at the centre of the screen with options like play-again, next-level, previous-level etc.
    
 -> Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
@@ -18,5 +19,5 @@
 -> Add a timer to clock the time spent on present level. It stops on completion of level.
 -> Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
 
--> show a pop-up LEVEL-COMPLETE at the centre of the screen with options like play-again, next-level, previous-level etc.
+
 -> CSS enhancement -- make the bricks, pusher as present in wikipedia page.
