@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Create Brick</title>
+	<link rel="stylesheet" type="text/css" href="../css/maze.css">
+	
+	<script src="../js/logger.js"></script>
+	<script src="../js/enumeration.js"></script>
+	<script src="../js/sokoban_util.js"></script>
+	<script src="../js/brick.js"></script>
+	<script src="../js/pusher.js"></script>	
+	<script src="../js/static_objects.js"></script>	
+	<script src="../js/maze.js"></script>
+	<script src="../js/position.js"></script>
+	<script src="../js/sokoban_canvas.js"></script>
+	<script src="../js/game.js"></script>
+	<script src="../js/create_table.js"></script>
+	<script src="../lib/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript">
+		function createTable() {
+			var table = document.getElementById("maze_table");
+			createTestMaze(table);
+		}
+	</script>
+	</head>
+	<body onload="createTable()">
+		<div class="main_panel">
+			<h3> -------- TABLE --------</h3>
+			<br></br>
+			<table id="maze_table" class="game_maze" border="1">
+				<thead></thead>
+			</table>
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,4 @@
+function initializeLogger(div)
+{
+	//TODO
+}
