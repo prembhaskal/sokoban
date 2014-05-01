@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <title>Game</title>
     <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
@@ -12,6 +12,7 @@
     <script src="../lib/bootstrap.min.js"></script>
     <script src="../js/sokoban_util.js"></script>
     <script src="../js/static_objects.js"></script>
+    <script src="../js/brick.js"></script>
     <script src="../js/logger.js"></script>
     <script src="../js/pusher.js"></script>
     <script src="../js/maze.js"></script>
@@ -19,59 +20,8 @@
     <script src="../js/sokoban_canvas.js"></script>
     <script src="../js/game_controller.js"></script>
     <script src="../js/game.js"></script>
-    <script type="text/javascript">
-
-        var menuOpen = false;
-        function menuAction()
-        {
-            if(!menuOpen)
-            {
-                $("#levelChooser").animate({left:'0%'});
-                menuOpen = true;
-            }
-            else
-            {
-                menuOpen= false;
-                $("#levelChooser").animate({left:'-95%'});
-            }
-        }
-        function init()
-        {
-            initializeGame(getTable());
-        }
-
-        function startNextLevel() {
-            playNextLevel(getTable());
-        }
-
-        function startPreviousLevel() {
-            playPreviousLevel(getTable());
-        }
-
-        function replayPresentLevel() {
-            resetPresentLevel(getTable());
-        }
-
-        function undo() {
-            undoMove();
-        }
-
-        function getTable() {
-            var table = document.getElementById("maze_table");
-            return table;
-        }
-
-        function showModalWindow() {
-            showPopUp();
-        }
-
-        function hideModalWindow() {
-            hidePopUp();
-        }
-
-    </script>
 </head>
-<body onload="init();">
+<body>
 <div class="full_panel">
     <div class="header_panel" style="text-align: center; font-size: 30px;">
         <h1>Sokoban</h1>
@@ -85,7 +35,7 @@
                     <!--
                     this button is kept basically for testing purpose.
                     -->
-                    <button id="showWindow" onclick="showModalWindow()">SHOW_MODAL</button>
+                    <button id="showWindow">SHOW_MODAL</button>
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
                             <h1 style="text-align: center">LEVEL COMPLETE</h1>
@@ -98,14 +48,11 @@
                                 <div class="filler_left col-lg-2"></div>
                                 <div class="level_buttons_popup col-lg-10">
                                     <button id="button_popup_pre_level"
-                                            class="button_popup topcoat-button--large--cta"
-                                            onclick="startPreviousLevel()">Previous_Level</button>
+                                            class="button_popup topcoat-button--large--cta">Previous_Level</button>
                                     <button id="button_popup_next_level"
-                                            class="button_popup topcoat-button--large--cta"
-                                            onclick="startNextLevel()">Next_Level</button>
+                                            class="button_popup topcoat-button--large--cta">Next_Level</button>
                                     <button id="button_popup_reset_level"
-                                            class="button_popup topcoat-button--large--cta"
-                                            onclick="replayPresentLevel()">Play_Again</button>
+                                            class="button_popup topcoat-button--large--cta">Play_Again</button>
                                 </div>
                             </div>
                         </div>
@@ -127,26 +74,26 @@
             <div class="button_panel col-lg-3" style="margin: 60px 5px; float: right">
                 <div class="level_buttons" style="margin: 5px 5px">
                     <div>
-                        <button id="button_pre_level" class="soko_button topcoat-button--large--cta" onclick = "startPreviousLevel()">Previous_Level</button>
+                        <button id="button_pre_level" class="soko_button topcoat-button--large--cta">Previous_Level</button>
                     </div>
                     <div>
-                        <button id="button_next_level" class="soko_button topcoat-button--large--cta" onclick = "startNextLevel()">Next_Level</button>
+                        <button id="button_next_level" class="soko_button topcoat-button--large--cta">Next_Level</button>
                     </div>
                 </div>
 
                 <div class="moves_buttons" style="margin: 5px 5px">
                     <div>
-                        <button id="button_reset_level" class="soko_button topcoat-button--large--cta" onclick = "replayPresentLevel()">Reset_Level</button>
+                        <button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button>
                     </div>
                     <div>
-                        <button id="button_undo_move" class="soko_button topcoat-button--large--cta" onclick = "undo()">Undo</button>
+                        <button id="button_undo_move" class="soko_button topcoat-button--large--cta">Undo</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button class="menu_button topcoat-button--cta" id="menubtn" onclick="menuAction()" >Menu</button>
+<button class="menu_button topcoat-button--cta" id="menubtn">Menu</button>
 <div class="levelChooser" id="levelChooser">
 <table style="height: 100%;width: 100%;background-color: #ec514e" border="0">
 <tr style="height: 15%">
