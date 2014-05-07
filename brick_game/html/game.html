@@ -23,22 +23,22 @@
 </head>
 <body>
 <div class="full_panel">
-    <div class="header_panel" style="text-align: center; font-size: 30px;">
+    <div class="header_panel">
         <h1>Sokoban</h1>
     </div>
-    <div class="game_panel container" style="width: 90%">
+    <div class="game_panel container">
         <div class="row">
             <!-- the whole row is divided into 12 parts...col-lg-8 will cover 100*8/12% part of it. -->
-            <div class="main_panel col-lg-8" style="margin-left: 50px;">
+            <div class="main_panel col-lg-8">
                 <div class="maze_header">
-                    <h4 style="text-align: center" id="level_no"></h4>
+                    <h4 id="level_no"></h4>
                     <!--
                     this button is kept basically for testing purpose.
                     -->
                     <button id="showWindow">SHOW_MODAL</button>
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
-                            <h1 style="text-align: center">LEVEL COMPLETE</h1>
+                            <h1 class="level_completion">LEVEL COMPLETE</h1>
                             <br/>
                             <!--
                             this button is kept basically for testing purpose.
@@ -71,8 +71,8 @@
                 </div>
             </div>
 
-            <div class="button_panel col-lg-3" style="margin: 60px 5px; float: right">
-                <div class="level_buttons" style="margin: 5px 5px">
+            <div class="button_panel col-lg-3">
+                <div class="level_buttons">
                     <div>
                         <button id="button_pre_level" class="soko_button topcoat-button--large--cta">Previous_Level</button>
                     </div>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <div class="moves_buttons" style="margin: 5px 5px">
+                <div class="moves_buttons">
                     <div>
                         <button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button>
                     </div>
@@ -95,7 +95,7 @@
 </div>
 <button class="menu_button topcoat-button--cta" id="menubtn">Menu</button>
 <div class="levelChooser" id="levelChooser">
-<table style="height: 100%;width: 100%;background-color: #ec514e" border="0">
+<table class="outer_table" style="height: 100%;width: 100%;background-color: #ec514e" border="0">
 <tr style="height: 15%">
     <td></td>
     <td style="text-align: center">
@@ -106,7 +106,7 @@
 <tr style="height: 75%">
 <td style="width: 15%">&nbsp;</td>
 <td>
-<table style="height: 100%;width: 100%;background-color: antiquewhite" border="1">
+<table class="inner_table" style="height: 100%;width: 100%;background-color: antiquewhite" border="1">
 <tr style="height: 16%">
     <td style="width: 16%">
         &nbsp;

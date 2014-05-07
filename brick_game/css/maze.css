@@ -1,5 +1,25 @@
 /* Style sheet for the maze of the game.*/
 
+div.header_panel
+{
+    text-align: center;
+    font-size: 30px;
+}
+
+div.game_panel
+{
+    width: 90%;
+}
+
+div.main_panel
+{
+    margin-left: 50px;
+}
+#level_no
+{
+    text-align: center;
+}
+
 div.main_panel table.game_maze
 {
 	border-right-color: #000000;
@@ -106,14 +126,29 @@ div.modalDialog
     height: 50%;
     opacity: 1.0;
     background-color: #feffb4;
+}
 
+div.modalDialog h1.level_completion
+{
+    text-align: center;
+}
+
+div.button_panel
+{
+    margin: 60px 5px;
+    float: right;
+}
+
+div.button_panel div.level_buttons,
+div.button_panel div.move_buttons
+{
+    margin: 5px 5px;
 }
 
 h1, h2, h3, h4, h5, h6
 {
     margin: 10px 0;
 }
-
 
 body
 {
