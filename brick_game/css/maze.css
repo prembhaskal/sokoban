@@ -181,3 +181,65 @@ button.button_popup
     text-align: center;
 }
 
+div.levelChooser table.outer_table
+{
+    height: 100%;
+    width: 100%;
+    background-color: #ec514e;
+    border: 0;
+}
+
+div.levelChooser table.outer_table td.col2
+{
+    text-align: center;
+}
+
+div.levelChooser table.outer_table td.col3
+{
+    text-align: right;
+}
+
+div.levelChooser table.inner_table
+{
+    height: 100%;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+tr.rowh_75
+{
+    height: 75%;
+}
+
+tr.rowh_15
+{
+    height: 15%;
+}
+
+tr.rowh_16
+{
+    height: 16%;
+}
+
+tr.rowh_10
+{
+    height: 10%;
+}
+
+tr.rowh_5
+{
+    height: 5%;
+}
+
+td.colw_16
+{
+    width: 16%;
+}
+td.colw_15
+{
+    width: 15%;
+}
+td.colw_5
+{
+    width: 5%;
+}
