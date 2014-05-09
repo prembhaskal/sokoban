@@ -91,7 +91,8 @@ function addOnClickListener(elementId, clickListener) {
 // Add all the event listeners below
 $(document).ready(function() {
 	window.addEventListener('load', init, false);
-	addOnClickListener('showWindow', showModalWindow);
+    // showWindow is used only for test purpose.
+//	addOnClickListener('showWindow', showModalWindow);
 	addOnClickListener('button_popup_pre_level', startPreviousLevel);
 	addOnClickListener('button_popup_next_level', startNextLevel);
 	addOnClickListener('button_popup_reset_level', replayPresentLevel);
@@ -99,7 +100,7 @@ $(document).ready(function() {
 	addOnClickListener('button_next_level', startNextLevel);
 	addOnClickListener('button_reset_level', replayPresentLevel);
 	addOnClickListener('button_undo_move', undo);
-	addOnClickListener('menubtn', menuAction);
+//	addOnClickListener('menubtn', menuAction);
 });
 
 
