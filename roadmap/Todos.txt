@@ -14,7 +14,7 @@
    
 -> Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
--> Add upto 100 levels
+-> Add upto 100 levels (move the levels to a separate file).
 -> CSS enhancement for the entire game.
 -> Add a timer to clock the time spent on present level. It stops on completion of level.
 -> Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
