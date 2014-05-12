@@ -1,0 +1,276 @@
+<html>
+<head>
+</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/maze.css">
+
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../js/sokoban_util.js"></script>
+    <script src="../js/static_objects.js"></script>
+    <script src="../js/brick.js"></script>
+    <script src="../js/logger.js"></script>
+    <script src="../js/pusher.js"></script>
+    <script src="../js/maze.js"></script>
+    <script src="../js/position.js"></script>
+    <script src="../js/sokoban_canvas.js"></script>
+    <script src="../js/game_controller.js"></script>
+    <script src="../js/game.js"></script>
+    
+    <script type="text/javascript">
+    
+    function getTheTable(name) {
+        var table = document.getElementById(name);
+        return table;
+    }
+	var x=5;
+	var y=5;
+    function init()
+    {
+		var immovable = getTheTable("immovable");
+    	var movable = getTheTable("movable");
+    	generateTable(x,y,immovable);
+    	generateTable(x,y,movable);
+    }
+    
+    
+    function refreshGrids()
+    {		
+    	var immovable = getTheTable("immovable");
+		var movable = getTheTable("movable");
+    	x = document.getElementById('xVal').value;
+    	y = document.getElementById('xVal').value;
+		if(x == "")
+			{
+    		x = getLevelSize();
+    		y = getLevelSize();
+			
+			}
+		
+    	init();	
+    	loadDefaultData(immovable,'E');
+    	loadDefaultData(movable,'X');
+    	loadLevelData();
+    }
+
+    function getLevelSize()
+    {
+    	//TODO
+    	return 3;
+    }
+    function loadDefaultData(grid,def)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].firstElementChild.value=def;
+    				
+    			}
+    	}
+    }
+    function loadLevelData()
+    {
+    	
+    }
+    function reloadOutput()
+    {
+    	
+    	var movable = getTheTable("movable");
+    	
+    	var immovable = getTheTable("immovable");
+    	
+    	var gridArrayMovable = getGridArray(movable);
+    	var gridArrayImmovable = getGridArray(immovable);
+    	
+    	
+    	var base = getTheTable("base");
+    	
+    	var maze = getTheTable("maze");
+    	
+    	
+    	generateTableGeneric(gridArrayImmovable.length,base);
+    	generateTableGeneric(gridArrayMovable.length,maze);
+    	
+    	clearTable(maze);
+    	clearTable(base);
+    	
+    	loadMazeElements(base,gridArrayImmovable);
+    	loadMazeElements(maze,gridArrayImmovable);
+    	//alert(12)
+    	loadMazeElements(maze,gridArrayMovable);
+    	
+    }
+    
+    function clearTable(grid)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].className = " ";
+    				
+    			}
+    	}
+    }
+    function loadMazeElements(grid,gridArray)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].className +=  getTypeOfElement(gridArray[i][k])+" ";
+    				
+    			}
+    	}
+    }
+    
+    function getTypeOfElement(type)
+    {
+    	if(type=='E')
+    		return "empty_space";
+    	if(type=='D')
+    		return "destination";
+    	if(type=="I")
+    		return "immovable";
+    	if(type=="G")
+    		return "greenery";
+    	if(type=="B")
+    		return "brick";
+    	if(type=="P")
+    		return "brick_mover";
+    		
+    	
+    }
+    
+    function getGridArray(grid)
+    {	
+    	var gridFullArray = new Array();
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				gridRowArray.push(row.cells[k].firstElementChild.value)
+    				
+    			}
+    			gridFullArray.push(gridRowArray);
+    	}
+    	return gridFullArray;
+    }
+    var  generateTable = function (x,y,table)
+    {
+    	var rowLength = table.rows.length;
+    	for (var i = 0; i < rowLength; i++) {
+    		table.deleteRow(0);
+    	}
+    	
+    	table.rows.length = 0;
+    	var ypos = y-1;
+    	
+    	for(;ypos >=0;ypos--)
+    	{
+    		//alert("y"+ypos);
+    		var row = table.insertRow(table.rows.length);
+    		row.id = "row"+ypos;
+    		var xpos =0;
+    		for(;xpos <x; xpos++ )
+    		{
+    			//alert(xpos);
+    			var cell = row.insertCell(row.cells.length);
+    			cell.innerHTML="<input type='text' size='4' />";
+    			
+    		}
+    	}
+
+    };
+    
+    var  generateTableGeneric = function (size,table)
+    {
+    	var x = size;
+    	var y = size;
+    	var rowLength = table.rows.length;
+    	for (var i = 0; i < rowLength; i++) {
+    		table.deleteRow(0);
+    	}
+    	
+    	table.rows.length = 0;
+    	var ypos = y-1;
+    	
+    	for(;ypos >=0;ypos--)
+    	{
+    		//alert("y"+ypos);
+    		var row = table.insertRow(table.rows.length);
+    		row.id = "row"+ypos;
+    		var xpos =0;
+    		for(;xpos <x; xpos++ )
+    		{
+    			//alert(xpos);
+    			var cell = row.insertCell(row.cells.length);
+    			cell.innerHTML="";
+    			cell.className = "empty_space";
+    			
+    		}
+    	}
+
+    };
+    </script>
+<body onload="init();">
+<table style="width: 100%">
+<tr>
+	<td>size: <input id="xVal" type="text"/>
+		level: <input id="level" type="text"/>
+		
+		<button onclick="refreshGrids()">OK</button>
+	</td>
+	<td>
+		
+	</td>
+</tr>
+<tr>
+	<td width="50%">Immovable
+	</td>
+	<td width="50%">
+		Movable
+	</td>
+</tr>
+<tr>
+	<td>
+        <table id="immovable" class="game_maze" border="1">
+  	    </table>
+	<td>
+			<table id="movable" border="1">
+
+		</table>
+	<td>
+	</td>
+	
+</tr>
+<tr>
+	<td>
+	<button onclick="reloadOutput();">Reload</button>
+	</td>
+</tr>
+<tr>
+	<td>
+	        <table id="base"  border="1 black" style="width: 400;height: 400" class="game_maze" border="1">
+  	    </table>
+	</td>
+	<td>
+	        <table id="maze"  border="1" style="width: 400;height: 400" class="game_maze" border="1">
+  	    </table>
+	</td>
+</tr>
+
+</table>
+</body>
+</html>
