@@ -13,6 +13,7 @@
     <script src="../js/static_objects.js"></script>
     <script src="../js/brick.js"></script>
     <script src="../js/logger.js"></script>
+    <script src="../js/levels.js"></script>
     <script src="../js/pusher.js"></script>
     <script src="../js/maze.js"></script>
     <script src="../js/position.js"></script>
@@ -34,6 +35,13 @@
     	var movable = getTheTable("movable");
     	generateTable(x,y,immovable);
     	generateTable(x,y,movable);
+    	
+    	var level = $("#level");
+  	
+    	for(var i=1;i < 101;i++){
+    		level.append($("<option />").val(i).text(i));
+    		
+    	}
     }
     
     
@@ -42,11 +50,11 @@
     	var immovable = getTheTable("immovable");
 		var movable = getTheTable("movable");
     	x = document.getElementById('xVal').value;
-    	y = document.getElementById('xVal').value;
+    	y = document.getElementById('yVal').value;
 		if(x == "")
 			{
-    		x = getLevelSize();
-    		y = getLevelSize();
+    		x = getLevelSizeX();
+    		y = getLevelSizeY();
 			
 			}
 		
@@ -56,9 +64,26 @@
     	loadLevelData();
     }
 
-    function getLevelSize()
+    function getLevelSizeX()
     {
-    	//TODO
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	if(allLevels[levelNo] != undefined)
+    		if(allLevels[levelNo].base != undefined)
+    			return allLevels[levelNo].base.length;
+    	
+    	return 3;
+    }
+    function getLevelSizeY()
+    {
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	if(allLevels[levelNo] != undefined)
+    		if(allLevels[levelNo].base != undefined)
+    			return allLevels[levelNo].base[0].length;
+    	
     	return 3;
     }
     function loadDefaultData(grid,def)
@@ -76,10 +101,41 @@
     }
     function loadLevelData()
     {
+    	//alert(x)
+    	var level = $("#level");
+    	var levelNo = level.val();
     	
+    	if(allLevels[levelNo]==undefined)
+    		return;
+    	
+    	var movable = getTheTable("movable");
+    	
+    	var immovable = getTheTable("immovable");
+    	
+    	loadGridData(immovable,allLevels[levelNo].base);
+    	loadGridData(movable,allLevels[levelNo].top);
+    	
+    	
+    }
+    
+    function loadGridData(grid,gridArray)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].firstElementChild.value=gridArray[i][k];
+    				
+    			}
+    	}
     }
     function reloadOutput()
     {
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
     	
     	var movable = getTheTable("movable");
     	
@@ -94,16 +150,25 @@
     	var maze = getTheTable("maze");
     	
     	
-    	generateTableGeneric(gridArrayImmovable.length,base);
-    	generateTableGeneric(gridArrayMovable.length,maze);
+    	generateTableGeneric(gridArrayImmovable.length,gridArrayImmovable[0].length,base);
+    	generateTableGeneric(gridArrayMovable.length,gridArrayMovable[0].length,maze);
     	
     	clearTable(maze);
     	clearTable(base);
     	
     	loadMazeElements(base,gridArrayImmovable);
     	loadMazeElements(maze,gridArrayImmovable);
-    	//alert(12)
+    	
     	loadMazeElements(maze,gridArrayMovable);
+    	allLevels[levelNo]={'base':'','top':''};
+    	
+    	
+    	allLevels[levelNo]['base']=gridArrayImmovable;
+    	allLevels[levelNo]['top']=gridArrayMovable;
+    	
+    	
+    	$('#jsonGen').val(JSON.stringify(allLevels));
+    	//alert(JSON.stringify(allLevels));
     	
     }
     
@@ -174,60 +239,48 @@
     	}
     	
     	table.rows.length = 0;
-    	var ypos = y-1;
-    	
-    	for(;ypos >=0;ypos--)
-    	{
-    		//alert("y"+ypos);
+
+    	for(var i =0;i < x;i++){
     		var row = table.insertRow(table.rows.length);
-    		row.id = "row"+ypos;
-    		var xpos =0;
-    		for(;xpos <x; xpos++ )
+    		for(var j=0;j < y;j++)
     		{
-    			//alert(xpos);
     			var cell = row.insertCell(row.cells.length);
     			cell.innerHTML="<input type='text' size='4' />";
-    			
     		}
     	}
+    	
+
 
     };
     
-    var  generateTableGeneric = function (size,table)
+    var  generateTableGeneric = function (x,y,table)
     {
-    	var x = size;
-    	var y = size;
     	var rowLength = table.rows.length;
     	for (var i = 0; i < rowLength; i++) {
     		table.deleteRow(0);
     	}
     	
     	table.rows.length = 0;
-    	var ypos = y-1;
-    	
-    	for(;ypos >=0;ypos--)
-    	{
-    		//alert("y"+ypos);
+
+
+    	for(var i =0;i < x;i++){
     		var row = table.insertRow(table.rows.length);
-    		row.id = "row"+ypos;
-    		var xpos =0;
-    		for(;xpos <x; xpos++ )
+    		for(var j=0;j < y;j++)
     		{
-    			//alert(xpos);
     			var cell = row.insertCell(row.cells.length);
-    			cell.innerHTML="";
     			cell.className = "empty_space";
-    			
     		}
     	}
+
 
     };
     </script>
 <body onload="init();">
 <table style="width: 100%">
 <tr>
-	<td>size: <input id="xVal" type="text"/>
-		level: <input id="level" type="text"/>
+	<td>x: <input id="xVal" type="text"/>
+		y: <input id="yVal" type="text"/>
+		level: <select id="level"></select>
 		
 		<button onclick="refreshGrids()">OK</button>
 	</td>
@@ -267,6 +320,11 @@
 	<td>
 	        <table id="maze"  border="1" style="width: 400;height: 400" class="game_maze" border="1">
   	    </table>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+	<textarea rows="3" cols="100" id="jsonGen"></textarea>
 	</td>
 </tr>
 
