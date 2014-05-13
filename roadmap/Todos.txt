@@ -21,3 +21,4 @@
 -> CSS enhancement -- make the bricks, pusher as present in wikipedia page.
 -> CHROME WEB STORE: create the .crx file etc necessary to put the Game on the Web Store.
 		https://developer.chrome.com/apps/about_apps
+-> Sound effects		
