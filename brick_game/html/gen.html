@@ -274,13 +274,21 @@
 
 
     };
+    
+    function onChangeSelect()
+    {
+    	document.getElementById('xVal').value ="";
+    	document.getElementById('yVal').value="";
+    }
     </script>
 <body onload="init();">
 <table style="width: 100%">
 <tr>
-	<td>x: <input id="xVal" type="text"/>
+	<td>
+	level: <select id="level" onchange="onChangeSelect()"></select>
+		x: <input id="xVal" type="text"/>
 		y: <input id="yVal" type="text"/>
-		level: <select id="level"></select>
+		
 		
 		<button onclick="refreshGrids()">OK</button>
 	</td>
