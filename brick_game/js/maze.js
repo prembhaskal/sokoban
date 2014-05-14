@@ -89,6 +89,7 @@ function MazeCreator() {
 	E - empty_space
 	D - destination
 	I - immovable
+	G - Greenery
 				
 	B - brick
 	P - pusher
