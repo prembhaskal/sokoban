@@ -2,7 +2,7 @@
 function GameController() {
 
 	// variables containing the game/level information
-	var maxLevels = 8;
+	var maxLevels = allLevels.len;
 	var presentLevel = null;
 	// put a new undo stack for moves.
 	var undoStack = null;
@@ -11,6 +11,7 @@ function GameController() {
 	var isGameComplete = null;
 	var keysEnabled = null;
 	var keyCodeZ = 90;
+	var allMazeLevels = null;
 
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
@@ -119,7 +120,6 @@ function GameController() {
 
 	function startLevel(levelNo, table) {
 		initializeStuffForLevel();
-		var allMazeLevels = new AllMazeLevels();
 		var rawMaze = allMazeLevels.getRawMaze(levelNo);
 
 		var mazeCreator = new MazeCreator();
@@ -178,6 +178,7 @@ function GameController() {
 	this.initializeGame = function (table) {
 
 		presentLevel = 1;
+		allMazeLevels = new AllMazeLevels();
 		startLevel(presentLevel, table);
 
 		//binding key handlers

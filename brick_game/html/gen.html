@@ -161,13 +161,17 @@
     	
     	loadMazeElements(maze,gridArrayMovable);
     	allLevels[levelNo]={'base':'','top':''};
-    	
-    	
-    	allLevels[levelNo]['base']=gridArrayImmovable;
+		
+		allLevels[levelNo]['base']=gridArrayImmovable;
     	allLevels[levelNo]['top']=gridArrayMovable;
-    	
-    	
-    	$('#jsonGen').val(JSON.stringify(allLevels));
+		
+		// find the total number of levels.
+		var totalLevels = 0;
+		while(allLevels[++totalLevels]);
+		
+		allLevels.len = --totalLevels;
+
+    	$('#jsonGen').val('var allLevels = ' + JSON.stringify(allLevels));
     	//alert(JSON.stringify(allLevels));
     	
     }
@@ -332,7 +336,7 @@
 </tr>
 <tr>
 	<td colspan="2">
-	<textarea rows="3" cols="100" id="jsonGen"></textarea>
+	<textarea rows="3" cols="100" id="jsonGen" onclick="this.select();" ></textarea>
 	</td>
 </tr>
 
