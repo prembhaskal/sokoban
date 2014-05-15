@@ -65,8 +65,8 @@ div.main_panel table.game_maze td
 .immovable
 {
 	background-size : 10% 10%;
-	background-image: url("../images/immovable.jpg") ;
-	//background-color:#A9A9A9;
+	//background-image: url("../images/immovable.jpg") ;
+	background-color:#A9A9A9;
 }
 
 .brick
@@ -130,10 +130,8 @@ div.modalWindow
     left: 0;
     right: 0;
     bottom: 0;
-    opacity:1; /* transparency */
-    -webkit-transition: opacity 500ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
+
+    background-color: rgba(199,199,199,0.5);
 }
 
 div.modalDialog
@@ -143,10 +141,11 @@ div.modalDialog
     left: 20%;
     width: 50%;
     height: 30%;
-    opacity: 5;
+    opacity: 1 !important;
     background-color: #A9A9A9;
     box-shadow: 10px 10px 5px #888888;
     border-radius:25px;
+
 
 
 }
