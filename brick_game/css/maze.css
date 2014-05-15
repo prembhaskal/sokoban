@@ -4,6 +4,10 @@ div.header_panel
 {
     text-align: center;
     font-size: 30px;
+    background-color: #4CA1E4;
+    box-shadow: 10px 10px 5px #888888;
+    color:white;
+
 }
 
 div.game_panel
@@ -14,10 +18,6 @@ div.game_panel
 div.main_panel
 {
     margin-left: 50px;
-}
-#level_no
-{
-    text-align: center;
 }
 
 div.main_panel table.game_maze
@@ -66,6 +66,7 @@ div.main_panel table.game_maze td
 {
 	background-size : 10% 10%;
 	background-image: url("../images/immovable.jpg") ;
+	//background-color:#A9A9A9;
 }
 
 .brick
@@ -78,6 +79,8 @@ div.main_panel table.game_maze td
 {
     background-size: 100% 100%;
 	background-image: url("../images/green.png");
+
+	//background-color:#A9A9A9;
 }
 
 .brick_mover
@@ -90,7 +93,24 @@ div.main_panel table.game_maze td
     background-size: 100% 100%;
     background-image: url("../images/brick_on_dest.png");
 }
+.header-table
+{
+    width:100%;
+    text-align:right;
 
+}
+.game-header
+{
+    text-align:left;
+}
+.level-header
+{
+    width:50px;
+    background-color: #A9A9A9;
+    border-radius:25px;
+    text-align: center;
+    border: 2px solid;
+}
 div.levelChooser
 {
     position: absolute;
@@ -98,19 +118,19 @@ div.levelChooser
     left: -95%;
     height: 80%;
     width: 100%;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 div.modalWindow
 {
     display: none;
     position: fixed;
-    z-index: 10;
+    z-index:10;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity:2; /* transparency */
+    opacity:1; /* transparency */
     -webkit-transition: opacity 500ms ease-in;
     -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
@@ -118,18 +138,23 @@ div.modalWindow
 
 div.modalDialog
 {
-    position: fixed;
+    position: absolute;
     top: 25%;
     left: 20%;
     width: 50%;
-    height: 50%;
-    opacity: 1.0;
-    background-color: #feffb4;
+    height: 30%;
+    opacity: 5;
+    background-color: #A9A9A9;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius:25px;
+
+
 }
 
-div.modalDialog h1.level_completion
+div.modalDialog h4.level_completion
 {
     text-align: center;
+
 }
 
 div.button_panel
@@ -184,13 +209,15 @@ div.levelChooser table.outer_table
 {
     height: 100%;
     width: 100%;
-    background-color: #ec514e;
+    background-color:  #A9A9A9;
     border: 0;
+        box-shadow: 10px 10px 5px #888888;
 }
 
 div.levelChooser table.outer_table td.col2
 {
     text-align: center;
+    z-index:5
 }
 
 div.levelChooser table.outer_table td.col3

@@ -85,14 +85,15 @@ function hideModalWindow() {
 }
 
 function addOnClickListener(elementId, clickListener) {
-	document.getElementById(elementId).addEventListener('click', clickListener, false);
+	if(document.getElementById(elementId) !=undefined)
+	    document.getElementById(elementId).addEventListener('click', clickListener, false);
 }
 
 // Add all the event listeners below
 $(document).ready(function() {
 	window.addEventListener('load', init, false);
     // showWindow is used only for test purpose.
-//	addOnClickListener('showWindow', showModalWindow);
+	addOnClickListener('showWindow', showModalWindow);
 	addOnClickListener('button_popup_pre_level', startPreviousLevel);
 	addOnClickListener('button_popup_next_level', startNextLevel);
 	addOnClickListener('button_popup_reset_level', replayPresentLevel);
@@ -100,7 +101,7 @@ $(document).ready(function() {
 	addOnClickListener('button_next_level', startNextLevel);
 	addOnClickListener('button_reset_level', replayPresentLevel);
 	addOnClickListener('button_undo_move', undo);
-//	addOnClickListener('menubtn', menuAction);
+	addOnClickListener('menubtn', menuAction);
 });
 
 
