@@ -14,5 +14,8 @@
             "background" : {
             "scripts" : ["main.js"]
             }
-    }
+    },
+	"permissions": [
+		  "storage"
+	]
 }

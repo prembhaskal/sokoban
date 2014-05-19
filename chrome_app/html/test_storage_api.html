@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <title>Testing Chrome API Storage</title>
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+    <script src="../js/storage.js"></script>
+</head>
+<body>
+      <div id = "mainDiv" >
+	    <p>Testing chrome api storage -- this will work only when launched as a Chrome app</p>
+		<div>
+		Store value: <input type="text" id="stored_input"> </input>
+		<button id = "store_value">Store the input</button>
+		</div>
+		<div>
+		RETRIEVED VALUE: <p id="retrieved_value"></p>
+		<button id = "get_value">Retrieve value</button>
+		</div>
+	  </div>
+</body>
+</html>
