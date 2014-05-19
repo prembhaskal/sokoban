@@ -209,8 +209,7 @@ div.levelChooser table.outer_table
     height: 100%;
     width: 100%;
     background-color:  #A9A9A9;
-    border: 0;
-        box-shadow: 10px 10px 5px #888888;
+
 }
 
 div.levelChooser table.outer_table td.col2
@@ -229,6 +228,7 @@ div.levelChooser table.inner_table
     height: 100%;
     width: 100%;
     background-color: antiquewhite;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 tr.rowh_75
@@ -258,7 +258,9 @@ tr.rowh_5
 
 td.colw_16
 {
-    width: 16%;
+    width: 10%;
+
+
 }
 td.colw_15
 {
@@ -267,4 +269,19 @@ td.colw_15
 td.colw_5
 {
     width: 5%;
+}
+.menulevelActive
+{
+     background-color: #4CA1E4 ;
+     border-radius:25px;
+     text-align: center;
+     color:white;
+     cursor:pointer;
+}
+.menulevelInActive
+{
+     background-color: grey ;
+     border-radius:25px;
+     text-align: center;
+     color:white;
 }

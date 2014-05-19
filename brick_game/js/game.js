@@ -36,19 +36,10 @@ function showPopUp() {
 }
 
 
-var menuOpen = false;
+
 function menuAction()
 {
-	if(!menuOpen)
-	{
-		$("#levelChooser").animate({left:'0%'});
-		menuOpen = true;
-	}
-	else
-	{
-		menuOpen= false;
-		$("#levelChooser").animate({left:'-95%'});
-	}
+    gameController.menuAction();
 }
 function init()
 {
@@ -72,8 +63,7 @@ function undo() {
 }
 
 function getTable() {
-	var table = document.getElementById("maze_table");
-	return table;
+    return SokobanUtil.getTable();
 }
 
 function showModalWindow() {

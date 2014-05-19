@@ -12,6 +12,9 @@ function GameController() {
 	var keysEnabled = null;
 	var keyCodeZ = 90;
 	var allMazeLevels = null;
+	var menuOffset = 0;
+	var menuOpen = false;
+
 
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
@@ -179,12 +182,46 @@ function GameController() {
 
 		presentLevel = 1;
 		allMazeLevels = new AllMazeLevels();
+		thisObject.initialiseMenuChooser();
 		startLevel(presentLevel, table);
 
 		//binding key handlers
 		addKeyHandlers();
 	};
 
+    this.initialiseMenuChooser = function(){
+       var i=menuOffset ;
+        while(++i < 21 )
+        {
+            if(i < maxLevels)
+            {
+                     $("#menuLevel"+i).html(i+menuOffset);
+                     $("#menuLevel"+i).removeClass("menulevelActive");
+                     $("#menuLevel"+i).removeClass("menulevelInActive");
+                     $("#menuLevel"+i).addClass("menulevelActive");
+                     addMenuLevelListeners("#menuLevel"+i,i);
+
+            }
+            else
+            {
+                     $("#menuLevel"+i).removeClass("menulevelActive");
+                     $("#menuLevel"+i).removeClass("menulevelInActive");
+                     $("#menuLevel"+i).addClass("menulevelInActive");
+            }
+
+        }
+
+    };
+
+    function addMenuLevelListeners(elementID,levelNo)
+    {
+        $(elementID).click(function(){
+         menuAction();
+         var table = SokobanUtil.getTable();
+         thisObject.playLevel(table,levelNo);
+
+        });
+    }
 	this.playNextLevel = function (table) {
 		if (presentLevel < maxLevels) {
 			presentLevel++;
@@ -198,6 +235,13 @@ function GameController() {
 			startLevel(presentLevel, table);
 		}
 	};
+
+    this.playLevel = function (table,levelNo) {
+            presentLevel = levelNo;
+            startLevel(presentLevel, table);
+        };
+
+
 
 	this.resetPresentLevel = function (table) {
 		startLevel(presentLevel, table);
@@ -236,6 +280,20 @@ function GameController() {
 			undoStack.push(gameMove);
 		}
 	};
+
+	this.menuAction = function()
+    {
+    	if(!menuOpen)
+    	{
+    		$("#levelChooser").animate({left:'0%'});
+    		menuOpen = true;
+    	}
+    	else
+    	{
+    		menuOpen= false;
+    		$("#levelChooser").animate({left:'-95%'});
+    	}
+    };
 
 }
 

@@ -51,6 +51,11 @@ SokobanUtil.getCellType = function(position)
 	else
 		return SokobanUtil.CellType.EMPTY_SPACE;
 };
+SokobanUtil.getTable = function()
+{
+	var table = document.getElementById("maze_table");
+	return table;
+}
 
 SokobanUtil.isDestination = function (position) {
 	var elementId = this.getElementId(position);
