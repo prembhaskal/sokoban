@@ -12,7 +12,7 @@
 -> Done - disable buttons (like next level, previous level, undo, reset) at appropriate times.
 -> Done - show a pop-up LEVEL-COMPLETE at the centre of the screen with options like play-again, next-level, previous-level etc.
    
--> Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
+-> Done - Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
 -> Add upto 100 levels (move the levels to a separate file).
 -> CSS enhancement for the entire game.
@@ -22,4 +22,4 @@
 -> CHROME WEB STORE: create the .crx file etc necessary to put the Game on the Web Store.
 		https://developer.chrome.com/apps/about_apps
 -> Sound effects
-
+->Complete the Menu next-previous logic

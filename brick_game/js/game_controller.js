@@ -14,6 +14,7 @@ function GameController() {
 	var allMazeLevels = null;
 	var menuOffset = 0;
 	var menuOpen = false;
+	var menusize=20;
 
 
 	// see http://www.crockford.com/javascript/private.html
@@ -189,16 +190,25 @@ function GameController() {
 		addKeyHandlers();
 	};
 
+    this.menuPrev = function(){
+        menuOffset = menuOffset - menusize;
+
+    };
+    this.menuNext = function(){
+        menuOffset = menuOffset + menusize;
+
+    };
     this.initialiseMenuChooser = function(){
        var i=menuOffset ;
-        while(++i < 21 )
+        while(++i <=menusize )
         {
-            if(i < maxLevels)
+            if(i <= maxLevels)
             {
                      $("#menuLevel"+i).html(i+menuOffset);
                      $("#menuLevel"+i).removeClass("menulevelActive");
                      $("#menuLevel"+i).removeClass("menulevelInActive");
                      $("#menuLevel"+i).addClass("menulevelActive");
+                     removeLevelListeners("#menuLevel"+i);
                      addMenuLevelListeners("#menuLevel"+i,i);
 
             }
@@ -207,12 +217,21 @@ function GameController() {
                      $("#menuLevel"+i).removeClass("menulevelActive");
                      $("#menuLevel"+i).removeClass("menulevelInActive");
                      $("#menuLevel"+i).addClass("menulevelInActive");
+                     removeLevelListeners("#menuLevel"+i);
             }
 
         }
+        //TODO
+        //toggleMenuPrevNextButton();
 
     };
 
+    function removeLevelListeners(elementID)
+    {
+     $(elementID).click(function(){
+
+     });
+    }
     function addMenuLevelListeners(elementID,levelNo)
     {
         $(elementID).click(function(){

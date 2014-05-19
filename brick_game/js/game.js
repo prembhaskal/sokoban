@@ -41,6 +41,14 @@ function menuAction()
 {
     gameController.menuAction();
 }
+function menuPrev()
+{
+
+}
+function menuNext()
+{
+
+}
 function init()
 {
 	initializeGame(getTable());
@@ -92,6 +100,9 @@ $(document).ready(function() {
 	addOnClickListener('button_reset_level', replayPresentLevel);
 	addOnClickListener('button_undo_move', undo);
 	addOnClickListener('menubtn', menuAction);
+	addOnClickListener('menuprevbtn', menuPrev);
+	addOnClickListener('menunextbtn', menuNext);
+
 });
 
 
