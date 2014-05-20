@@ -43,11 +43,11 @@ function menuAction()
 }
 function menuPrev()
 {
-
+    gameController.menuPrev();
 }
 function menuNext()
 {
-
+    gameController.menuNext();
 }
 function init()
 {

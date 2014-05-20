@@ -245,6 +245,22 @@ SokobanUtil.enableUndoButton = function() {
 };
 
 
+SokobanUtil.disableMenuNextButton = function() {
+	$("#menunextbtn").attr('disabled', true);
+};
+
+SokobanUtil.enableMenuNextButton = function() {
+	$("#menunextbtn").removeAttr('disabled');
+};
+
+SokobanUtil.disableMenuPrevtButton = function() {
+	$("#menuprevbtn").attr('disabled', true);
+};
+
+SokobanUtil.enableMenuPrevButton = function() {
+	$("#menuprevbtn").removeAttr('disabled');
+};
+
 SokobanUtil.disableResetButton = function() {
 	$("#button_reset_level").attr('disabled', true);
 	$("#button_popup_reset_level").attr('disabled', true);

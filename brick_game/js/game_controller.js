@@ -192,45 +192,62 @@ function GameController() {
 
     this.menuPrev = function(){
         menuOffset = menuOffset - menusize;
+        thisObject.initialiseMenuChooser();
 
     };
     this.menuNext = function(){
         menuOffset = menuOffset + menusize;
+        thisObject.initialiseMenuChooser();
 
     };
     this.initialiseMenuChooser = function(){
        var i=menuOffset ;
-        while(++i <=menusize )
+       var counter = 0;
+        while(++i <=(menusize+menuOffset ))
         {
+            counter = i-menuOffset;
             if(i <= maxLevels)
             {
-                     $("#menuLevel"+i).html(i+menuOffset);
-                     $("#menuLevel"+i).removeClass("menulevelActive");
-                     $("#menuLevel"+i).removeClass("menulevelInActive");
-                     $("#menuLevel"+i).addClass("menulevelActive");
-                     removeLevelListeners("#menuLevel"+i);
-                     addMenuLevelListeners("#menuLevel"+i,i);
+                     $("#menuLevel"+counter).html(i);
+                     $("#menuLevel"+counter).removeClass("menulevelActive");
+                     $("#menuLevel"+counter).removeClass("menulevelInActive");
+                     $("#menuLevel"+counter).addClass("menulevelActive");
+                     removeLevelListeners("#menuLevel"+counter);
+                     addMenuLevelListeners("#menuLevel"+counter,i);
 
             }
             else
             {
-                     $("#menuLevel"+i).removeClass("menulevelActive");
-                     $("#menuLevel"+i).removeClass("menulevelInActive");
-                     $("#menuLevel"+i).addClass("menulevelInActive");
-                     removeLevelListeners("#menuLevel"+i);
+                    $("#menuLevel"+counter).html("");
+                     $("#menuLevel"+counter).removeClass("menulevelActive");
+                     $("#menuLevel"+counter).removeClass("menulevelInActive");
+                     $("#menuLevel"+counter).addClass("menulevelInActive");
+                     removeLevelListeners("#menuLevel"+counter);
             }
 
         }
-        //TODO
-        //toggleMenuPrevNextButton();
+
+        toggleMenuPrevNextButton();
 
     };
 
+    function toggleMenuPrevNextButton()
+    {
+        if(menuOffset == 0)
+            SokobanUtil.disableMenuPrevtButton();
+        else
+            SokobanUtil.enableMenuPrevButton();
+
+        if((maxLevels-menuOffset) <= menusize )
+            SokobanUtil.disableMenuNextButton();
+        else
+            SokobanUtil.enableMenuNextButton();
+
+    }
     function removeLevelListeners(elementID)
     {
-     $(elementID).click(function(){
 
-     });
+        $(elementID).unbind( "click" );
     }
     function addMenuLevelListeners(elementID,levelNo)
     {
