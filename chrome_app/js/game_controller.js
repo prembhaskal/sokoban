@@ -249,3 +249,6 @@ function MovesListener(gameController) {
 	};
 }
 
+function LevelPersistentState() {
+	
+}
