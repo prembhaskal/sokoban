@@ -17,6 +17,8 @@ SokobanUtil.CellType =  {BrickType : "brick",
 		 EmptySpaceType: "empty_space",
 		 Greenery  : "greenery"};
 
+SokobanUtil.storageType = {CHROME_API : 'chrome_storage_api'};
+
 
 //CSS related
 SokobanUtil.changeClassOfElement= function (elementId, className)
