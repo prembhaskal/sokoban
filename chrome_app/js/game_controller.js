@@ -187,12 +187,16 @@ function GameController() {
     function getBestScore() {
         var currentLevel = presentLevel;
         storageHelper.getLevelState(presentLevel, function(storedState) {
+			var bestScore = 'UNSOLVED LEVEL';
             if (storedState !== undefined) {
+				bestScore = storedState.solutionMoves;
                 console.log('best score for level ' + currentLevel + ' is ' + storedState.solutionMoves);
             }
             else {
                 console.log(' no best score level ' + currentLevel + ' yet');
             }
+			
+			SokobanUtil.updateBestScore(bestScore);
         })
     }
 
@@ -286,30 +290,4 @@ function MovesListener(gameController) {
 		gameController.addToUndo(gameMove);
 		gameController.updateUndoResetButton();
 	};
-}
-
-function StorageHelper(storageType) {
-    var storageAPI = storageAPIProvider.getStorageAPI(storageType);
-    var levelKeyPrefix = 'levelInfo';
-
-    this.storeLevelState = function(levelState) {
-        var key = levelKeyPrefix + levelState.levelNo;
-        console.log(levelState);
-
-        var keyValueObject = {};
-        keyValueObject[key] = levelState;
-
-        storageAPI.set(keyValueObject, function() {
-            console.log('state of the level - ' +  levelState.levelNo + ' with key: ' + key + ' is stored successfully');
-        });
-    };
-
-    this.getLevelState = function(levelNo, callback) {
-        var key = levelKeyPrefix + levelNo;
-
-        storageAPI.get(key, function(result) {
-            console.log(result);
-            callback(result[key]);
-        });
-    };
 }

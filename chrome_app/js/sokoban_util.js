@@ -213,6 +213,10 @@ SokobanUtil.updateTotalMoves = function(totalMoves) {
 	$("#total_moves").text(totalMoves);
 };
 
+SokobanUtil.updateBestScore = function(bestScore) {
+	$("#best_score").text(bestScore);
+};
+
 SokobanUtil.disablePreviousLevelButton = function() {
 	$("#button_pre_level").attr('disabled', true);
 	$("#button_popup_pre_level").attr('disabled', true);
