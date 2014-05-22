@@ -29,6 +29,8 @@
     }
 	var x=5;
 	var y=5;
+    var BASE_MAZE = "base_maze";
+    var TOP_MAZE = "top_maze";
     function init()
     {
 
@@ -46,8 +48,8 @@
     {
         var immovable = getTheTable("immovable");
         var movable = getTheTable("movable");
-        generateTable(x,y,immovable);
-        generateTable(x,y,movable);
+        generateTable(x,y,immovable,BASE_MAZE);
+        generateTable(x,y,movable,TOP_MAZE);
 
     }
     
@@ -208,8 +210,32 @@
     	}
     }
 
-    function convertToUpperCase(textElement) {
+    function validateText(textElement) {
         textElement.value = textElement.value.toUpperCase();
+
+        var identifier = textElement.className;
+        if(identifier == BASE_MAZE)
+        {
+            if(textElement.value != "I" && textElement.value!="E" && textElement.value!="D")
+            {
+                 alert("Invalid value " + textElement.value);
+                 textElement.value = "E";
+            }
+
+        }
+
+        if(identifier == TOP_MAZE)
+        {
+          if(textElement.value != 'P' && textElement.value!='B' && textElement.value!='X')
+         {
+               alert("Invalid value " + textElement.value);
+            textElement.value = 'X';
+          }
+        }
+
+
+
+
     }
     
     function getTypeOfElement(type)
@@ -246,7 +272,7 @@
     	}
     	return gridFullArray;
     }
-    var  generateTable = function (x,y,table)
+    var  generateTable = function (x,y,table,identifierClass)
     {
     	var rowLength = table.rows.length;
     	for (var i = 0; i < rowLength; i++) {
@@ -260,7 +286,7 @@
     		for(var j=0;j < y;j++)
     		{
     			var cell = row.insertCell(row.cells.length);
-    			cell.innerHTML="<input type='text' size='4' onclick='this.select()' onkeyup='convertToUpperCase(this)' />";
+    			cell.innerHTML="<input type='text' size='4' class='"+identifierClass+"' onclick='this.select()' onkeyup='validateText(this)' />";
     		}
     	}
     	
