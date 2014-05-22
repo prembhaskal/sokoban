@@ -17,6 +17,8 @@ SokobanUtil.CellType =  {BrickType : "brick",
 		 EmptySpaceType: "empty_space",
 		 Greenery  : "greenery"};
 
+SokobanUtil.storageType = {CHROME_API : 'chrome_storage_api'};
+
 
 //CSS related
 SokobanUtil.changeClassOfElement= function (elementId, className)
@@ -209,6 +211,10 @@ SokobanUtil.resetLevelCompleteMsg = function () {
 
 SokobanUtil.updateTotalMoves = function(totalMoves) {
 	$("#total_moves").text(totalMoves);
+};
+
+SokobanUtil.updateBestScore = function(bestScore) {
+	$("#best_score").text(bestScore);
 };
 
 SokobanUtil.disablePreviousLevelButton = function() {
