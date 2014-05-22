@@ -53,6 +53,11 @@ SokobanUtil.getCellType = function(position)
 	else
 		return SokobanUtil.CellType.EMPTY_SPACE;
 };
+SokobanUtil.getTable = function()
+{
+	var table = document.getElementById("maze_table");
+	return table;
+}
 
 SokobanUtil.isDestination = function (position) {
 	var elementId = this.getElementId(position);
@@ -195,7 +200,7 @@ SokobanUtil.undoMove = function(cell, xinc, yinc, cellStyle) {
 
 
 SokobanUtil.showLevel = function (levelNo) {
-    var levelInfo = "LEVEL : " + levelNo;
+    var levelInfo = levelNo;
     $("#level_no").text(levelInfo);
 };
 
@@ -245,6 +250,22 @@ SokobanUtil.enableUndoButton = function() {
 	$("#button_undo_move").removeAttr('disabled');
 };
 
+
+SokobanUtil.disableMenuNextButton = function() {
+	$("#menunextbtn").attr('disabled', true);
+};
+
+SokobanUtil.enableMenuNextButton = function() {
+	$("#menunextbtn").removeAttr('disabled');
+};
+
+SokobanUtil.disableMenuPrevtButton = function() {
+	$("#menuprevbtn").attr('disabled', true);
+};
+
+SokobanUtil.enableMenuPrevButton = function() {
+	$("#menuprevbtn").removeAttr('disabled');
+};
 
 SokobanUtil.disableResetButton = function() {
 	$("#button_reset_level").attr('disabled', true);

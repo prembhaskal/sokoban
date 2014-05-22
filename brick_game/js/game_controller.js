@@ -2,7 +2,7 @@
 function GameController() {
 
 	// variables containing the game/level information
-	var maxLevels = 8;
+	var maxLevels = allLevels.len;
 	var presentLevel = null;
 	// put a new undo stack for moves.
 	var undoStack = null;
@@ -11,8 +11,14 @@ function GameController() {
 	var isGameComplete = null;
 	var keysEnabled = null;
 	var keyCodeZ = 90;
+	var allMazeLevels = null;
+	var menuOffset = 0;
+	var menuOpen = false;
+	var menusize=20;
+
     var storageType = SokobanUtil.storageType.CHROME_API;
     var storageHelper = null;
+
 
 	// see http://www.crockford.com/javascript/private.html
 	// needed to preserve the object reference in private methods.... stupid ECMA :(
@@ -122,7 +128,6 @@ function GameController() {
 
 	function startLevel(levelNo, table) {
 		initializeStuffForLevel();
-		var allMazeLevels = new AllMazeLevels();
 		var rawMaze = allMazeLevels.getRawMaze(levelNo);
 
 		var mazeCreator = new MazeCreator();
@@ -220,6 +225,8 @@ function GameController() {
 	this.initializeGame = function (table) {
 
 		presentLevel = 1;
+		allMazeLevels = new AllMazeLevels();
+		thisObject.initialiseMenuChooser();
         storageHelper = new StorageHelper(storageType);
 		startLevel(presentLevel, table);
 
@@ -227,6 +234,74 @@ function GameController() {
 		addKeyHandlers();
 	};
 
+    this.menuPrev = function(){
+        menuOffset = menuOffset - menusize;
+        thisObject.initialiseMenuChooser();
+
+    };
+    this.menuNext = function(){
+        menuOffset = menuOffset + menusize;
+        thisObject.initialiseMenuChooser();
+
+    };
+    this.initialiseMenuChooser = function(){
+       var i=menuOffset ;
+       var counter = 0;
+        while(++i <=(menusize+menuOffset ))
+        {
+            counter = i-menuOffset;
+            if(i <= maxLevels)
+            {
+                     $("#menuLevel"+counter).html(i);
+                     $("#menuLevel"+counter).removeClass("menulevelActive");
+                     $("#menuLevel"+counter).removeClass("menulevelInActive");
+                     $("#menuLevel"+counter).addClass("menulevelActive");
+                     removeLevelListeners("#menuLevel"+counter);
+                     addMenuLevelListeners("#menuLevel"+counter,i);
+
+            }
+            else
+            {
+                    $("#menuLevel"+counter).html("");
+                     $("#menuLevel"+counter).removeClass("menulevelActive");
+                     $("#menuLevel"+counter).removeClass("menulevelInActive");
+                     $("#menuLevel"+counter).addClass("menulevelInActive");
+                     removeLevelListeners("#menuLevel"+counter);
+            }
+
+        }
+
+        toggleMenuPrevNextButton();
+
+    };
+
+    function toggleMenuPrevNextButton()
+    {
+        if(menuOffset == 0)
+            SokobanUtil.disableMenuPrevtButton();
+        else
+            SokobanUtil.enableMenuPrevButton();
+
+        if((maxLevels-menuOffset) <= menusize )
+            SokobanUtil.disableMenuNextButton();
+        else
+            SokobanUtil.enableMenuNextButton();
+
+    }
+    function removeLevelListeners(elementID)
+    {
+
+        $(elementID).unbind( "click" );
+    }
+    function addMenuLevelListeners(elementID,levelNo)
+    {
+        $(elementID).click(function(){
+         menuAction();
+         var table = SokobanUtil.getTable();
+         thisObject.playLevel(table,levelNo);
+
+        });
+    }
 	this.playNextLevel = function (table) {
 		if (presentLevel < maxLevels) {
 			presentLevel++;
@@ -240,6 +315,13 @@ function GameController() {
 			startLevel(presentLevel, table);
 		}
 	};
+
+    this.playLevel = function (table,levelNo) {
+            presentLevel = levelNo;
+            startLevel(presentLevel, table);
+        };
+
+
 
 	this.resetPresentLevel = function (table) {
 		startLevel(presentLevel, table);
@@ -278,6 +360,20 @@ function GameController() {
 			undoStack.push(gameMove);
 		}
 	};
+
+	this.menuAction = function()
+    {
+    	if(!menuOpen)
+    	{
+    		$("#levelChooser").animate({left:'0%'});
+    		menuOpen = true;
+    	}
+    	else
+    	{
+    		menuOpen= false;
+    		$("#levelChooser").animate({left:'-95%'});
+    	}
+    };
 
 }
 

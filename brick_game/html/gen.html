@@ -1,0 +1,397 @@
+<html>
+<head>
+</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/maze.css">
+
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../js/sokoban_util.js"></script>
+    <script src="../js/static_objects.js"></script>
+    <script src="../js/brick.js"></script>
+    <script src="../js/logger.js"></script>
+    <script src="../js/levels.js"></script>
+    <script src="../js/pusher.js"></script>
+    <script src="../js/maze.js"></script>
+    <script src="../js/position.js"></script>
+    <script src="../js/sokoban_canvas.js"></script>
+    <script src="../js/game_controller.js"></script>
+    <script src="../js/game.js"></script>
+    
+    <script type="text/javascript">
+    
+    function getTheTable(name) {
+        var table = document.getElementById(name);
+        return table;
+    }
+	var x=5;
+	var y=5;
+    var BASE_MAZE = "base_maze";
+    var TOP_MAZE = "top_maze";
+    function init()
+    {
+
+        initTables();
+    	var level = $("#level");
+        document.getElementById('level').innerHTML = '';
+
+    	for(var i=1;i < 101;i++){
+    		level.append($("<option />").val(i).text(i));
+    	}
+
+    }
+
+    function initTables()
+    {
+        var immovable = getTheTable("immovable");
+        var movable = getTheTable("movable");
+        generateTable(x,y,immovable,BASE_MAZE);
+        generateTable(x,y,movable,TOP_MAZE);
+
+    }
+    
+    
+    function refreshGrids()
+    {		
+    	var immovable = getTheTable("immovable");
+		var movable = getTheTable("movable");
+    	x = document.getElementById('xVal').value;
+    	y = document.getElementById('yVal').value;
+		if(x == "")
+			{
+    		x = getLevelSizeX();
+    		y = getLevelSizeY();
+			
+			}
+
+        initTables();
+    	loadDefaultData(immovable,'E');
+    	loadDefaultData(movable,'X');
+    	loadLevelData();
+    }
+
+    function getLevelSizeX()
+    {
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	if(allLevels[levelNo] != undefined)
+    		if(allLevels[levelNo].base != undefined)
+    			return allLevels[levelNo].base.length;
+    	
+    	return 3;
+    }
+    function getLevelSizeY()
+    {
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	if(allLevels[levelNo] != undefined)
+    		if(allLevels[levelNo].base != undefined)
+    			return allLevels[levelNo].base[0].length;
+    	
+    	return 3;
+    }
+    function loadDefaultData(grid,def)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].firstElementChild.value=def;
+    				
+    			}
+    	}
+    }
+    function loadLevelData()
+    {
+    	//alert(x)
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	
+    	if(allLevels[levelNo]==undefined)
+    		return;
+    	
+    	var movable = getTheTable("movable");
+    	
+    	var immovable = getTheTable("immovable");
+    	
+    	loadGridData(immovable,allLevels[levelNo].base);
+    	loadGridData(movable,allLevels[levelNo].top);
+    	
+    	
+    }
+    
+    function loadGridData(grid,gridArray)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].firstElementChild.value=gridArray[i][k];
+    				
+    			}
+    	}
+    }
+    function reloadOutput()
+    {
+    	
+    	var level = $("#level");
+    	var levelNo = level.val();
+    	
+    	var movable = getTheTable("movable");
+    	
+    	var immovable = getTheTable("immovable");
+    	
+    	var gridArrayMovable = getGridArray(movable);
+    	var gridArrayImmovable = getGridArray(immovable);
+    	
+    	
+    	var base = getTheTable("base");
+    	
+    	var maze = getTheTable("maze");
+    	
+    	
+    	generateTableGeneric(gridArrayImmovable.length,gridArrayImmovable[0].length,base);
+    	generateTableGeneric(gridArrayMovable.length,gridArrayMovable[0].length,maze);
+    	
+    	clearTable(maze);
+    	clearTable(base);
+    	
+    	loadMazeElements(base,gridArrayImmovable);
+    	loadMazeElements(maze,gridArrayImmovable);
+    	
+    	loadMazeElements(maze,gridArrayMovable);
+    	allLevels[levelNo]={'base':'','top':''};
+		
+		allLevels[levelNo]['base']=gridArrayImmovable;
+    	allLevels[levelNo]['top']=gridArrayMovable;
+		
+		// find the total number of levels.
+		var totalLevels = 0;
+		while(allLevels[++totalLevels]);
+		
+		allLevels.len = --totalLevels;
+
+    	$('#jsonGen').val('var allLevels = ' + JSON.stringify(allLevels));
+    	//alert(JSON.stringify(allLevels));
+    	
+    }
+    
+    function clearTable(grid)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].className = " ";
+    				
+    			}
+    	}
+    }
+    function loadMazeElements(grid,gridArray)
+    {
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				row.cells[k].className +=  getTypeOfElement(gridArray[i][k])+" ";
+    				
+    			}
+    	}
+    }
+
+    function validateText(textElement) {
+        textElement.value = textElement.value.toUpperCase();
+
+        var identifier = textElement.className;
+        if(identifier == BASE_MAZE)
+        {
+            if(textElement.value != "I" && textElement.value!="E" && textElement.value!="D")
+            {
+                 alert("Invalid value " + textElement.value);
+                 textElement.value = "E";
+            }
+
+        }
+
+        if(identifier == TOP_MAZE)
+        {
+          if(textElement.value != 'P' && textElement.value!='B' && textElement.value!='X')
+         {
+               alert("Invalid value " + textElement.value);
+            textElement.value = 'X';
+          }
+        }
+
+
+
+
+    }
+    
+    function getTypeOfElement(type)
+    {
+    	if(type=='E')
+    		return "empty_space";
+    	if(type=='D')
+    		return "destination";
+    	if(type=="I")
+    		return "immovable";
+    	if(type=="G")
+    		return "greenery";
+    	if(type=="B")
+    		return "brick";
+    	if(type=="P")
+    		return "brick_mover";
+    		
+    	
+    }
+    
+    function getGridArray(grid)
+    {	
+    	var gridFullArray = new Array();
+    	for(var i =0;i <grid.rows.length;i++ )
+    	{
+    			var row = grid.rows[i];
+    			var gridRowArray = new Array();
+    			for(var k=0;k < row.cells.length;k++)
+    			{
+    				gridRowArray.push(row.cells[k].firstElementChild.value)
+    				
+    			}
+    			gridFullArray.push(gridRowArray);
+    	}
+    	return gridFullArray;
+    }
+    var  generateTable = function (x,y,table,identifierClass)
+    {
+    	var rowLength = table.rows.length;
+    	for (var i = 0; i < rowLength; i++) {
+    		table.deleteRow(0);
+    	}
+    	
+    	table.rows.length = 0;
+
+    	for(var i =0;i < x;i++){
+    		var row = table.insertRow(table.rows.length);
+    		for(var j=0;j < y;j++)
+    		{
+    			var cell = row.insertCell(row.cells.length);
+    			cell.innerHTML="<input type='text' size='4' class='"+identifierClass+"' onclick='this.select()' onkeyup='validateText(this)' />";
+    		}
+    	}
+    	
+
+
+    };
+    
+    var  generateTableGeneric = function (x,y,table)
+    {
+    	var rowLength = table.rows.length;
+    	for (var i = 0; i < rowLength; i++) {
+    		table.deleteRow(0);
+    	}
+    	
+    	table.rows.length = 0;
+
+
+    	for(var i =0;i < x;i++){
+    		var row = table.insertRow(table.rows.length);
+    		for(var j=0;j < y;j++)
+    		{
+    			var cell = row.insertCell(row.cells.length);
+    			cell.className = "empty_space";
+    		}
+    	}
+
+
+    };
+    
+    function onChangeSelect()
+    {
+    	document.getElementById('xVal').value ="";
+    	document.getElementById('yVal').value="";
+    }
+    </script>
+<body onload="init();">
+<table style="width: 100%">
+<tr>
+	<td>
+	level: <select id="level" onchange="onChangeSelect()"></select>
+		x: <input id="xVal" type="text"/>
+		y: <input id="yVal" type="text"/>
+		
+		
+		<button onclick="refreshGrids()">OK</button>
+	</td>
+	<td></td>
+    <td></td>
+</tr>
+<tr>
+	<td width="35%">Immovable
+	</td>
+	<td width="35%">
+		Movable
+	</td>
+    <td width = "30%">
+        Terminology
+    </td>
+</tr>
+<tr>
+	<td>
+        <table id="immovable" class="game_maze" border="1">
+  	    </table>
+	</td>
+    <td>
+		<table id="movable" border="1">
+		</table>
+    </td>
+	<td>
+        <pre>
+          Object containing all the levels of the maze.
+          Basic terminologies
+            E - empty_space
+            D - destination
+            I - immovable
+            G - Greenery
+
+            B - brick
+            P - pusher
+            X - no movable object
+        </pre>
+	</td>
+
+</tr>
+<tr>
+	<td>
+	<button onclick="reloadOutput();">Reload</button>
+	</td>
+</tr>
+<tr>
+	<td>
+	        <table id="base"  border="1 black" style="width: 400;height: 400" class="game_maze" border="1">
+  	    </table>
+	</td>
+	<td>
+	        <table id="maze"  border="1" style="width: 400;height: 400" class="game_maze" border="1">
+  	    </table>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+	<textarea rows="3" cols="100" id="jsonGen" onclick="this.select();" ></textarea>
+	</td>
+</tr>
+
+</table>
+</body>
+</html>

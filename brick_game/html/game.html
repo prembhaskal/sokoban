@@ -12,6 +12,7 @@
     <script src="../lib/bootstrap.min.js"></script>
     <script src="../js/sokoban_util.js"></script>
     <script src="../js/static_objects.js"></script>
+    <script src="../js/levels.js"></script>
     <script src="../js/brick.js"></script>
     <script src="../js/logger.js"></script>
     <script src="../js/pusher.js"></script>
@@ -25,21 +26,33 @@
 <body>
 <div class="full_panel">
     <div class="header_panel">
-        <h1>Sokoban</h1>
+        <table class="header-table" border="0">
+            <tr>
+                <td>
+                    <h2 class="game-header">Sokoban</h2>
+                </td>
+                <td>
+                    <div id="level_no" class="level-header"></div>
+                </td>
+            </tr>
+        </table>
+
     </div>
+    <hr>
     <div class="game_panel container">
         <div class="row">
             <!-- the whole row is divided into 12 parts...col-lg-8 will cover 100*8/12% part of it. -->
             <div class="main_panel col-lg-8">
                 <div class="maze_header">
-                    <h4 id="level_no"></h4>
+
                     <!--
                     this button is kept basically for testing purpose.
                     <button id="showWindow">SHOW_MODAL</button>
                     -->
+
                     <div id="modalWindow" class="modalWindow">
                         <div id="modalDialog" class="modalDialog">
-                            <h1 class="level_completion">LEVEL COMPLETE</h1>
+                            <h4 class="level_completion">Level Completed</h4>
                             <br/>
                             <!--
                             this button is kept basically for testing purpose.
@@ -95,23 +108,119 @@
         </div>
     </div>
 </div>
-<!--
+
 <button class="menu_button topcoat-button--cta" id="menubtn">Menu</button>
 <div class="levelChooser" id="levelChooser">
-<table class="outer_table">
+<table class="outer_table" border="0">
 <tr class="rowh_15">
     <td class="col1"></td>
     <td class="col2">
-        Levels
+        <h4>Levels</h4>
     </td>
     <td class="col3"></td>
 </tr>
 <tr class="rowh_75">
-<td class="colw_15">&nbsp;</td>
+<td class="colw_16" align="right"><button class="menu_prevNextbutton topcoat-button--cta" id="menuprevbtn"><<</button></td>
 <td>
-<table class="inner_table" border="1">
+<table class="inner_table" border="0">
+
+<tr class="rowh_5">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+
+
+</tr>
 <tr class="rowh_16">
-    <td class="colw_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 "  id="menuLevel1">
+       &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel2">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel3">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel4">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel5">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+
+</tr>
+
+<tr class="rowh_5">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
@@ -123,7 +232,68 @@
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+
+</tr>
+
+<tr class="rowh_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel6">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel7">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel8">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel9">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel10">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+
+</tr>
+<tr class="rowh_5">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
@@ -135,32 +305,68 @@
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+
+</tr>
+<tr class="rowh_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel11">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel12">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel13">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel14">
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel15">
+        &nbsp;
+    </td>
+    <td class="colw_5">
         &nbsp;
     </td>
 
 
 </tr>
 <tr class="rowh_5">
-    <td class="colw_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
@@ -170,41 +376,72 @@
         &nbsp;
     </td>
 
+    <td class="colw_5">
+        &nbsp;
+    </td>
 
 </tr>
 <tr class="rowh_16">
-    <td class="colw_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16 " id="menuLevel16">
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16 " id="menuLevel17">
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16 " id="menuLevel18">
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16 " id="menuLevel19">
         &nbsp;
     </td>
     <td class="colw_5">
         &nbsp;
     </td>
-    <td class="colw_16">
+    <td class="colw_16 " id="menuLevel20">
+        &nbsp;
+    </td>
+    <td class="colw_5">
         &nbsp;
     </td>
 
 
 </tr>
+
 <tr class="rowh_5">
-    <td class="colw_16">
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
+        &nbsp;
+    </td>
+    <td class="colw_5">
+        &nbsp;
+    </td>
+    <td class="colw_16" >
         &nbsp;
     </td>
     <td class="colw_5">
@@ -214,185 +451,16 @@
         &nbsp;
     </td>
     <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
         &nbsp;
     </td>
 
 
 </tr>
-<tr class="rowh_16">
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
 
-
-</tr>
-<tr class="rowh_5">
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-
-
-</tr>
-<tr class="rowh_16">
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-
-
-</tr>
-<tr class="rowh_5">
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-
-
-</tr>
-<tr class="rowh_16">
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-    <td class="colw_5">
-        &nbsp;
-    </td>
-    <td class="colw_16">
-        &nbsp;
-    </td>
-
-
-</tr>
 </table>
 </td>
 <td class="colw_16">
-    &nbsp;
+    <button class="menu_prevNextbutton topcoat-button--cta " id="menunextbtn">>></button>
 </td>
 </tr>
 
@@ -403,7 +471,6 @@
 </tr>
 </table>
 </div>
--->
 
 </body>
 </html>
