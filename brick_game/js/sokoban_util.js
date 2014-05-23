@@ -20,7 +20,8 @@ SokobanUtil.CellType = {BrickType: "brick",
 
 SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api'};
 
-SokobanUtil.eventType = {LEVEL_COMPLETE: "level_complete"};
+SokobanUtil.eventType = {LEVEL_COMPLETE : 'level_complete',
+                         LEVEL_START : 'level_start'};
 
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {

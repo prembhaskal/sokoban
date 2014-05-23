@@ -16,8 +16,8 @@ function GameController() {
     var menuOpen = false;
     var menusize = 20;
 
-    var storageType = SokobanUtil.storageType.CHROME_API;
-    var storageHelper = null;
+    var gameState = null;
+    var storageController = null;
 
 
     // see http://www.crockford.com/javascript/private.html
@@ -83,7 +83,7 @@ function GameController() {
             //TODO add may be a delay before showing the pop up.
             SokobanUtil.displayPopUp();
             thisObject.updateUndoResetButton();
-            storeLevelStateOnCompletion();
+            Events.publish(SokobanUtil.eventType.LEVEL_COMPLETE, [gameState]);
         }
     }
 
@@ -115,6 +115,11 @@ function GameController() {
         // enable keys
         keysEnabled = true;
 
+        // reset game state.
+        gameState.resetMoves();
+        gameState.changeLevel(presentLevel);
+
+        Events.publish(SokobanUtil.eventType.LEVEL_START, [gameState]);
         initializeLevelViews();
     }
 
@@ -148,7 +153,6 @@ function GameController() {
 
         SokobanUtil.showLevel(levelNo);
         updatePreviousNextButtons();
-        getBestScore();
     }
 
     function addKeyHandlers() {
@@ -167,46 +171,7 @@ function GameController() {
         }
     }
 
-    function storeLevelStateOnCompletion() {
-        var levelState = new LevelState(presentLevel);
-        levelState.setSolutionMoves(maze.pusher.getTotalMoves());
-        // callback function used so that present levelState is preserved (since this will be ASYNC CALL);
-        storageHelper.getLevelState(presentLevel, function (storedState) {
-            updateStoreStateIfImprovised(levelState, storedState);
-        });
-    }
-
-    function updateStoreStateIfImprovised(presentState, storedState) {
-        if (storedState !== undefined) {
-            // store if solved in lesser moves.
-            if (presentState.solutionMoves < storedState.solutionMoves) {
-                storageHelper.storeLevelState(presentState);
-            }
-        }
-        else {
-            // also store if this is the first time.
-            storageHelper.storeLevelState(presentState);
-        }
-    }
-
-    function getBestScore() {
-        var currentLevel = presentLevel;
-        storageHelper.getLevelState(presentLevel, function (storedState) {
-            var bestScore = 'UNSOLVED LEVEL';
-            if (storedState !== undefined) {
-                bestScore = storedState.solutionMoves;
-                console.log('best score for level ' + currentLevel + ' is ' + storedState.solutionMoves);
-            }
-            else {
-                console.log(' no best score level ' + currentLevel + ' yet');
-            }
-
-            SokobanUtil.updateBestScore(bestScore);
-        })
-    }
-
     // privileged methods.
-
     this.updateUndoResetButton = function () {
         if (isGameComplete) {
             SokobanUtil.disableUndoButton();
@@ -223,11 +188,13 @@ function GameController() {
     };
 
     this.initializeGame = function (table) {
-
         presentLevel = 1;
         allMazeLevels = new AllMazeLevels();
         thisObject.initialiseMenuChooser();
-        storageHelper = new StorageHelper(storageType);
+        gameState = new GameState();
+        storageController = new StorageController();
+        storageController.init();
+
         startLevel(presentLevel, table);
 
         //binding key handlers
@@ -352,6 +319,11 @@ function GameController() {
         }
     };
 
+    this.updateGameState = function(gameMove) {
+        this.addToUndo(gameMove);
+        gameState.setMoves(maze.pusher.getTotalMoves());
+    };
+
     this.addToUndo = function (gameMove) {
         if (gameMove != null) {
             undoStack.push(gameMove);
@@ -377,7 +349,84 @@ function GameController() {
 function MovesListener(gameController) {
 
     this.onEvent = function (gameMove) {
-        gameController.addToUndo(gameMove);
+        gameController.updateGameState(gameMove);
         gameController.updateUndoResetButton();
     };
+}
+
+function GameState() {
+    var presentLevel = 1;
+    var noOfMoves = 0;
+
+    this.setMoves = function(moves) {
+        noOfMoves = moves;
+    }
+
+    this.getMoves = function() {
+        return noOfMoves;
+    }
+
+    this.resetMoves = function() {
+        noOfMoves = 0;
+    };
+
+    this.getPresentLevel = function() {
+        return presentLevel;
+    }
+
+    this.changeLevel = function(newLevel) {
+        presentLevel = newLevel;
+    };
+}
+
+// object to control the storage of data. i.e when to store and what to store
+function StorageController() {
+    var storageType = SokobanUtil.storageType.CHROME_API;
+    var storageHelper = new StorageHelper(storageType);
+
+    function storeLevelStateOnCompletion(gameState) {
+        var levelState = new LevelState(gameState.getPresentLevel());
+        levelState.setSolutionMoves(gameState.getMoves());
+        // callback function used so that present levelState is preserved (since this will be ASYNC CALL);
+        storageHelper.getLevelState(gameState.getPresentLevel(), function (storedState) {
+            updateStoreStateIfImprovised(levelState, storedState);
+        });
+    }
+
+    function updateStoreStateIfImprovised(presentState, storedState) {
+        if (storedState !== undefined) {
+            // store if solved in lesser moves.
+            if (presentState.solutionMoves < storedState.solutionMoves) {
+                storageHelper.storeLevelState(presentState);
+            }
+        }
+        else {
+            // also store if this is the first time.
+            storageHelper.storeLevelState(presentState);
+        }
+    }
+
+    function getBestScore(gameState) {
+        var presentLevel = gameState.getPresentLevel();
+        var currentLevel = presentLevel;
+        storageHelper.getLevelState(presentLevel, function (storedState) {
+            var bestScore = 'UNSOLVED LEVEL';
+            if (storedState !== undefined) {
+                bestScore = storedState.solutionMoves;
+                console.log('best score for level ' + currentLevel + ' is ' + storedState.solutionMoves);
+            }
+            else {
+                console.log(' no best score level ' + currentLevel + ' yet');
+            }
+
+            SokobanUtil.updateBestScore(bestScore);
+        })
+    }
+
+    this.init = function() {
+        // listen to game completion events.
+        Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, storeLevelStateOnCompletion);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_START, getBestScore);
+    };
+
 }

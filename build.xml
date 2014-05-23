@@ -1,11 +1,11 @@
-<project name="Sokoban">
+<project name="Sokoban" default="build">
 
 	<property name="game_src" value="${basedir}/brick_game"></property>
 	<property name="chrome_ext" value="${basedir}/chrome_ext"></property>
 	<property name="chrome_zip" value="${basedir}/chrome_ext.zip"></property>
 	
 	<!-- create the folder for the chrome extension -->
-	<target name="build_chrome_folder" description="creates the folder as required by the chrome extension">
+	<target name="build" description="creates the folder as required by the chrome extension">
 		<delete dir="${chrome_ext}" />
 		<mkdir dir="${chrome_ext}" />
 		
@@ -27,7 +27,7 @@
 		</copy>
 	</target>
 	
-	<target name="zip_chrome_folder" depends="build_chrome_folder" 
+	<target name="zip" depends="build" 
 			description="Builds a zip for the chrome extension folder as required for publishing the app.">
 		<zip destfile="${chrome_zip}">
 			<fileset dir="${chrome_ext}" />
