@@ -1,4 +1,3 @@
-function initializeLogger(div)
-{
-	//TODO
+function initializeLogger(div) {
+    //TODO
 }

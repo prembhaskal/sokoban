@@ -3,71 +3,66 @@
 var gameController = null;
 
 function initializeGame(table) {
-	gameController = new GameController();
-	gameController.initializeGame(table);
+    gameController = new GameController();
+    gameController.initializeGame(table);
 }
 
 function playNextLevel(table) {
-	gameController.playNextLevel(table);
-	hidePopUp();
+    gameController.playNextLevel(table);
+    hidePopUp();
 }
 
 function playPreviousLevel(table) {
-	gameController.playPreviousLevel(table);
-	hidePopUp();
+    gameController.playPreviousLevel(table);
+    hidePopUp();
 }
 
 function resetPresentLevel(table) {
-	gameController.resetPresentLevel(table);
-	hidePopUp();
+    gameController.resetPresentLevel(table);
+    hidePopUp();
 }
 
 function undoMove() {
-	gameController.undoMove();
+    gameController.undoMove();
 }
 
 function hidePopUp() {
-	SokobanUtil.hidePopUp();
+    SokobanUtil.hidePopUp();
 }
 
 
 function showPopUp() {
-	SokobanUtil.displayPopUp();
+    SokobanUtil.displayPopUp();
 }
 
 
-
-function menuAction()
-{
+function menuAction() {
     gameController.menuAction();
 }
-function menuPrev()
-{
+function menuPrev() {
     gameController.menuPrev();
 }
-function menuNext()
-{
+function menuNext() {
     gameController.menuNext();
 }
-function init()
-{
-	initializeGame(getTable());
+function init() {
+    initializeGame(getTable());
 }
 
 function startNextLevel() {
-	playNextLevel(getTable());
+    playNextLevel(getTable());
 }
 
 function startPreviousLevel() {
-	playPreviousLevel(getTable());
+    playPreviousLevel(getTable());
 }
 
 function replayPresentLevel() {
-	resetPresentLevel(getTable());
+    resetPresentLevel(getTable());
 }
 
 function undo() {
-	undoMove();
+    undoMove();
 }
 
 function getTable() {
@@ -75,33 +70,33 @@ function getTable() {
 }
 
 function showModalWindow() {
-	showPopUp();
+    showPopUp();
 }
 
 function hideModalWindow() {
-	hidePopUp();
+    hidePopUp();
 }
 
 function addOnClickListener(elementId, clickListener) {
-	if(document.getElementById(elementId) !=undefined)
-	    document.getElementById(elementId).addEventListener('click', clickListener, false);
+    if (document.getElementById(elementId) != undefined)
+        document.getElementById(elementId).addEventListener('click', clickListener, false);
 }
 
 // Add all the event listeners below
-$(document).ready(function() {
-	window.addEventListener('load', init, false);
+$(document).ready(function () {
+    window.addEventListener('load', init, false);
     // showWindow is used only for test purpose.
-	addOnClickListener('showWindow', showModalWindow);
-	addOnClickListener('button_popup_pre_level', startPreviousLevel);
-	addOnClickListener('button_popup_next_level', startNextLevel);
-	addOnClickListener('button_popup_reset_level', replayPresentLevel);
-	addOnClickListener('button_pre_level', startPreviousLevel);
-	addOnClickListener('button_next_level', startNextLevel);
-	addOnClickListener('button_reset_level', replayPresentLevel);
-	addOnClickListener('button_undo_move', undo);
-	addOnClickListener('menubtn', menuAction);
-	addOnClickListener('menuprevbtn', menuPrev);
-	addOnClickListener('menunextbtn', menuNext);
+    addOnClickListener('showWindow', showModalWindow);
+    addOnClickListener('button_popup_pre_level', startPreviousLevel);
+    addOnClickListener('button_popup_next_level', startNextLevel);
+    addOnClickListener('button_popup_reset_level', replayPresentLevel);
+    addOnClickListener('button_pre_level', startPreviousLevel);
+    addOnClickListener('button_next_level', startNextLevel);
+    addOnClickListener('button_reset_level', replayPresentLevel);
+    addOnClickListener('button_undo_move', undo);
+    addOnClickListener('menubtn', menuAction);
+    addOnClickListener('menuprevbtn', menuPrev);
+    addOnClickListener('menunextbtn', menuNext);
 
 });
 
