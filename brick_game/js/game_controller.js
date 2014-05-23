@@ -109,7 +109,7 @@ function GameController() {
 
     function initializeStuffForLevel() {
         // reset the undo stack.
-        undoStack = new Array();
+        undoStack = [];
         // set completed false
         isGameComplete = false;
         // enable keys
@@ -249,20 +249,21 @@ function GameController() {
         var counter = 0;
         while (++i <= (menusize + menuOffset )) {
             counter = i - menuOffset;
+            var menuLevelElement = $("#menuLevel" + counter);
             if (i <= maxLevels) {
-                $("#menuLevel" + counter).html(i);
-                $("#menuLevel" + counter).removeClass("menulevelActive");
-                $("#menuLevel" + counter).removeClass("menulevelInActive");
-                $("#menuLevel" + counter).addClass("menulevelActive");
+                menuLevelElement.html(i);
+                menuLevelElement.removeClass("menulevelActive");
+                menuLevelElement.removeClass("menulevelInActive");
+                menuLevelElement.addClass("menulevelActive");
                 removeLevelListeners("#menuLevel" + counter);
                 addMenuLevelListeners("#menuLevel" + counter, i);
 
             }
             else {
-                $("#menuLevel" + counter).html("");
-                $("#menuLevel" + counter).removeClass("menulevelActive");
-                $("#menuLevel" + counter).removeClass("menulevelInActive");
-                $("#menuLevel" + counter).addClass("menulevelInActive");
+                menuLevelElement.html("");
+                menuLevelElement.removeClass("menulevelActive");
+                menuLevelElement.removeClass("menulevelInActive");
+                menuLevelElement.addClass("menulevelInActive");
                 removeLevelListeners("#menuLevel" + counter);
             }
 
