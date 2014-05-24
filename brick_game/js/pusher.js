@@ -87,12 +87,13 @@ function Pusher(position, cellId, mazeDimension) {
         // replace the original position with empty space
         SokobanUtil.removeClassOFElementByPosition(oldPosition, SokobanUtil.cellStyle.BRICK_MOVER);
 
+        // increase the moves count before we sent events for move.
+        increaseTotalMoves();
+
         // register this move
         var gameMove = new GameMove(this, x_inc, y_inc);
 
         onMove(gameMove);
-
-        increaseTotalMoves();
     };
 
 
