@@ -29,4 +29,4 @@
 -> Show Best score even in the Level Chooser.
 -> Fallback for Storage - in case chrome.storage is not available, add a Fallback API, which just uses a HashTable or equivalent.
    (useful for testing in other browsers).
-   
+-> Separate concerns  make the app more MVC compliant.

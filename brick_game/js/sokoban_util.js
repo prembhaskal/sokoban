@@ -18,7 +18,8 @@ SokobanUtil.CellType = {BrickType: "brick",
     EmptySpaceType: "empty_space",
     Greenery: "greenery"};
 
-SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api'};
+SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api',
+                           FALLBACK : 'fallback'};
 
 SokobanUtil.eventType = {LEVEL_COMPLETE : 'level_complete',
                          LEVEL_START : 'level_start'};
