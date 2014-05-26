@@ -15,7 +15,9 @@
 -> Done - Level chooser - A menu to choose to go to different level.(Kind of menu which we get in angry bird)
 -> Done - Add ANT build file to automatically create the folder_Structure/zip files needed for the Chrome App.
 -> Done (PARTIAL)- Add Storage, for a level -> best score, best time etc.
-
+-> Done  Fallback for Storage - in case chrome.storage is not available, add a Fallback API, which just uses a HashTable or equivalent.
+   (useful for testing in other browsers).
+   
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
 -> Add upto 100 levels (move the levels to a separate file).
 -> CSS enhancement for the entire game.
@@ -23,10 +25,8 @@
 -> Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
 -> CSS enhancement -- make the bricks, pusher as present in wikipedia page.
 -> Sound effects
-->Complete the Menu next-previous logic
-->Solvability of All levels
+-> Complete the Menu next-previous logic
+-> Solvability of All levels
 -> Add 'U' for undo along with Ctrl+Z.
 -> Show Best score even in the Level Chooser.
--> Fallback for Storage - in case chrome.storage is not available, add a Fallback API, which just uses a HashTable or equivalent.
-   (useful for testing in other browsers).
 -> Separate concerns  make the app more MVC compliant.
