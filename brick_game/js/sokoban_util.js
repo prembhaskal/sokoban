@@ -56,6 +56,10 @@ SokobanUtil.getTable = function () {
     var table = document.getElementById("maze_table");
     return table;
 }
+SokobanUtil.getTimerElement = function () {
+    var timerElement = document.getElementById("total_time");
+    return timerElement;
+}
 
 SokobanUtil.isDestination = function (position) {
     var elementId = this.getElementId(position);

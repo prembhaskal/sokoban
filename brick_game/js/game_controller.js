@@ -18,6 +18,8 @@ function GameController() {
 
     var gameState = null;
     var storageController = null;
+    var sokobanTimer = null;
+
 
 
     // see http://www.crockford.com/javascript/private.html
@@ -153,6 +155,8 @@ function GameController() {
 
         SokobanUtil.showLevel(levelNo);
         updatePreviousNextButtons();
+
+
     }
 
     function addKeyHandlers() {
@@ -194,6 +198,10 @@ function GameController() {
         gameState = new GameState();
         storageController = new StorageController();
         storageController.init();
+
+        var timerElement = SokobanUtil.getTimerElement();
+        sokobanTimer = new SokobanTimer(timerElement);
+        sokobanTimer.init();
 
         startLevel(presentLevel, table);
 
