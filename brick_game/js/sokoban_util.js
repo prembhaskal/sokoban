@@ -189,8 +189,7 @@ SokobanUtil.undoMove = function (cell, xinc, yinc, cellStyle) {
 
 
 SokobanUtil.showLevel = function (levelNo) {
-    var levelInfo = levelNo;
-    $("#level_no").text(levelInfo);
+    $("#level_no").text(levelNo);
 };
 
 SokobanUtil.showLevelCompleteMsg = function () {

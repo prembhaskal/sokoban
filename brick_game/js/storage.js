@@ -38,12 +38,8 @@ var defaultStorageAPI = (function() {
 // Chrome Storage API, available only when app is run as an extension.
 var chromeStorageAPI = (function () {
     var storageArea;
-    try{
-         storageArea = (chrome ? (chrome.storage ? chrome.storage.sync: undefined) : undefined);
-    }
-    catch(error){
-
-    }
+    var chrome = chrome; // done this way to avoid reference error.
+    storageArea = (chrome ? (chrome.storage ? chrome.storage.sync: undefined) : undefined);
 
     var chromeAPIInstance = {
         get: function (keys, callback) {
