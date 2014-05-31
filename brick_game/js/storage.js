@@ -37,6 +37,7 @@ var defaultStorageAPI = (function() {
 
 // Chrome Storage API, available only when app is run as an extension.
 var chromeStorageAPI = (function () {
+    var chrome = window.chrome || {};
     var storageArea = (chrome ? (chrome.storage ? chrome.storage.sync: undefined) : undefined);
 
     var chromeAPIInstance = {
@@ -101,6 +102,7 @@ LevelState.prototype.setSolutionMoves = function (moves) {
 function StorageHelper(storageType) {
     var storageAPI = storageAPIProvider.getStorageAPI(storageType);
     if (!storageAPI) { // fallback to default storage api.
+        console.log('storage API not available... falling back to default api');
         storageAPI = storageAPIProvider.getStorageAPI(SokobanUtil.storageType.FALLBACK);
     }
 
