@@ -180,7 +180,7 @@ body
 
 button.soko_button
 {
-    min-width: 150px;
+    min-width: 100px;
     height: 35px;
     margin: 10px 10px;
     font-size: 1.3rem;
@@ -201,6 +201,21 @@ button.menu_prevNextbutton
 
 }
 
+table.score_panel td
+{
+    min-width: 130px;
+    padding-left: 10px;
+}
+
+table.button_panel
+{
+    margin-top: 50px;
+}
+
+table.button_panel td
+{
+    min-width: 130px;
+}
 
 button.button_popup
 {

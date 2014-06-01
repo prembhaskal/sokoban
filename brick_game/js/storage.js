@@ -92,11 +92,16 @@ var storageAPIProvider = (function () {
 // state of the level.
 function LevelState(levelNo) {
     this.levelNo = levelNo;
-    this.solutionMoves = -1; // default moves.
+    this.solutionMoves = 0;
+    this.solutionTime = 0;
 }
 
 LevelState.prototype.setSolutionMoves = function (moves) {
     this.solutionMoves = moves;
+};
+
+LevelState.prototype.setSolutionTime = function(time) {
+    this.solutionTime = time;
 };
 
 function StorageHelper(storageType) {
