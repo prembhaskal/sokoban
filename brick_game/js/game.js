@@ -82,6 +82,18 @@ function addOnClickListener(elementId, clickListener) {
         document.getElementById(elementId).addEventListener('click', clickListener, false);
 }
 
+function sendAjax() {
+console.log('sending ajax request');
+    $.ajax({
+			  url: "http://1-dot-testsoko.appspot.com/gae_test1",
+			  cache: true
+			})
+			  .done(function( html ) {
+				console.log('call success');
+				console.log(html);
+			  });
+}
+
 // Add all the event listeners below
 $(document).ready(function () {
     window.addEventListener('load', init, false);
@@ -97,7 +109,7 @@ $(document).ready(function () {
     addOnClickListener('menubtn', menuAction);
     addOnClickListener('menuprevbtn', menuPrev);
     addOnClickListener('menunextbtn', menuNext);
-
+    addOnClickListener('send_ajax_request', sendAjax);
 });
 
 
