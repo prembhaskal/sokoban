@@ -265,12 +265,10 @@ SokobanUtil.enableMenuPrevButton = function () {
 
 SokobanUtil.disableResetButton = function () {
     $("#button_reset_level").attr('disabled', true);
-    $("#button_popup_reset_level").attr('disabled', true);
 };
 
 SokobanUtil.enableResetButton = function () {
     $("#button_reset_level").attr('disabled', false);
-    $("#button_popup_reset_level").attr('disabled', false);
 };
 
 SokobanUtil.displayPopUp = function () {
