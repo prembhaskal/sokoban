@@ -30,8 +30,8 @@ function SokoStopWatch(element) {
     }
 
     function render() {
-        elapsedTime = (clock/1000).toFixed(1);
-        element.innerHTML = elapsedTime;
+        elapsedTime = (clock/1000); // store decimal
+        element.innerHTML = elapsedTime.toFixed(3); // give a string to display.
     }
 
     function delta() {

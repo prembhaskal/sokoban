@@ -436,12 +436,12 @@ function StorageController() {
 
     function updateStoreStateIfImprovised(presentState, storedState) {
         if (storedState !== undefined) {
-//            // store only if a better solution.
-//            if (isBetterSolution(storedState, presentState)) {
-//                storageHelper.storeLevelState(presentState);
-//            }
+            // store only if a better solution.
+            if (isBetterSolution(storedState, presentState)) {
+                storageHelper.storeLevelState(presentState);
+            }
             // update the existing score with the new score, if there is an improvement,
-            updateIfScoreImprovised(presentState, storedState);
+//            updateIfScoreImprovised(presentState, storedState);
             storageHelper.storeLevelState(storedState);
         }
         else {
@@ -472,7 +472,7 @@ function StorageController() {
         return true;
     }
 
-    function getBestScore(gameState) {
+    function getAndUpdateBestScore(gameState) {
         var currentLevel = gameState.getPresentLevel();
         storageHelper.getLevelState(currentLevel, function (storedState) {
             if (storedState !== undefined) {
@@ -500,7 +500,7 @@ function StorageController() {
     this.init = function() {
         // listen to game completion events.
         Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, storeLevelStateOnCompletion);
-        Events.subscribe(SokobanUtil.eventType.LEVEL_START, getBestScore);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_START, getAndUpdateBestScore);
     };
 
 }
