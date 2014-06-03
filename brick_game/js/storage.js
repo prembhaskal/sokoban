@@ -32,7 +32,7 @@ var defaultStorageAPI = (function() {
 
             callback();
         }
-    }
+    };
 })();
 
 // Chrome Storage API, available only when app is run as an extension.
@@ -89,6 +89,29 @@ var storageAPIProvider = (function () {
     };
 })();
 
+// factory which will intialize the storage APIs and a storage helper.
+var StorageAPIFactory = (function() {
+     // initialization storage api and a helper.
+     var storageType = SokobanUtil.storageType.CHROME_API;
+     
+     var storageAPI = storageAPIProvider.getStorageAPI(storageType);
+    if (!storageAPI) { // fallback to default storage api.
+        console.log(storageType + ' is not available... falling back to default storage api');
+        storageAPI = storageAPIProvider.getStorageAPI(SokobanUtil.storageType.FALLBACK);
+    }
+    
+    var storageHelper = new StorageHelper(storageAPI);
+    
+    return {
+        getStorageAPI : function() {
+            return storageAPI;
+        },
+        getStorageHelper : function() {
+            return storageHelper;
+        }
+    };
+})();
+
 // state of the level.
 function LevelState(levelNo) {
     this.levelNo = levelNo;
@@ -104,13 +127,7 @@ LevelState.prototype.setSolutionTime = function(time) {
     this.solutionTime = time;
 };
 
-function StorageHelper(storageType) {
-    var storageAPI = storageAPIProvider.getStorageAPI(storageType);
-    if (!storageAPI) { // fallback to default storage api.
-        console.log('storage API not available... falling back to default api');
-        storageAPI = storageAPIProvider.getStorageAPI(SokobanUtil.storageType.FALLBACK);
-    }
-
+function StorageHelper(storageAPI) {
     var levelKeyPrefix = 'levelInfo';
 
     this.storeLevelState = function (levelState) {
