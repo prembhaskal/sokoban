@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src http://1-dot-testsoko.appspot.com">
     <title>Game</title>
     <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
@@ -97,7 +97,6 @@
                         <td><h4>BEST TIME: </h4><h5><span id="best_time"></span></h5></td>
                     </tr>
                 </table>
-
                 <table class="button_panel" id="buttons_panel" border="0">
                     <tr id="level_buttons">
                         <td><button id="button_pre_level" class="soko_button topcoat-button--large--cta">Previous_Level</button></td>
@@ -106,6 +105,9 @@
                     <tr id="moves_buttons">
                         <td><button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button></td>
                         <td><button id="button_undo_move" class="soko_button topcoat-button--large--cta">Undo</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id="send_ajax_request" class="send_ajax">TEST_AJAX</button></td>
                     </tr>
                 </table>
             </div>

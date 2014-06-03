@@ -107,6 +107,7 @@ LevelState.prototype.setSolutionTime = function(time) {
 function StorageHelper(storageType) {
     var storageAPI = storageAPIProvider.getStorageAPI(storageType);
     if (!storageAPI) { // fallback to default storage api.
+        console.log('storage API not available... falling back to default api');
         storageAPI = storageAPIProvider.getStorageAPI(SokobanUtil.storageType.FALLBACK);
     }
 
