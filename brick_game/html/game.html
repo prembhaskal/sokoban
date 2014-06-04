@@ -26,6 +26,7 @@
     <script src="../js/maze.js"></script>
     <script src="../js/position.js"></script>
     <script src="../js/sokoban_canvas.js"></script>
+    <script src="../js/sokoban_timer.js"></script>
     <script src="../js/storage.js"></script>
     <script src="../js/game_controller.js"></script>
     <script src="../js/game.js"></script>
@@ -88,32 +89,33 @@
                     </table>
                 </div>
                 <div class="maze_footer">
-                    TOTAL_MOVES: <pre id="total_moves"></pre>
-					BEST SCORE: <pre id="best_score"></pre>
                 </div>
             </div>
 
             <div class="button_panel col-lg-3">
-                <div class="level_buttons">
-                    <div>
-                        <button id="button_pre_level" class="soko_button topcoat-button--large--cta">Previous_Level</button>
-                    </div>
-                    <div>
-                        <button id="button_next_level" class="soko_button topcoat-button--large--cta">Next_Level</button>
-                    </div>
-                </div>
-
-                <div class="moves_buttons">
-                    <div>
-                        <button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button>
-                    </div>
-                    <div>
-                        <button id="button_undo_move" class="soko_button topcoat-button--large--cta">Undo</button>
-                    </div>
-                    <div>
-                        <button id="send_ajax_request" class="send_ajax">TEST_AJAX</button>
-                    </div>
-                </div>
+                <table class="score_panel" id="score_panel" border="0">
+                    <tr>
+                        <td><h4>SCORE:</h4><h5><span id="your_score"></span></h5></td>
+                        <td><h4>BEST SCORE: </h4><h5><span id="best_score"></span></h5></td>
+                    </tr>
+                    <tr>
+                        <td><h4>TIME: </h4><h5><span id="your_time"></span></h5></td>
+                        <td><h4>BEST TIME: </h4><h5><span id="best_time"></span></h5></td>
+                    </tr>
+                </table>
+                <table class="button_panel" id="buttons_panel" border="0">
+                    <tr id="level_buttons">
+                        <td><button id="button_pre_level" class="soko_button topcoat-button--large--cta">Previous_Level</button></td>
+                        <td><button id="button_next_level" class="soko_button topcoat-button--large--cta">Next_Level</button></td>
+                    </tr>
+                    <tr id="moves_buttons">
+                        <td><button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button></td>
+                        <td><button id="button_undo_move" class="soko_button topcoat-button--large--cta">Undo</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id="send_ajax_request" class="send_ajax">TEST_AJAX</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

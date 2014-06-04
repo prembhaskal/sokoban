@@ -5,7 +5,9 @@ function SokobanUtil() {
 }
 
 //Global Variables
-SokobanUtil.keyCode = {LEFT_ARROW: "LEFT-ARROW", UP_ARROW: "UP-ARROW", RIGHT_ARROW: "RIGHT-DOWN", DOWN_ARROW: "DOWN-ARROW"};
+SokobanUtil.keyName = {LEFT_ARROW: "LEFT-ARROW", UP_ARROW: "UP-ARROW", RIGHT_ARROW: "RIGHT-DOWN", DOWN_ARROW: "DOWN-ARROW"};
+
+SokobanUtil.keyCode = {KEY_U: 85, KEY_Z: 90};
 
 SokobanUtil.cellStyle = {BRICK_MOVER: 'brick_mover', BRICK: 'brick', EMPTY_SPACE: 'empty_space',
     DESTINATION: 'destination', IMMOVABLE: 'immovable', GREENERY: 'immovable'};
@@ -22,7 +24,9 @@ SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api',
                            FALLBACK : 'fallback'};
 
 SokobanUtil.eventType = {LEVEL_COMPLETE : 'level_complete',
-                         LEVEL_START : 'level_start'};
+                         STOP_TIMER : 'stop_timer',
+                         LEVEL_START : 'level_start',
+                         MOVE_EVENT: 'move_event'};
 
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {
@@ -56,6 +60,10 @@ SokobanUtil.getTable = function () {
     var table = document.getElementById("maze_table");
     return table;
 }
+SokobanUtil.getTimerElement = function () {
+    var timerElement = document.getElementById("your_time");
+    return timerElement;
+}
 
 SokobanUtil.isDestination = function (position) {
     var elementId = this.getElementId(position);
@@ -82,16 +90,16 @@ SokobanUtil.getDOMId = function (position) {
 //Input related
 SokobanUtil.getArrowKeyPressed = function (keyCode) {
     if (keyCode == '37') {
-        return SokobanUtil.keyCode.LEFT_ARROW;
+        return SokobanUtil.keyName.LEFT_ARROW;
     }
     else if (keyCode == '38') {
-        return SokobanUtil.keyCode.UP_ARROW;
+        return SokobanUtil.keyName.UP_ARROW;
     }
     else if (keyCode == '39') {
-        return SokobanUtil.keyCode.RIGHT_ARROW;
+        return SokobanUtil.keyName.RIGHT_ARROW;
     }
     else if (keyCode == '40') {
-        return SokobanUtil.keyCode.DOWN_ARROW;
+        return SokobanUtil.keyName.DOWN_ARROW;
     }
     else {
         return null;
@@ -99,32 +107,32 @@ SokobanUtil.getArrowKeyPressed = function (keyCode) {
 };
 
 SokobanUtil.keyXInc = function (keyName) {
-    if (keyName == SokobanUtil.keyCode.LEFT_ARROW) {
+    if (keyName == SokobanUtil.keyName.LEFT_ARROW) {
         return -1;
     }
-    else if (keyName == SokobanUtil.keyCode.UP_ARROW) {
+    else if (keyName == SokobanUtil.keyName.UP_ARROW) {
         return 0;
     }
-    else if (keyName == SokobanUtil.keyCode.RIGHT_ARROW) {
+    else if (keyName == SokobanUtil.keyName.RIGHT_ARROW) {
         return 1;
     }
-    else if (keyName == SokobanUtil.keyCode.DOWN_ARROW) {
+    else if (keyName == SokobanUtil.keyName.DOWN_ARROW) {
         return 0;
     }
 
 };
 
 SokobanUtil.keyYInc = function (keyName) {
-    if (keyName == SokobanUtil.keyCode.LEFT_ARROW) {
+    if (keyName == SokobanUtil.keyName.LEFT_ARROW) {
         return 0;
     }
-    else if (keyName == SokobanUtil.keyCode.UP_ARROW) {
+    else if (keyName == SokobanUtil.keyName.UP_ARROW) {
         return 1;
     }
-    else if (keyName == SokobanUtil.keyCode.RIGHT_ARROW) {
+    else if (keyName == SokobanUtil.keyName.RIGHT_ARROW) {
         return 0;
     }
-    else if (keyName == SokobanUtil.keyCode.DOWN_ARROW) {
+    else if (keyName == SokobanUtil.keyName.DOWN_ARROW) {
         return -1;
     }
 
@@ -185,8 +193,7 @@ SokobanUtil.undoMove = function (cell, xinc, yinc, cellStyle) {
 
 
 SokobanUtil.showLevel = function (levelNo) {
-    var levelInfo = levelNo;
-    $("#level_no").text(levelInfo);
+    $("#level_no").text(levelNo);
 };
 
 SokobanUtil.showLevelCompleteMsg = function () {
@@ -200,11 +207,15 @@ SokobanUtil.resetLevelCompleteMsg = function () {
 };
 
 SokobanUtil.updateTotalMoves = function (totalMoves) {
-    $("#total_moves").text(totalMoves);
+    $("#your_score").text(totalMoves);
 };
 
 SokobanUtil.updateBestScore = function (bestScore) {
     $("#best_score").text(bestScore);
+};
+
+SokobanUtil.updateBestTime = function (bestTime) {
+    $("#best_time").text(bestTime);
 };
 
 SokobanUtil.disablePreviousLevelButton = function () {
@@ -254,12 +265,10 @@ SokobanUtil.enableMenuPrevButton = function () {
 
 SokobanUtil.disableResetButton = function () {
     $("#button_reset_level").attr('disabled', true);
-    $("#button_popup_reset_level").attr('disabled', true);
 };
 
 SokobanUtil.enableResetButton = function () {
     $("#button_reset_level").attr('disabled', false);
-    $("#button_popup_reset_level").attr('disabled', false);
 };
 
 SokobanUtil.displayPopUp = function () {

@@ -1,6 +1,8 @@
 .idea
 # ignore the generated class files.
+
 *.class
+
 Thumbs.db
 .settings/
 chrome_ext/
