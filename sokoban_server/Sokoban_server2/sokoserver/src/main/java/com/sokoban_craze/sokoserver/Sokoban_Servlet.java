@@ -1,6 +1,7 @@
 package com.sokoban_craze.sokoserver;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sokoban_craze.leaderboard.bean.GameStat;
 import com.sokoban_craze.leaderboard.bean.LevelStat;
+import com.sokoban_craze.leaderboard.helper.JsonHelper;
 import com.sokoban_craze.leaderboard.helper.SokobanConstants;
 import com.sokoban_craze.leaderboard.helper.SokobanStatHelper;
+import com.sokoban_craze.persist.PersistStat;
 
 @SuppressWarnings("serial")
 public class Sokoban_Servlet extends HttpServlet {
@@ -40,30 +43,37 @@ public class Sokoban_Servlet extends HttpServlet {
 
 	}
 	
-	private void getUserStats(HttpServletRequest req, HttpServletResponse resp)
+	private void getUserStats(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
 		String userName = req.getParameter(SokobanConstants.REQ_USER_NAME);
 		
 		List<LevelStat> levelStat = SokobanStatHelper.getRankedUserStat(userName);
 		
-		//TODO
+		flushJsonString(levelStat,resp);
 		
 	}
 
-	private void getAllLevel(HttpServletRequest req, HttpServletResponse resp)
+	private void getAllLevel(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
 		List<LevelStat> levelStat = SokobanStatHelper.getAllLeaderBoard();
-		
-		//TODO
+		flushJsonString(levelStat,resp);
 	}
 
-	private void getLevel(HttpServletRequest req, HttpServletResponse resp) 
+	private void getLevel(HttpServletRequest req, HttpServletResponse resp) throws IOException 
 	{
 		Integer levelNo =Integer.parseInt(req.getParameter(SokobanConstants.REQ_LEVEL_NO).toString());
 		List<GameStat> lstGameStat = SokobanStatHelper.getLevelLeaderBoard(levelNo);
+		flushJsonString(lstGameStat,resp);
 		
-		//TODO
+	}
+	
+	private void flushJsonString(Object object,
+			HttpServletResponse resp) throws IOException {
 		
+		String jsonString = JsonHelper.toJson(object);
+		PrintWriter out = resp.getWriter();
+		out.write(jsonString);
+		out.close();
 	}
 
 	@Override
@@ -72,7 +82,16 @@ public class Sokoban_Servlet extends HttpServlet {
 		
 		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setContentType("application/json");
-		// TODO Auto-generated method stub
-		//super.doPost(req, resp);
+		
+		String userName = req.getParameter(SokobanConstants.REQ_USER_NAME);
+		Integer levelNo =Integer.parseInt(req.getParameter(SokobanConstants.REQ_LEVEL_NO).toString());
+		Float time = Float.parseFloat(req.getParameter(SokobanConstants.REQ_TIME).toString());
+		Integer moves =Integer.parseInt(req.getParameter(SokobanConstants.REQ_MOVES).toString());
+		
+		PersistStat.saveOrUpdateStat(userName, moves, time, levelNo);
+		
+		
+		
+		
 	}
 }

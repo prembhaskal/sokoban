@@ -12,6 +12,8 @@ public class SokobanConstants {
 	public static final String REQ_GET_USER_STATS = "req_getUserStats";
 	public static final String REQ_USER_NAME = "userName";
 	public static final String REQ_LEVEL_NO = "req_level_no";
+	public static final String REQ_TIME = "time";
+	public static final String REQ_MOVES = "moves";
 	
 
 }
