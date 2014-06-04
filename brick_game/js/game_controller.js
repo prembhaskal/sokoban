@@ -421,8 +421,7 @@ function GameState() {
 
 // object to control the storage of data. i.e when to store and what to store
 function StorageController() {
-    var storageType = SokobanUtil.storageType.CHROME_API;
-    var storageHelper = new StorageHelper(storageType);
+    var storageHelper = StorageAPIFactory.getStorageHelper();
 
     function storeLevelStateOnCompletion(gameState) {
         var levelState = new LevelState(gameState.getPresentLevel());
@@ -440,8 +439,7 @@ function StorageController() {
             if (isBetterSolution(storedState, presentState)) {
                 storageHelper.storeLevelState(presentState);
             }
-            // update the existing score with the new score, if there is an improvement,
-//            updateIfScoreImprovised(presentState, storedState);
+			
             storageHelper.storeLevelState(storedState);
         }
         else {
@@ -449,17 +447,7 @@ function StorageController() {
             storageHelper.storeLevelState(presentState);
         }
     }
-
-    // improvement if solved in lesser moves or lesser time.
-    function updateIfScoreImprovised(presentState, storedState) {
-        storedState.solutionMoves = (storedState.solutionMoves > presentState.solutionMoves) ?
-                                     presentState.solutionMoves :
-                                     storedState.solutionMoves;
-        storedState.solutionTime = (storedState.solutionTime > presentState.solutionTime) ?
-                                    presentState.solutionTime :
-                                    storedState.solutionTime;
-    }
-
+	
     function isBetterSolution(oldState, newState) {
         if (oldState.solutionMoves < newState.solutionMoves)
             return false;
