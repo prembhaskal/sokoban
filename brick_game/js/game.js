@@ -83,7 +83,7 @@ function addOnClickListener(elementId, clickListener) {
 }
 
 function sendAjax() {
-console.log('sending ajax request');
+    console.log('sending ajax request');
     $.ajax({
 			  url: "http://1-dot-testsoko.appspot.com/gae_test1",
 			  cache: true
@@ -92,6 +92,15 @@ console.log('sending ajax request');
 				console.log('call success');
 				console.log(html);
 			  });
+			  
+    console.log('getting user identity');
+	
+	chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+		 if (chrome.runtime.lastError) {
+			console.log(chrome.runtime.lastError);
+		  }
+		console.log('got some token ' + token);
+	});
 }
 
 // Add all the event listeners below
