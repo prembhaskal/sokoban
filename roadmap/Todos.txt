@@ -32,3 +32,7 @@
 -> Show Best score even in the Level Chooser.
 -> Show help pop up window - give playing instructions.
 -> Implement leader board for best score.
+
+
+----> Sokoban Server
+-->Ignore testcases in the deployment
