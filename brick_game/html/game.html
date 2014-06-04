@@ -2,7 +2,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src http://1-dot-testsoko.appspot.com">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+	                                                    connect-src *;
+														style-src 'self' data: chrome-extension-resource: 'unsafe-inline';
+														img-src 'self' data: chrome-extension-resource:;
+														frame-src 'self' data: chrome-extension-resource:;
+														font-src 'self' data: chrome-extension-resource:;
+														media-src *;">
     <title>Game</title>
     <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
