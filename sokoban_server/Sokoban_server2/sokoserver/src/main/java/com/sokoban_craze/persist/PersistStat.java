@@ -5,7 +5,10 @@ import java.util.List;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -27,20 +30,43 @@ public class PersistStat {
 	
 	}
 	
-	public static List<Entity>  getLevelLeaders(int level)
+	public static List<Entity> getLevelStats(int level ,int  fetchSize)
 	{
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
 		String levelTbl = SokobanUtil.getLevelSchema(level);
 		
 		Query q = new Query(levelTbl)
-        .addSort(SokobanConstants.MOVES, SortDirection.DESCENDING)
+        .addSort(SokobanConstants.MOVES, SortDirection.ASCENDING)
         .addSort(SokobanConstants.TIME, SortDirection.DESCENDING);
 		
 		 PreparedQuery pq = datastore.prepare(q);
 		 
-		 return  pq.asList(FetchOptions.Builder.withLimit(SokobanConstants.LEADERBOARD_SIZE));
+		 if(fetchSize == -1 )
+			 return  pq.asList(FetchOptions.Builder.withDefaults());
+		 else
+			 return  pq.asList(FetchOptions.Builder.withLimit(SokobanConstants.LEADERBOARD_SIZE));
 		 
+	}
+	
+	public static List<Entity>  getLevelLeaders(int level)
+	{
+		
+		return getLevelStats(level ,SokobanConstants.LEADERBOARD_SIZE );
+			 
+	}
+	
+	
+	public static Entity getUserStat(String userName , Integer level) throws EntityNotFoundException
+	{
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		String levelTbl = SokobanUtil.getLevelSchema(level);
+		
+		Key userKey = KeyFactory.createKey(levelTbl, userName);
+		
+		return datastore.get(userKey);
+
+			
 	}
 
 	

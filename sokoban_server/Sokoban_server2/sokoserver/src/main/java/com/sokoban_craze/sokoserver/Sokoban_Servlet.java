@@ -1,21 +1,71 @@
 package com.sokoban_craze.sokoserver;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sokoban_craze.leaderboard.bean.GameStat;
+import com.sokoban_craze.leaderboard.bean.LevelStat;
+import com.sokoban_craze.leaderboard.helper.SokobanConstants;
+import com.sokoban_craze.leaderboard.helper.SokobanStatHelper;
 
 @SuppressWarnings("serial")
 public class Sokoban_Servlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		
-		resp.addHeader("Access-Control-Allow-Origin", "*");
 		
+		String requestType = req.getParameter(SokobanConstants.PARAM_REQUEST_TYPE);
+		
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setContentType("application/json");
-		resp.getWriter().println("Hello, world");
+		
+		switch(requestType)
+		{
+			case SokobanConstants.REQ_GET_LEVEL : getLevel(req,resp);
+			break;
+			
+			case SokobanConstants.REQ_GET_ALL_LEVEL : getAllLevel(req,resp);
+			break;
+			
+			case SokobanConstants.REQ_GET_USER_STATS : getUserStats(req,resp);
+			break;
+  												
+		}
+		
+
 	}
 	
+	private void getUserStats(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String userName = req.getParameter(SokobanConstants.REQ_USER_NAME);
+		
+		List<LevelStat> levelStat = SokobanStatHelper.getRankedUserStat(userName);
+		
+		//TODO
+		
+	}
+
+	private void getAllLevel(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<LevelStat> levelStat = SokobanStatHelper.getAllLeaderBoard();
+		
+		//TODO
+	}
+
+	private void getLevel(HttpServletRequest req, HttpServletResponse resp) 
+	{
+		Integer levelNo =Integer.parseInt(req.getParameter(SokobanConstants.REQ_LEVEL_NO).toString());
+		List<GameStat> lstGameStat = SokobanStatHelper.getLevelLeaderBoard(levelNo);
+		
+		//TODO
+		
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -23,6 +73,6 @@ public class Sokoban_Servlet extends HttpServlet {
 		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setContentType("application/json");
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		//super.doPost(req, resp);
 	}
 }
