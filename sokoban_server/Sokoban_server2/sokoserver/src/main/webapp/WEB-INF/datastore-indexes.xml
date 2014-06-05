@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes
+  autoGenerate="true">
+   <datastore-index kind="level_1" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_2" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_3" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_4" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_5" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_6" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_7" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_8" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+    <datastore-index kind="level_9" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_10" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_11" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_12" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_13" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_14" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_15" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+        <datastore-index kind="level_16" ancestor="false" source="manual">
+        <property name="moves" direction="asc"/>
+        <property name="time" direction="desc"/>
+    </datastore-index>
+</datastore-indexes>

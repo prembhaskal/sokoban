@@ -3,6 +3,7 @@ package com.sokoban_craze.sokoserver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,10 @@ import com.sokoban_craze.persist.PersistStat;
 
 @SuppressWarnings("serial")
 public class Sokoban_Servlet extends HttpServlet {
+	
+	static Logger log = Logger.getLogger(Sokoban_Servlet.class.getName());  
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		
 		
 		String requestType = req.getParameter(SokobanConstants.PARAM_REQUEST_TYPE);
 		

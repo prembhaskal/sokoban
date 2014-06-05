@@ -4,7 +4,7 @@ public class GameStat {
 	
 	private String userName;
 	private int moves;
-	private float time;
+	private String time;
 	private int rank;
 	public String getUserName() {
 		return userName;
@@ -18,10 +18,10 @@ public class GameStat {
 	public void setMoves(int moves) {
 		this.moves = moves;
 	}
-	public float getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(float time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	public int getRank() {

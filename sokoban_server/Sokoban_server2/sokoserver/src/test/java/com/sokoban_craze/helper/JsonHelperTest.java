@@ -15,7 +15,7 @@ public class JsonHelperTest {
 		GameStat gm = new GameStat();
 		gm.setMoves(5);
 		gm.setRank(3);
-		gm.setTime(4.3f);
+		gm.setTime("4.3");
 		gm.setUserName("ashwini");
 		
 		String returnString = JsonHelper.toJson(gm);

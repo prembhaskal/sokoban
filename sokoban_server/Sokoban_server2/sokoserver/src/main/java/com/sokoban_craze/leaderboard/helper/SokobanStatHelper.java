@@ -1,5 +1,6 @@
 package com.sokoban_craze.leaderboard.helper;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -131,8 +132,9 @@ public class SokobanStatHelper {
 	private static GameStat convertToGameStat(Entity entity, int rank)
 	{
 		GameStat gameStat = new GameStat();
-		gameStat.setMoves((Integer)entity.getProperty(SokobanConstants.MOVES));
-		gameStat.setTime((Float)entity.getProperty(SokobanConstants.TIME));
+		DecimalFormat format = new DecimalFormat("0.00"); 
+		gameStat.setMoves(((Long)entity.getProperty(SokobanConstants.MOVES)).intValue());
+		gameStat.setTime(format.format(entity.getProperty(SokobanConstants.TIME)));
 		gameStat.setUserName(entity.getKey().getName());
 		gameStat.setRank(rank);
 		
