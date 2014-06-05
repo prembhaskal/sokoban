@@ -20,6 +20,8 @@ function GameController() {
     var storageController = null;
     var sokobanTimer = null;
 
+    var leaderBoardController = null;
+
 
 
     // see http://www.crockford.com/javascript/private.html
@@ -218,6 +220,9 @@ function GameController() {
 
         storageController = new StorageController();
         storageController.init();
+
+        leaderBoardController = new LeaderBoardController();
+        leaderBoardController.init();
 
         startLevel(presentLevel, table);
 

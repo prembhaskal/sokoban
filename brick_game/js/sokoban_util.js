@@ -26,7 +26,8 @@ SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api',
 SokobanUtil.eventType = {LEVEL_COMPLETE : 'level_complete',
                          STOP_TIMER : 'stop_timer',
                          LEVEL_START : 'level_start',
-                         MOVE_EVENT: 'move_event'};
+                         MOVE_EVENT: 'move_event',
+                         UPDATE_LEADERBOARD : 'update_leaderboard'};
 
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {

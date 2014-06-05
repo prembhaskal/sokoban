@@ -15,23 +15,28 @@ function LeaderBoardData() {
 
 var dummyLeaderBoardProvider = (function () {
     // dummy store of leader boards.
-    var leaderBoardMap = [];
+    var leaderBoardMap = {};
     // fill the store with some dummy data.
     init();
 
     function init() {
-        var leaderBoardData = new LeaderBoardData();
-        leaderBoardData.username = "player";
-        leaderBoardData.levelNo = 1;
-        leaderBoardData.rank = 1;
-        leaderBoardData.levelMoves = 25;
-        leaderBoardData.levelTime = 10.002;
-        leaderBoardMap[1] = leaderBoardData;
+        for (var i = 1; i <= 21; i++) {
+            leaderBoardMap[i] = leaderBoardMap[i] || [];
+            for (var j = 1; j <= 3; j ++) {
+                var leaderBoardData = new LeaderBoardData();
+                leaderBoardData.username = 'player_' + j ;
+                leaderBoardData.levelNo = i;
+                leaderBoardData.rank = j;
+                leaderBoardData.levelMoves = 10*i + j;
+                leaderBoardData.levelTime = 10.002;
+                leaderBoardMap[i].push(leaderBoardData);
+            }
+        }
     }
 
     return {
         getLeaderBoardForLevel : function(levelNo) {
-            return leaderBoardMap;
+            return leaderBoardMap[levelNo];
         },
         getRankForLevel : function(levelNo) {
             return 1;
@@ -48,12 +53,41 @@ function LeaderBoardController() {
 
     function refreshLeaderBoardOnStart(gameState) {
         var leaderBoardForLevel = leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel());
-        var userRankForLevel = leaderBoardForLevel.getRankForLevel(gameState.getPresentLevel());
-        // update UI with the same.
+        Events.publish(SokobanUtil.eventType.UPDATE_LEADERBOARD, [leaderBoardForLevel]);
     }
 
     this.init = function() {
         Events.subscribe(SokobanUtil.eventType.LEVEL_START, refreshLeaderBoardOnStart);
-
-    }
+    };
 }
+
+// view code to update the leader board.
+var leaderBoardView = (function(){
+
+    init();
+
+    function updateLeaderBoardForLevel(levelLeaderBoards) {
+        // code to add li for each of the leaders.
+        var leadersElement = document.getElementById('leaders');
+
+        // clear the leaders for this level first.
+        while(leadersElement.firstChild) {
+            leadersElement.removeChild(leadersElement.firstChild);
+        }
+
+        for (var i = 0; i < levelLeaderBoards.length; i++) {
+            var leader = levelLeaderBoards[i];
+            var text = leader.username + ' ' + leader.levelMoves + ' moves : ' + leader.levelTime + ' secs';
+            var textNode = document.createTextNode(text);
+            var liElement = document.createElement('li');
+            liElement.appendChild(textNode);
+
+            leadersElement.appendChild(liElement);
+        }
+    }
+
+    function init() {
+        Events.subscribe(SokobanUtil.eventType.UPDATE_LEADERBOARD, updateLeaderBoardForLevel);
+    }
+
+})();
