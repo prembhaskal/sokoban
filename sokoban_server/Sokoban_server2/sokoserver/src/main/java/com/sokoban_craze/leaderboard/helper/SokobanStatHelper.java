@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.sokoban_craze.leaderboard.bean.GameStat;
 import com.sokoban_craze.leaderboard.bean.LevelStat;
 import com.sokoban_craze.persist.PersistStat;
@@ -61,7 +60,7 @@ public class SokobanStatHelper {
 			Entity entity = PersistStat.getUserStat(userName, levelNo);
 			return convertToGameStat(entity , -1);
 			
-		} catch (EntityNotFoundException e) 
+		} catch (Exception e) 
 		{
 			
 			e.printStackTrace();
