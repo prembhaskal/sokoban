@@ -35,4 +35,5 @@
 
 
 ----> Sokoban Server
--->Ignore testcases in the deployment
+-> Done - Ignore testcases in the deployment
+-> Change the query for persistance to a single table , because with the levels increasing having differnt table for each level is cubersome.
