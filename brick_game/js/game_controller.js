@@ -224,6 +224,8 @@ function GameController() {
         leaderBoardController = new LeaderBoardController();
         leaderBoardController.init();
 
+        Events.publish(SokobanUtil.eventType.GAME_START, []);
+
         startLevel(presentLevel, table);
 
         //binding key handlers

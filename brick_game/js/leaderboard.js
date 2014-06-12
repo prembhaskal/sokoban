@@ -6,11 +6,21 @@
  */
 
 function LeaderBoardData() {
-    this.username = "";
+//    this.username = "";
+//    this.levelNo = -1;
+//    this.rank = -1;
+//    this.levelMoves = -1;
+//    this.levelTime = -1;
+
+    this.gameStats = [];
     this.levelNo = -1;
+}
+
+function IndividualScore() {
+    this.time = -1;
+    this.moves = -1;
     this.rank = -1;
-    this.levelMoves = -1;
-    this.levelTime = -1;
+    this.userName = "";
 }
 
 var dummyLeaderBoardProvider = (function () {
@@ -35,10 +45,10 @@ var dummyLeaderBoardProvider = (function () {
     }
 
     return {
-        getLeaderBoardForLevel : function(levelNo) {
-            return leaderBoardMap[levelNo];
+        getLeaderBoardForLevel : function(levelNo, callback) {
+            return callback(leaderBoardMap[levelNo]);
         },
-        getRankForLevel : function(levelNo) {
+        getRankForLevel : function(levelNo, userName) {
             return 1;
         },
         updateLeaderBoardForLevel : function(gameState) {
@@ -48,16 +58,88 @@ var dummyLeaderBoardProvider = (function () {
 })();
 
 
-function LeaderBoardController() {
-    var leaderBoardProvider = dummyLeaderBoardProvider;
+var appEngineLeaderBoardProvider = (function(){
 
-    function refreshLeaderBoardOnStart(gameState) {
-        var leaderBoardForLevel = leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel());
-        Events.publish(SokobanUtil.eventType.UPDATE_LEADERBOARD, [leaderBoardForLevel]);
+    // all methods are async calls.
+    return {
+      getAllLeaderBoardData : function(callback) {
+          $.ajax({
+              type: 'GET',
+              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              data: {requestType: 'req_getAllLevel'}
+          })
+              .done(callback);
+      },
+      getLeaderBoardForLevel : function(levelNo, callback) {
+          $.ajax({
+              type: 'GET',
+              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              data: {requestType: 'req_getLevel', req_level_no: levelNo}
+          })
+              .done(callback);
+      },
+      getUserStats : function(userName, callback) {
+          $.ajax({
+              type: 'GET',
+              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              data: {requestType: 'req_getUserStats', req_level_no: userName}
+          })
+              .done(callback);
+      },
+      updateLeaderBoardForLevel : function(levelScore, callback) {
+          $.ajax({
+              type: 'POST',
+              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              data: levelScore
+          })
+              .done(callback);
+      }
+    };
+})();
+
+function LeaderBoardController() {
+//  var leaderBoardProvider = dummyLeaderBoardProvider;
+    var leaderBoardProvider = appEngineLeaderBoardProvider;
+    function refreshLevelLeaderBoardData(gameState) {
+        leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel(), function(levelData) {
+            console.log('leader board data for level ' + gameState.getPresentLevel() + ' fetched');
+            console.log(levelData);
+//            Events.publish(SokobanUtil.eventType.UPDATE_LEADERBOARD, [levelData]);
+        });
+    }
+
+    function getCompleteLeaderBoardOnStart() {
+        leaderBoardProvider.getAllLeaderBoardData(function(leaderBoardData) {
+           console.log('leader board data fetched');
+           console.log(leaderBoardData);
+        });
+    }
+
+    function getUserStats(gameState) {
+        var userName = 'prem';
+        leaderBoardProvider.getUserStats(userName, function(userStatsData) {
+            console.log('user data successfully queried');
+            console.log(userStatsData);
+        });
+    }
+
+    function updateLeaderBoardData(gameState) {
+        var levelScore = {};
+        levelScore['userName'] = 'prem';
+        levelScore['time'] = gameState.getElapsedTime();
+        levelScore['moves'] = gameState.getMoves();
+        levelScore['req_level_no'] = gameState.getPresentLevel();
+
+        leaderBoardProvider.updateLeaderBoardForLevel(levelScore, function() {
+            console.log('updated the leader board with the present score.')
+        });
     }
 
     this.init = function() {
-        Events.subscribe(SokobanUtil.eventType.LEVEL_START, refreshLeaderBoardOnStart);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_START, refreshLevelLeaderBoardData);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_START, getUserStats);
+        Events.subscribe(SokobanUtil.eventType.GAME_START, getCompleteLeaderBoardOnStart);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, updateLeaderBoardData);
     };
 }
 
