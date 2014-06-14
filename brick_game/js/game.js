@@ -99,48 +99,6 @@ function addOnClickListener(elementId, clickListener) {
         document.getElementById(elementId).addEventListener('click', clickListener, false);
 }
 
-function sendAjax() {
-    console.log('sending ajax request');
-    $.ajax({
-        url: "http://1-dot-testsoko.appspot.com/gae_test1",
-        cache: true
-    }).done(function (html) {
-            console.log('call success');
-            console.log(html);
-        });
-
-    console.log('getting user identity');
-
-    chrome.identity.getAuthToken({ 'interactive': true }, function (token) {
-        if (chrome.runtime.lastError) {
-            console.log(chrome.runtime.lastError);
-        }
-        else {
-            console.log('got some token ' + token);
-            getUserInfo(token);
-        }
-    });
-}
-
-function getUserInfo(access_token) {
-    $.ajax({
-        type: 'GET',
-        url: 'https://www.googleapis.com/plus/v1/people/me',
-        headers: {'Authorization': 'Bearer ' + access_token}
-    }).done(function (data) {
-            console.log('got response for user information');
-            console.log(data);
-
-            if (data) {
-                var emails = data['emails'];
-                var email = emails['0'];
-                var userEmail = ((email && email['type'] === 'account') ? email['value'] : 'not present');
-
-                console.log('users email id is ' + userEmail);
-            }
-        });
-}
-
 // Add all the event listeners below
 $(document).ready(function () {
     window.addEventListener('load', init, false);
@@ -156,7 +114,6 @@ $(document).ready(function () {
     addOnClickListener('menubtn', menuAction);
     addOnClickListener('menuprevbtn', menuPrev);
     addOnClickListener('menunextbtn', menuNext);
-    addOnClickListener('send_ajax_request', sendAjax);
     addOnClickListener('leaderBoardButton', leaderBoardAction.onLeaderBoardClick);
 });
 

@@ -100,11 +100,12 @@ var appEngineLeaderBoardProvider = (function(){
 function LeaderBoardController() {
 //  var leaderBoardProvider = dummyLeaderBoardProvider;
     var leaderBoardProvider = appEngineLeaderBoardProvider;
+
     function refreshLevelLeaderBoardData(gameState) {
         leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel(), function(levelData) {
             console.log('leader board data for level ' + gameState.getPresentLevel() + ' fetched');
             console.log(levelData);
-//            Events.publish(SokobanUtil.eventType.UPDATE_LEADERBOARD, [levelData]);
+            Events.publish(SokobanUtil.eventType.REFRESH_LEADERBOARD, [levelData]);
         });
     }
 
@@ -125,13 +126,18 @@ function LeaderBoardController() {
 
     function updateLeaderBoardData(gameState) {
         var levelScore = {};
-        levelScore['userName'] = 'prem';
+        var userName = IdentityHelper.getUserName();
+        if (!userName) {
+            console.log("ERROR - username not available, high score won't be uploaded");
+            return;
+        }
+        levelScore['userName'] = userName;
         levelScore['time'] = gameState.getElapsedTime();
         levelScore['moves'] = gameState.getMoves();
         levelScore['req_level_no'] = gameState.getPresentLevel();
 
         leaderBoardProvider.updateLeaderBoardForLevel(levelScore, function() {
-            console.log('updated the leader board with the present score.')
+            console.log('updated the leader board with the present score.');
         });
     }
 
@@ -139,7 +145,8 @@ function LeaderBoardController() {
         Events.subscribe(SokobanUtil.eventType.LEVEL_START, refreshLevelLeaderBoardData);
         Events.subscribe(SokobanUtil.eventType.LEVEL_START, getUserStats);
         Events.subscribe(SokobanUtil.eventType.GAME_START, getCompleteLeaderBoardOnStart);
-        Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, updateLeaderBoardData);
+        // leader board data is sent only if it is the best score of the user.
+        Events.subscribe(SokobanUtil.eventType.GOT_BEST_SCORE, updateLeaderBoardData);
     };
 }
 
@@ -148,7 +155,9 @@ var leaderBoardView = (function(){
 
     init();
 
-    function updateLeaderBoardForLevel(levelLeaderBoards) {
+    // TODO delay might cause levelboarddata to come in incorrect sequence.
+    // FIXME Check the present level before updating the level? how to do it?
+    function updateLeaderBoardForLevel(levelLeaderBoard) {
         // code to add li for each of the leaders.
         var leadersElement = document.getElementById('leaders');
 
@@ -157,9 +166,11 @@ var leaderBoardView = (function(){
             leadersElement.removeChild(leadersElement.firstChild);
         }
 
-        for (var i = 0; i < levelLeaderBoards.length; i++) {
-            var leader = levelLeaderBoards[i];
-            var text = leader.username + ' ' + leader.levelMoves + ' moves : ' + leader.levelTime + ' secs';
+        for (var i = 0; i < 3; i++) {
+            var leader = levelLeaderBoard[i];
+            if (!leader)
+                break; // show at max 3 leaders, stop if there are less leaders.
+            var text = leader.userName + ' ' + leader.moves + ' moves : ' + leader.time + ' secs';
             var textNode = document.createTextNode(text);
             var liElement = document.createElement('li');
             liElement.appendChild(textNode);
@@ -169,7 +180,7 @@ var leaderBoardView = (function(){
     }
 
     function init() {
-        Events.subscribe(SokobanUtil.eventType.UPDATE_LEADERBOARD, updateLeaderBoardForLevel);
+        Events.subscribe(SokobanUtil.eventType.REFRESH_LEADERBOARD, updateLeaderBoardForLevel);
     }
 
 })();

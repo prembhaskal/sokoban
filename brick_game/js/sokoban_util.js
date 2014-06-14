@@ -28,7 +28,8 @@ SokobanUtil.eventType = {GAME_START         : 'game_start',
                          STOP_TIMER         : 'stop_timer',
                          LEVEL_START        : 'level_start',
                          MOVE_EVENT         : 'move_event',
-                         UPDATE_LEADERBOARD : 'update_leaderboard'};
+                         GOT_BEST_SCORE     : 'got_best_score',
+                         REFRESH_LEADERBOARD : 'refresh_leaderboard'};
 
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {
