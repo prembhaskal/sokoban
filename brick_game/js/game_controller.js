@@ -20,6 +20,8 @@ function GameController() {
     var storageController = null;
     var sokobanTimer = null;
 
+    var leaderBoardController = null;
+
 
 
     // see http://www.crockford.com/javascript/private.html
@@ -218,6 +220,11 @@ function GameController() {
 
         storageController = new StorageController();
         storageController.init();
+
+        leaderBoardController = new LeaderBoardController();
+        leaderBoardController.init();
+
+        Events.publish(SokobanUtil.eventType.GAME_START, []);
 
         startLevel(presentLevel, table);
 
@@ -423,31 +430,24 @@ function GameState() {
 function StorageController() {
     var storageHelper = StorageAPIFactory.getStorageHelper();
 
-    function storeLevelStateOnCompletion(gameState) {
+    function updateLevelStateOnCompletion(gameState) {
         var levelState = new LevelState(gameState.getPresentLevel());
         levelState.setSolutionMoves(gameState.getMoves());
         levelState.setSolutionTime(gameState.getElapsedTime());
         // callback function used so that present levelState is preserved (since this will be ASYNC CALL);
         storageHelper.getLevelState(gameState.getPresentLevel(), function (storedState) {
-            updateStoreStateIfImprovised(levelState, storedState);
+            updateIfBetterScore(levelState, storedState, gameState);
         });
     }
 
-    function updateStoreStateIfImprovised(presentState, storedState) {
-        if (storedState !== undefined) {
-            // store only if a better solution.
-            if (isBetterSolution(storedState, presentState)) {
-                storageHelper.storeLevelState(presentState);
-            }
-			
-            storageHelper.storeLevelState(storedState);
-        }
-        else {
-            // also store if this is the first time.
+    function updateIfBetterScore(presentState, storedState, gameState) {
+        // store if this is the first time. Or or if it is a better solution.
+        if (storedState === undefined || isBetterSolution(storedState, presentState)) {
             storageHelper.storeLevelState(presentState);
+            Events.publish(SokobanUtil.eventType.GOT_BEST_SCORE, [gameState]);
         }
     }
-	
+
     function isBetterSolution(oldState, newState) {
         if (oldState.solutionMoves < newState.solutionMoves)
             return false;
@@ -487,7 +487,7 @@ function StorageController() {
 
     this.init = function() {
         // listen to game completion events.
-        Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, storeLevelStateOnCompletion);
+        Events.subscribe(SokobanUtil.eventType.LEVEL_COMPLETE, updateLevelStateOnCompletion);
         Events.subscribe(SokobanUtil.eventType.LEVEL_START, getAndUpdateBestScore);
     };
 

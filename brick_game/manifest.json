@@ -15,7 +15,16 @@
             "scripts" : ["main.js"]
             }
     },
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq6lIw6OtEmOWl6OxKMv2sIwKYiV8rux6Mp8udqpSq14xOgI6a37W3nOicOqP7lT0Zd65axBhrUVGLQlBpYpH64DXce3MFbnEShBzTnDGyJvktdv/7pMCHU0YWxgxa2YBqELQfnDAg7BmanUGBO9oDDiT1/tQP9AxdpnLMppcYHhH5ceHn1Bi6XsqxM3AMFHLQwoZP7gMcNhSi3itDU+AlrLtAWhkFTivuxyIbpjL0v+kNJmttZdDfzZFuUxG81BVrzJkrrq5ro0wZvNiBeOSJk8z7NQ8rRMrDPUWlbUwZr/nhxaCxtGEF8EsXZTsiWHXM+4OKCJk7mipVCjxdYPNfwIDAQAB",
+	"oauth2": {
+		"client_id": "264190733599-lkt9f2c3drc65mb4n1rgcps5i0gc428k.apps.googleusercontent.com",
+		"scopes": [
+			"https://www.googleapis.com/auth/userinfo.email"
+		]
+    },
 	"permissions": [
-		  "storage"
+		  "storage",
+		  "identity", "https://accounts.google.com/*", "https://www.googleapis.com/*"
 	]
+	
 }

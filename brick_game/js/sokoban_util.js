@@ -23,10 +23,13 @@ SokobanUtil.CellType = {BrickType: "brick",
 SokobanUtil.storageType = {CHROME_API: 'chrome_storage_api',
                            FALLBACK : 'fallback'};
 
-SokobanUtil.eventType = {LEVEL_COMPLETE : 'level_complete',
-                         STOP_TIMER : 'stop_timer',
-                         LEVEL_START : 'level_start',
-                         MOVE_EVENT: 'move_event'};
+SokobanUtil.eventType = {GAME_START         : 'game_start',
+                         LEVEL_COMPLETE     : 'level_complete',
+                         STOP_TIMER         : 'stop_timer',
+                         LEVEL_START        : 'level_start',
+                         MOVE_EVENT         : 'move_event',
+                         GOT_BEST_SCORE     : 'got_best_score',
+                         REFRESH_LEADERBOARD : 'refresh_leaderboard'};
 
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {

@@ -2,7 +2,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8855-1">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src http://1-dot-testsoko.appspot.com">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+	                                                    connect-src *;
+														style-src 'self' data: chrome-extension-resource: 'unsafe-inline';
+														img-src 'self' data: chrome-extension-resource:;
+														frame-src 'self' data: chrome-extension-resource:;
+														font-src 'self' data: chrome-extension-resource:;
+														media-src *;">
     <title>Game</title>
     <link rel="stylesheet" type="text/css" href="../css/topcoat-desktop-light.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
@@ -22,6 +28,8 @@
     <script src="../js/sokoban_canvas.js"></script>
     <script src="../js/sokoban_timer.js"></script>
     <script src="../js/storage.js"></script>
+    <script src="../js/identity_helper.js"></script>
+    <script src="../js/leaderboard.js"></script>
     <script src="../js/game_controller.js"></script>
     <script src="../js/game.js"></script>
 </head>
@@ -105,9 +113,6 @@
                     <tr id="moves_buttons">
                         <td><button id="button_reset_level" class="soko_button topcoat-button--large--cta">Reset_Level</button></td>
                         <td><button id="button_undo_move" class="soko_button topcoat-button--large--cta">Undo</button></td>
-                    </tr>
-                    <tr>
-                        <td><button id="send_ajax_request" class="send_ajax">TEST_AJAX</button></td>
                     </tr>
                 </table>
             </div>
@@ -478,5 +483,11 @@
 </table>
 </div>
 
+<a class="leaderBoardButton" id="leaderBoardButton" href="#"> LEADER_BOARD </a>
+<div id = "leader_board" class="leader_board">
+    <ul id = "leaders" class="leaders">
+
+    </ul>
+</div>
 </body>
 </html>
