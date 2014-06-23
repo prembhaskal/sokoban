@@ -77,23 +77,6 @@ function hideModalWindow() {
     hidePopUp();
 }
 
-var leaderBoardAction = (function(){
-    var isOpen = false;
-
-    return {
-      onLeaderBoardClick : function() {
-          if (isOpen) {
-              $('#leader_board').animate({top : '-30%'});
-          }
-          else {
-              $('#leader_board').animate({top : '10%'});
-          }
-
-          isOpen = !isOpen;
-      }
-    };
-})();
-
 function addOnClickListener(elementId, clickListener) {
     if (document.getElementById(elementId) != undefined)
         document.getElementById(elementId).addEventListener('click', clickListener, false);
@@ -114,7 +97,6 @@ $(document).ready(function () {
     addOnClickListener('menubtn', menuAction);
     addOnClickListener('menuprevbtn', menuPrev);
     addOnClickListener('menunextbtn', menuNext);
-    addOnClickListener('leaderBoardButton', leaderBoardAction.onLeaderBoardClick);
 });
 
 

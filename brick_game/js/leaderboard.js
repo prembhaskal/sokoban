@@ -170,10 +170,17 @@ var leaderBoardView = (function(){
             var leader = levelLeaderBoard[i];
             if (!leader)
                 break; // show at max 3 leaders, stop if there are less leaders.
-            var text = leader.userName + ' ' + leader.moves + ' moves : ' + leader.time + ' secs';
+            // create a Text Node
+            var text = leader.userName + ' : ' + leader.moves + ' moves - ' + leader.time + ' secs';
             var textNode = document.createTextNode(text);
+            // wrap it with a Span
+            var textSpan = document.createElement('span');
+            textSpan.classList.add('leader_text');
+            textSpan.appendChild(textNode);
+
+            // add the span to the li
             var liElement = document.createElement('li');
-            liElement.appendChild(textNode);
+            liElement.appendChild(textSpan);
 
             leadersElement.appendChild(liElement);
         }
