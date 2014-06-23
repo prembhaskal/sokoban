@@ -151,6 +151,8 @@ function LeaderBoardController() {
 }
 
 // view code to update the leader board.
+// TODO use the complete leader board data (if available) to obtain the 1st/default/fallback leader board for a level.
+// after that try to get the new data for the level, if available override current data / update complete data etc.
 var leaderBoardView = (function(){
 
     init();
