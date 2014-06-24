@@ -38,7 +38,7 @@ public class PersistStat {
 		
 		Query q = new Query(levelTbl)
         .addSort(SokobanConstants.MOVES, SortDirection.ASCENDING)
-        .addSort(SokobanConstants.TIME, SortDirection.DESCENDING);
+        .addSort(SokobanConstants.TIME, SortDirection.ASCENDING);
 		
 		 PreparedQuery pq = datastore.prepare(q);
 		 
