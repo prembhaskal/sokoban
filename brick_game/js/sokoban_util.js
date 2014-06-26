@@ -32,6 +32,8 @@ SokobanUtil.eventType = {GAME_START         : 'game_start',
                          REFRESH_LEVEL_LEADERBOARD : 'refresh_level_leaderboard',
                          REFRESH_ALL_LEADERBOARD : 'refresh_all_leaderboard'};
 
+SokobanUtil.appEngineUrl = 'http://sokoserver.appspot.com/sokoban_server';
+
 //CSS related
 SokobanUtil.changeClassOfElement = function (elementId, className) {
     $(elementId).addClass(className);

@@ -60,7 +60,7 @@ var appEngineLeaderBoardProvider = (function(){
       getAllLeaderBoardData : function(callback) {
           $.ajax({
               type: 'GET',
-              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              url: SokobanUtil.appEngineUrl,
               data: {requestType: 'req_getAllLevel'}
           })
               .done(callback);
@@ -68,7 +68,7 @@ var appEngineLeaderBoardProvider = (function(){
       getLeaderBoardForLevel : function(levelNo, callback) {
           $.ajax({
               type: 'GET',
-              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              url: SokobanUtil.appEngineUrl,
               data: {requestType: 'req_getLevel', req_level_no: levelNo}
           })
               .done(callback);
@@ -76,7 +76,7 @@ var appEngineLeaderBoardProvider = (function(){
       getUserStats : function(userName, callback) {
           $.ajax({
               type: 'GET',
-              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              url: SokobanUtil.appEngineUrl,
               data: {requestType: 'req_getUserStats', req_level_no: userName}
           })
               .done(callback);
@@ -84,7 +84,7 @@ var appEngineLeaderBoardProvider = (function(){
       updateLeaderBoardForLevel : function(levelScore, callback) {
           $.ajax({
               type: 'POST',
-              url: 'http://1-dot-testsoko.appspot.com/sokoban_server',
+              url: SokobanUtil.appEngineUrl,
               data: levelScore
           })
               .done(callback);
