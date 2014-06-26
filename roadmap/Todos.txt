@@ -21,7 +21,11 @@
 -> InProgress - Separate concerns  make the app more MVC compliant.
    
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
--> Add upto 100 levels (move the levels to a separate file).
+-> Add upto 100 levels.
+	(see links http://www.sokobanonline.com/play/community/malice
+			    http://www.gamesloon.com/free-puzzle-7/sokoban-games-269/crazy-box-sokoban-remake-10054.html
+				https://sokoban-game.com/packs/dimitri-yorick/levels/two-rooms-3x3-01
+	)
 -> CSS enhancement for the entire game.
 -> Change the size of universal maze depending upon the screen size.Currently hardcoded to 400X400
 -> CSS enhancement -- make the bricks, pusher as present in wikipedia page.
