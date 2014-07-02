@@ -333,17 +333,13 @@ ul.leaders
 
 ul.leaders li
 {
-    background-color: #4CA1E4;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-color: grey;
-    border-radius: 7px;
     width: 300px;
     height: 30px;
+	font-weight: bold;
 }
 
 ul.leaders li span.leader_text
 {
     padding-left: 15px;
-    color: #ffffff;
+    color: #217FBE;
 }

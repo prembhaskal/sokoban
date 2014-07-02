@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "SOKOBAN CRAZE",
     "short_name": "Sokoban Craze",
-    "version": "0.6",
+    "version": "0.61",
     "author":" Ashwini Rai, Premkumar Bhaskal",
     "minimum_chrome_version": "23",
     "description" : "(Alpha Version) sokoban craze is the classic logic sokoban game, you move the tiles to the destination in minimum moves",
