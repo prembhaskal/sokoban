@@ -313,6 +313,11 @@ table.leader_panel
     height: 120px;
 }
 
+table.leader_panel td
+{
+	padding-left: 10px;
+}
+
 div.leader_board
 {
     height: 100px;
