@@ -18,6 +18,7 @@
 -> Done  Fallback for Storage - in case chrome.storage is not available, add a Fallback API, which just uses a HashTable or equivalent.
    (useful for testing in other browsers).
 -> Done - Add a timer to clock the time spent on present level. It stops on completion of level.   
+-> Done - Implement leader board for best score.
 -> InProgress - Separate concerns  make the app more MVC compliant.
    
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
@@ -31,7 +32,8 @@
 -> Add 'U' for undo along with Ctrl+Z.
 -> Show Best score even in the Level Chooser.
 -> Show help pop up window - give playing instructions.
--> Implement leader board for best score.
+-> leaderboard issue: leaderboard should be cleared as soon as new level is entered... then once we get the data from server populate the newer data.
+-> leaderboard implementation : it is flawed... make the use of all data downloaded during startup.
 
 
 ----> Sokoban Server
