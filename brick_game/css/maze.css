@@ -13,11 +13,13 @@ div.header_panel
 div.game_panel
 {
     width: 90%;
+    height: 500px;
 }
 
 div.main_panel
 {
     margin-left: 50px;
+    margin-top: 25px;
 }
 
 div.main_panel table.game_maze
@@ -145,25 +147,20 @@ div.modalDialog
     background-color: #A9A9A9;
     box-shadow: 10px 10px 5px #888888;
     border-radius:25px;
-
-
-
 }
 
 div.modalDialog h4.level_completion
 {
     text-align: center;
-
 }
 
-div.button_panel
+div.side_panel
 {
-    margin: 60px 5px;
     float: right;
 }
 
-div.button_panel div.level_buttons,
-div.button_panel div.move_buttons
+div.side_panel div.level_buttons,
+div.side_panel div.move_buttons
 {
     margin: 5px 5px;
 }
@@ -207,12 +204,12 @@ table.score_panel td
     padding-left: 10px;
 }
 
-table.button_panel
+table.side_panel
 {
     margin-top: 50px;
 }
 
-table.button_panel td
+table.side_panel td
 {
     min-width: 130px;
 }
@@ -231,6 +228,7 @@ div.levelChooser table.outer_table
     height: 100%;
     width: 100%;
     background-color:  #A9A9A9;
+    z-index: 1;
 
 }
 
@@ -310,24 +308,19 @@ td.colw_5
      color:white;
 }
 
-a.leaderBoardButton
+table.leader_panel
 {
-    position: absolute;
-    top: 5%;
-    right: 10%;
-    height: 20px;
-    z-index: 5;
-    font-size: medium;
-    color: white;
-    background-color: #4CA1E4;
-    text-decoration: none;
+    height: 120px;
+}
+
+table.leader_panel td
+{
+	padding-left: 10px;
 }
 
 div.leader_board
 {
-    position: absolute;
-    top: 10%;
-    right: 5%;
+    height: 100px;
     background-color: inherit;
 }
 
@@ -340,17 +333,13 @@ ul.leaders
 
 ul.leaders li
 {
-    background-color: #4CA1E4;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-color: grey;
-    border-radius: 7px;
     width: 300px;
     height: 30px;
+	font-weight: bold;
 }
 
 ul.leaders li span.leader_text
 {
     padding-left: 15px;
-    color: #ffffff;
+    color: #217FBE;
 }

@@ -29,7 +29,8 @@ SokobanUtil.eventType = {GAME_START         : 'game_start',
                          LEVEL_START        : 'level_start',
                          MOVE_EVENT         : 'move_event',
                          GOT_BEST_SCORE     : 'got_best_score',
-                         REFRESH_LEADERBOARD : 'refresh_leaderboard'};
+                         REFRESH_LEVEL_LEADERBOARD : 'refresh_level_leaderboard',
+                         REFRESH_ALL_LEADERBOARD : 'refresh_all_leaderboard'};
 
 SokobanUtil.appEngineUrl = 'http://sokoserver.appspot.com/sokoban_server';
 

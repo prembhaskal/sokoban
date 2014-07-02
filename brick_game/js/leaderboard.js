@@ -1,18 +1,13 @@
 /* leaderboard data for a level
-    username/email_id
-   level_no
+   levelNo
+   useName
    moves
-   time.
+   time
+   rank
  */
 
 function LeaderBoardData() {
-//    this.username = "";
-//    this.levelNo = -1;
-//    this.rank = -1;
-//    this.levelMoves = -1;
-//    this.levelTime = -1;
-
-    this.gameStats = [];
+    this.gameStats = []; // array of IndividualScore.
     this.levelNo = -1;
 }
 
@@ -34,11 +29,11 @@ var dummyLeaderBoardProvider = (function () {
             leaderBoardMap[i] = leaderBoardMap[i] || [];
             for (var j = 1; j <= 3; j ++) {
                 var leaderBoardData = new LeaderBoardData();
-                leaderBoardData.username = 'player_' + j ;
+                leaderBoardData.userName = 'player_' + j ;
                 leaderBoardData.levelNo = i;
                 leaderBoardData.rank = j;
-                leaderBoardData.levelMoves = 10*i + j;
-                leaderBoardData.levelTime = 10.002;
+                leaderBoardData.moves = 10*i + j;
+                leaderBoardData.time = 10.002;
                 leaderBoardMap[i].push(leaderBoardData);
             }
         }
@@ -105,19 +100,21 @@ function LeaderBoardController() {
         leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel(), function(levelData) {
             console.log('leader board data for level ' + gameState.getPresentLevel() + ' fetched');
             console.log(levelData);
-            Events.publish(SokobanUtil.eventType.REFRESH_LEADERBOARD, [levelData]);
+            Events.publish(SokobanUtil.eventType.REFRESH_LEVEL_LEADERBOARD, [levelData]);
         });
     }
 
     function getCompleteLeaderBoardOnStart() {
-        leaderBoardProvider.getAllLeaderBoardData(function(leaderBoardData) {
+        leaderBoardProvider.getAllLeaderBoardData(function(allLeaderBoardData) {
            console.log('leader board data fetched');
-           console.log(leaderBoardData);
+           console.log(allLeaderBoardData);
+           Events.publish(SokobanUtil.eventType.REFRESH_ALL_LEADERBOARD, [allLeaderBoardData]);
         });
     }
 
     function getUserStats(gameState) {
-        var userName = 'prem';
+        var userName = IdentityHelper.getUserName();
+        userName = (userName == null || userName === undefined) ? 'test_user' : userName;
         leaderBoardProvider.getUserStats(userName, function(userStatsData) {
             console.log('user data successfully queried');
             console.log(userStatsData);
@@ -151,7 +148,11 @@ function LeaderBoardController() {
 }
 
 // view code to update the leader board.
+// TODO use the complete leader board data (if available) to obtain the 1st/default/fallback leader board for a level.
+// after that try to get the new data for the level, if available override current data / update complete data etc.
 var leaderBoardView = (function(){
+
+    var allLevelLeaderBoardData;
 
     init();
 
@@ -186,8 +187,13 @@ var leaderBoardView = (function(){
         }
     }
 
+    function updateAllLevelLeaderBoardData(allLevelLeaderData) {
+        allLevelLeaderBoardData = allLevelLeaderData;
+    }
+
     function init() {
-        Events.subscribe(SokobanUtil.eventType.REFRESH_LEADERBOARD, updateLeaderBoardForLevel);
+        Events.subscribe(SokobanUtil.eventType.REFRESH_LEVEL_LEADERBOARD, updateLeaderBoardForLevel);
+        Events.subscribe(SokobanUtil.eventType.REFRESH_ALL_LEADERBOARD, updateAllLevelLeaderBoardData);
     }
 
 })();
