@@ -480,8 +480,8 @@ function StorageController() {
             SokobanUtil.updateBestTime(levelState.solutionTime);
         }
         else {
-            SokobanUtil.updateBestScore('UNSOLVED_LEVEL');
-            SokobanUtil.updateBestTime('UNSOLVED_LEVEL');
+            SokobanUtil.updateBestScore('-');
+            SokobanUtil.updateBestTime('-	');
         }
     }
 

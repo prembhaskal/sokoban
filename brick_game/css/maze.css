@@ -200,18 +200,20 @@ button.menu_prevNextbutton
 
 table.score_panel td
 {
-    min-width: 140px;
+    
     padding-left: 10px;
+	width:120px;
 }
 
 table.side_panel
 {
     margin-top: 50px;
+	
 }
 
 table.side_panel td
 {
-    min-width: 130px;
+    min-width: 120px;
 }
 
 button.button_popup
@@ -308,14 +310,21 @@ td.colw_5
      color:white;
 }
 
-table.leader_panel
+table.leader_panel_tab
 {
-    height: 120px;
+	height: 120px;
+	padding-left: 10px;
+	width:120px;
+	
 }
 
-table.leader_panel td
+div.leader_panel 
 {
-	padding-left: 10px;
+
+	background-color: #4CA1E4 ;
+	color:white;
+	box-shadow: 4px 2px 2px #888888;
+	
 }
 
 div.leader_board
@@ -329,6 +338,7 @@ ul.leaders
     list-style-type: none;
     padding: 0;
     margin: 0;
+	
 }
 
 ul.leaders li
@@ -336,10 +346,16 @@ ul.leaders li
     width: 300px;
     height: 30px;
 	font-weight: bold;
+	
 }
 
 ul.leaders li span.leader_text
 {
     padding-left: 15px;
     color: #217FBE;
+}
+.score_text
+{
+color: #217FBE;
+font-weight: bold;
 }

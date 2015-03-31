@@ -95,10 +95,10 @@
             </div>
 
             <div class="side_panel col-lg-3">
-                <table class="leader_panel" id="leader_panel" border="0">
+                <table  class="leader_panel_tab" id="leader_panel" border="0">
                     <tr>
                         <td>
-                            <div><h4>LEADER_BOARD</h4></div>
+                            <div class="leader_panel"><h4>Leaders</h4></div>
                             <div id = "leader_board" class="leader_board">
                                 <ul id = "leaders" class="leaders">
 
@@ -109,14 +109,36 @@
                 </table>
 
                 <table class="score_panel" id="score_panel" border="0">
-                    <tr>
-                        <td><h4>SCORE:</h4><h5><span id="your_score"></span></h5></td>
-                        <td><h4>BEST SCORE: </h4><h5><span id="best_score"></span></h5></td>
+					<tr>
+						<td colspan="3">
+							<div class="leader_panel"><h4>Me</h4></div>
+						</td>
+					</tr>
+                    <tr class="score_text">
+						<td>
+							Score:
+						</td>
+                        <td>
+							<span id="your_score"></span> moves
+						</td>
+						<td>
+							<span id="your_time"></span> secs
+						</td>
+                       
                     </tr>
-                    <tr>
-                        <td><h4>TIME: </h4><h5><span id="your_time"></span></h5></td>
-                        <td><h4>BEST TIME: </h4><h5><span id="best_time"></span></h5></td>
+					<tr class="score_text">
+						<td>
+							Best:
+						</td>
+                        <td>
+							<span id="best_score"></span> moves
+						</td>
+						<td>
+							<span id="best_time"></span> secs
+						</td>
+                       
                     </tr>
+
                 </table>
                 <table class="side_panel" id="buttons_panel" border="0">
                     <tr id="level_buttons">
