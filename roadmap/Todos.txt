@@ -43,3 +43,7 @@
 ----> Sokoban Server
 -> Done - Ignore testcases in the deployment
 -> Change the query for persistance to a single table , because with the levels increasing having differnt table for each level is cubersome.
+
+->Add ranking in the menu chooser.
+->CSS Improvement for leaderboard
+->Add watchlist where user can add friends.
