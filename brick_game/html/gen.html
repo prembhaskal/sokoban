@@ -286,7 +286,7 @@
     		for(var j=0;j < y;j++)
     		{
     			var cell = row.insertCell(row.cells.length);
-    			cell.innerHTML="<input type='text' size='4' class='"+identifierClass+"' onclick='this.select()' onkeyup='validateText(this)' />";
+    			cell.innerHTML="<input type='text' size='4' class='"+identifierClass+"' onkeypress = 'this.select()' onclick = this.select()' onkeyup = 'validateText(this)'/>";
     		}
     	}
     	
