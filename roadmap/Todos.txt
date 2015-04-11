@@ -48,3 +48,9 @@
 ->Add ranking in the menu chooser.
 ->CSS Improvement for leaderboard
 ->Add watchlist where user can add friends.
+-> Add new feature - score of friends.
+   list friends
+   add friends
+   show friends score.
+   rank of leaders
+   
