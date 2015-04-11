@@ -49,8 +49,9 @@
 ->CSS Improvement for leaderboard
 ->Add watchlist where user can add friends.
 -> Add new feature - score of friends.
-   list friends
-   add friends
+   list all users - to choose friends from them.
+   add friends - choose friends from list
+   remove a friend ??
    show friends score.
    rank of leaders
    

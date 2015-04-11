@@ -21,21 +21,36 @@ function IndividualScore() {
 var dummyLeaderBoardProvider = (function () {
     // dummy store of leader boards.
     var leaderBoardMap = {};
+
+    var userNames = {};
+
     // fill the store with some dummy data.
     init();
 
     function init() {
+        initDummyLeaderBoard();
+        initDummyUserNames();
+    }
+
+    function initDummyLeaderBoard() {
         for (var i = 1; i <= 21; i++) {
             leaderBoardMap[i] = leaderBoardMap[i] || [];
-            for (var j = 1; j <= 3; j ++) {
+            for (var j = 1; j <= 10; j++) {
                 var leaderBoardData = new LeaderBoardData();
-                leaderBoardData.userName = 'player_' + j ;
+                leaderBoardData.userName = 'player_' + j;
                 leaderBoardData.levelNo = i;
                 leaderBoardData.rank = j;
-                leaderBoardData.moves = 10*i + j;
+                leaderBoardData.moves = 10 * i + j;
                 leaderBoardData.time = 10.002;
                 leaderBoardMap[i].push(leaderBoardData);
             }
+        }
+    }
+
+    function initDummyUserNames() {
+        for (var i = 1; i <= 10; i++) {
+            var userName = 'player_' + i;
+            userNames.push(userName);
         }
     }
 
@@ -48,7 +63,20 @@ var dummyLeaderBoardProvider = (function () {
         },
         updateLeaderBoardForLevel : function(gameState) {
             // do nothing as of now.
+        },
+        getAllLeaderBoardData : function(callback) {
+            // do nothing :)
+        },
+        getUserStats : function(callback) {
+            // do nothing :)
+        },
+        getAllUserNames: function(callback) {
+            callback(userNames);
+        },
+        addFriends: function(friends) {
+
         }
+
     };
 })();
 
@@ -93,8 +121,8 @@ var appEngineLeaderBoardProvider = (function(){
 })();
 
 function LeaderBoardController() {
-//  var leaderBoardProvider = dummyLeaderBoardProvider;
-    var leaderBoardProvider = appEngineLeaderBoardProvider;
+  var leaderBoardProvider = dummyLeaderBoardProvider;
+//    var leaderBoardProvider = appEngineLeaderBoardProvider;
 
     function refreshLevelLeaderBoardData(gameState) {
         leaderBoardProvider.getLeaderBoardForLevel(gameState.getPresentLevel(), function(levelData) {
@@ -136,6 +164,10 @@ function LeaderBoardController() {
         leaderBoardProvider.updateLeaderBoardForLevel(levelScore, function() {
             console.log('updated the leader board with the present score.');
         });
+    }
+
+    function getAllUserNames() {
+
     }
 
     this.init = function() {
@@ -185,6 +217,10 @@ var leaderBoardView = (function(){
 
             leadersElement.appendChild(liElement);
         }
+    }
+
+    function updateUserNamesForFriendSelection(userNames) {
+
     }
 
     function updateAllLevelLeaderBoardData(allLevelLeaderData) {
