@@ -54,4 +54,5 @@
    remove a friend ??
    show friends score.
    rank of leaders
-   
+
+-> need a nice looking MultiSelect list to select friends, preferably not 3rd party (so that app remains lightweight).
