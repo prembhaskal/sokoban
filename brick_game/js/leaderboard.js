@@ -22,7 +22,7 @@ var dummyLeaderBoardProvider = (function () {
     // dummy store of leader boards.
     var leaderBoardMap = {};
 
-    var userNames = {};
+    var userNames = [];
 
     // fill the store with some dummy data.
     init();
