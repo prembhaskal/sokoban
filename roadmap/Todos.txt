@@ -20,7 +20,8 @@
 -> Done - Add a timer to clock the time spent on present level. It stops on completion of level.   
 -> Done - Implement leader board for best score.
 -> InProgress - Separate concerns  make the app more MVC compliant.
-   
+
+-> The storage.js is a mess. Remove the unnecessary functions storageAPIProvider and try to streamline StorageHelper.
 -> User state storage methodology so that when user comes back , he should be able to play the level where he left instead of playing from the beginning.
 -> Add upto 100 levels.
 	(see links http://www.sokobanonline.com/play/community/malice
