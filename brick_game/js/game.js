@@ -84,6 +84,7 @@ function addOnClickListener(elementId, clickListener) {
 
 // Add all the event listeners below
 $(document).ready(function () {
+    // DEPRECATED in latest jquery: with latest jquery(>3.0) the windows 'load' might not work... instead directly call the init function here, since the DOM is ready or explicitly call $(window).on("load", init);
     window.addEventListener('load', init, false);
     // showWindow is used only for test purpose.
     addOnClickListener('showWindow', showModalWindow);
